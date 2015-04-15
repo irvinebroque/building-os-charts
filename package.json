@@ -1,0 +1,30 @@
+{
+  "name": "lucid-d3",
+  "version": "0.0.1",
+  "authors": [
+    "Peter Barker <zoopoetics@gmail.com>"
+  ],
+  "description": "d3-based charting for timeseries data",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "build": "DIST=true webpack -p --progress --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@repos.office.luciddg.com:peter/lucid-d3.git"
+  },
+  "dependencies": {
+    "d3": "^3.5.5",
+    "events": "^1.0.2"
+  },
+  "devDependencies": {
+    "babel-core": "^4.4.6",
+    "babel-loader": "^4.0.0",
+    "webpack": "^1.5.3",
+    "webpack-dev-server": "^1.7.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}
