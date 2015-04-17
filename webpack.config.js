@@ -4,7 +4,7 @@ var path = require("path");
 
 module.exports = {
   entry: {
-    ld3: ["./src/entry"]
+    ld3: ["./src/index"]
   },
   module: {
     loaders: [
