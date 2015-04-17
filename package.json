@@ -8,7 +8,7 @@
   "main": "entry.js",
   "private": true,
   "scripts": {
-    "build": "DIST=true webpack -p --progress --colors",
+    "build": "webpack -p --progress --colors",
     "dev": "webpack --watch"
   },
   "repository": {
