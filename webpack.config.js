@@ -9,6 +9,7 @@ module.exports = {
   module: {
     loaders: [
       {test: /\.js$/, loader: "babel-loader", exclude: /node_modules/},
+      {test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/},
       {test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader", [
           "css-loader",
           "autoprefixer-loader?browsers=last 2 version",
