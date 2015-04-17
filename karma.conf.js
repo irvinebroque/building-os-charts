@@ -6,9 +6,9 @@ module.exports = function(config) {
   config.set({
   	basePath: '',
   	frameworks: ['jasmine'],
-  	files: ['tests/**/*.js'],
+  	files: ['src/**/*-test.js'],
     preprocessors: {
-  	  'tests/**/*.js': ['babel', 'webpack']
+  	  'src/**/*-test.js': ['babel', 'webpack']
   	},
   	webpack: {
   		devtool: 'inline-source-map',
@@ -19,12 +19,7 @@ module.exports = function(config) {
   			loaders: [
   				{test: /\.js$/, loader: "babel-loader"}
   			]
-  		},
-  		plugins: [
-  			new webpack.DefinePlugin({
-  				'process.env.NODE_ENV': JSON.stringify('test')
-  			})
-  		]
+  		}
   	},
   	webpackMiddleware: {
   		stats: {

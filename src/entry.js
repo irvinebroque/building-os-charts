@@ -1,7 +1,4 @@
 'use strict';
 
 require('./styles.scss');
-
-module.exports = {
-
-};
+require('./charts/horizontal-bar-chart');
