@@ -1,29 +1,27 @@
-var webpack = require('webpack');
-var path = require('path');
+var webpack = require("webpack");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var path = require("path");
 
-var config = {
+module.exports = {
   entry: {
-    'ld3': './src/index'
-  },
-  output: {
-    path: path.join(__dirname, 'build'),
-    filename: 'ld3.min.js'
+    ld3: ["./src/entry"]
   },
   module: {
     loaders: [
-      {test: /\.js$/, exclude: '/node_modules/', loader: 'babel-loader'}
+      {test: /\.js$/, loader: "babel-loader", exclude: /node_modules/},
+      {test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader", [
+          "css-loader",
+          "autoprefixer-loader?browsers=last 2 version",
+          "sass-loader?outputStyle=compact",
+        ].join("!")), exclude: /node_modules/
+      }
     ]
-  }
+  },
+  output: {
+    filename: "[name].js",
+    path: path.join(__dirname, "./build")
+  },
+  plugins: [
+    new ExtractTextPlugin("[name].css"),
+  ],
 };
-
-if (process.env.DIST) {
-  config.output.libraryTarget = "var";
-  config.output.library = "ld3";
-  config.externals = {"d3": "d3"};
-}
-
-if (process.env.NODE_ENV === "development") {
-  config.devtool = 'eval';
-}
-
-module.exports = config;

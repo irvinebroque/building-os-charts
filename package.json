@@ -5,22 +5,28 @@
     "Peter Barker <zoopoetics@gmail.com>"
   ],
   "description": "d3-based charting for timeseries data",
-  "main": "index.js",
+  "main": "entry.js",
   "private": true,
   "scripts": {
-    "build": "DIST=true webpack -p --progress --colors"
+    "build": "DIST=true webpack -p --progress --colors",
+    "dev": "webpack --watch"
   },
   "repository": {
     "type": "git",
     "url": "git@repos.office.luciddg.com:peter/lucid-d3.git"
   },
   "dependencies": {
-    "d3": "^3.5.5",
-    "events": "^1.0.2"
+    "d3": "^3.5.5"
   },
   "devDependencies": {
+    "autoprefixer-loader": "^1.2.0",
     "babel-core": "^4.4.6",
     "babel-loader": "^4.0.0",
+    "css-loader": "^0.10.1",
+    "extract-text-webpack-plugin": "^0.5.0",
+    "node-sass": "^2.1.1",
+    "sass-loader": "0.4.2",
+    "style-loader": "^0.10.2",
     "webpack": "^1.5.3",
     "webpack-dev-server": "^1.7.0"
   },
