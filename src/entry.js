@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-var styles = require('./styles.scss');
+require('./styles.scss');
 
 module.exports = {
 
