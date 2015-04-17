@@ -5,7 +5,7 @@
     "Peter Barker <zoopoetics@gmail.com>"
   ],
   "description": "d3-based charting for timeseries data",
-  "main": "entry.js",
+  "main": "index.js",
   "private": true,
   "scripts": {
     "build": "webpack -p --progress --colors",
@@ -27,6 +27,7 @@
     "extract-text-webpack-plugin": "^0.5.0",
     "jasmine-core": "^2.2.0",
     "karma": "^0.12.31",
+    "karma-babel-preprocessor": "^5.0.1",
     "karma-cli": "^0.0.4",
     "karma-jasmine": "^0.3.5",
     "karma-phantomjs-launcher": "^0.1.4",
