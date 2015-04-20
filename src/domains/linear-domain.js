@@ -1,5 +1,5 @@
 var d3 = require('d3');
-var NumberValidator = require('../validators/number-validator');
+var { isValid } = require('../validators/number-validator');
 
 var _getData = function(args) {
   var data = [];
@@ -16,7 +16,7 @@ var _getExtents = function(args) {
   var extents = [];
   data.forEach(function(datum) {
     extents = extents.concat(d3.extent(datum, function(values) {
-      if (NumberValidator(values.value)) {
+      if (isValid(values.value)) {
         return values.value;
       }
     }));
@@ -43,10 +43,10 @@ module.exports = function(...args) {
   var min = extents[0];
   var max = extents[1];
 
-  if (!NumberValidator(min)) {
+  if (!isValid(min)) {
     min = 0;
   }
-  if (!NumberValidator(max)) {
+  if (!isValid(max)) {
     max = 0;
   }
 
