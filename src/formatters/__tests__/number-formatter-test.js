@@ -10,7 +10,6 @@ describe('NumberFormatter...', function() {
     expect(format(Infinity)).toEqual('');
     expect(format(null)).toEqual('');
     expect(format(NaN)).toEqual('');
-    expect(format(undefined)).toEqual('');
     expect(format(Number.MIN_VALUE)).toEqual('');
     expect(format(Number.MAX_VALUE)).toEqual('');
     expect(format(undefined)).toEqual('');
