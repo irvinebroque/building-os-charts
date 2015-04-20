@@ -15,7 +15,7 @@ describe('NumberUtil...', function() {
     expect(NumberUtil.isFloat(Number.MAX_VALUE)).toBeFalsy();
     expect(NumberUtil.isFloat(Number.NEGATIVE_INFINITY)).toBeFalsy();
     expect(NumberUtil.isFloat(Number.POSITIVE_INFINITY)).toBeFalsy();
-    expect(NumberUtil.isFloat(1234.5678).toBeTruthy();
+    expect(NumberUtil.isFloat(1234.5678)).toBeTruthy();
     expect(NumberUtil.isFloat(-1234.5678)).toBeTruthy();
   });
 
