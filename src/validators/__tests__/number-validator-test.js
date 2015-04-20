@@ -1,57 +1,57 @@
-var NumberValidator = require('../number-validator');
+var { isValid } = require('../number-validator');
 
 describe('NumberValidator...', function() {
 
   it('rejects undefined', function() {
-    expect(NumberValidator()).toBeFalsy();
-    expect(NumberValidator(undefined)).toBeFalsy();
+    expect(isValid()).toBeFalsy();
+    expect(isValid(undefined)).toBeFalsy();
   });
 
   it('rejects objects, arrays, and strings', function() {
-    expect(NumberValidator({})).toBeFalsy();
-    expect(NumberValidator([])).toBeFalsy();
-    expect(NumberValidator('')).toBeFalsy();
-    expect(NumberValidator('foo')).toBeFalsy();
+    expect(isValid({})).toBeFalsy();
+    expect(isValid([])).toBeFalsy();
+    expect(isValid('')).toBeFalsy();
+    expect(isValid('foo')).toBeFalsy();
   });
 
   it('rejects null', function() {
-    expect(NumberValidator(null)).toBeFalsy();
+    expect(isValid(null)).toBeFalsy();
   });
 
   it('rejects NaN', function() {
-    expect(NumberValidator(NaN)).toBeFalsy();
+    expect(isValid(NaN)).toBeFalsy();
   });
 
   it('rejects Infinity', function() {
-    expect(NumberValidator(Infinity)).toBeFalsy();
+    expect(isValid(Infinity)).toBeFalsy();
   });
 
   it('rejects Number.MIN_VALUE', function() {
-    expect(NumberValidator(Number.MIN_VALUE)).toBeFalsy();
+    expect(isValid(Number.MIN_VALUE)).toBeFalsy();
   });
 
   it('rejects Number.MAX_VALUE', function() {
-    expect(NumberValidator(Number.MAX_VALUE)).toBeFalsy();
+    expect(isValid(Number.MAX_VALUE)).toBeFalsy();
   });
 
   it('rejects Number.NEGATIVE_INFINITY', function() {
-    expect(NumberValidator(Number.NEGATIVE_INFINITY)).toBeFalsy();
+    expect(isValid(Number.NEGATIVE_INFINITY)).toBeFalsy();
   });
 
   it('rejects Number.POSITIVE_INFINITY', function() {
-    expect(NumberValidator(Number.POSITIVE_INFINITY)).toBeFalsy();
+    expect(isValid(Number.POSITIVE_INFINITY)).toBeFalsy();
   });
 
   it('accepts negative numbers', function() {
-    expect(NumberValidator(Math.random() * -100)).toBeTruthy();
+    expect(isValid(Math.random() * -100)).toBeTruthy();
   });
 
   it('accepts positive numbers', function() {
-    expect(NumberValidator(Math.random() * 100)).toBeTruthy();
+    expect(isValid(Math.random() * 100)).toBeTruthy();
   });
 
   it('accepts zero', function() {
-    expect(NumberValidator(0)).toBeTruthy();
+    expect(isValid(0)).toBeTruthy();
   });
 
 });
