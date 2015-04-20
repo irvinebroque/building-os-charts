@@ -4,12 +4,10 @@ var webpack = require('webpack');
 
 module.exports = function(config) {
   config.set({
-  	basePath: '',
+  	basePath: 'src',
   	frameworks: ['jasmine'],
-  	files: ['src/**/*-test.js'],
-    preprocessors: {
-  	  'src/**/*-test.js': ['babel', 'webpack']
-  	},
+  	files: ['**/*-test.js'],
+    preprocessors: {'**/*-test.js': ['webpack']},
   	webpack: {
   		devtool: 'inline-source-map',
   		resolve: {

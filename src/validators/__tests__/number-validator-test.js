@@ -1,6 +1,6 @@
 var NumberValidator = require('../number-validator');
 
-describe('Number validator', function() {
+describe('NumberValidator...', function() {
 
   it('rejects undefined', function() {
     expect(NumberValidator()).toBeFalsy();
