@@ -1,36 +1,29 @@
-'use strict';
-
 var webpack = require('webpack');
 
 module.exports = function(config) {
   config.set({
-  	basePath: 'src',
-  	frameworks: ['jasmine'],
-  	files: ['**/*-test.js'],
-    preprocessors: {'**/*-test.js': ['webpack']},
-  	webpack: {
-  		devtool: 'inline-source-map',
-  		resolve: {
-  			extensions: ["", ".js"]
-  		},
-  		module: {
-  			loaders: [
-  				{test: /\.js$/, loader: "babel-loader"}
-  			]
-  		}
-  	},
-  	webpackMiddleware: {
-  		stats: {
-  			colors: true
-  		}
-  	},
-  	reporters: ['spec'],
-  	port: 9876,
-  	colors: true,
-    logLevel: config.LOG_INFO,
-  	autoWatch: true,
+    autoWatch: true,
   	browsers: ['PhantomJS'],
-  	captureTimeout: 60000,
-  	singleRun: false
+  	files: ['webpack.tests.js'],
+  	frameworks: ['jasmine'],
+    preprocessors: {
+      'webpack.tests.js': ['webpack', 'sourcemap']
+    },
+    webpack: {
+      devtool: 'inline-source-map',
+      module: {
+        loaders: [
+          {test: /\.js$/, loaders: ['babel-loader', 'jsx-loader']}
+        ]
+      },
+      plugins: [
+        new webpack.DefinePlugin({
+          'process.env.NODE_ENV': JSON.stringify('test')
+        })
+      ]
+    },
+    webpackServer: {
+      noInfo: true
+    }
   });
 };

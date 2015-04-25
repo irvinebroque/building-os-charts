@@ -4,19 +4,19 @@
   "authors": [
     "Peter Barker <zoopoetics@gmail.com>"
   ],
-  "description": "d3-based charting for timeseries data",
+  "description": "Plug-and-play chart components based on d3 and React",
   "main": "index.js",
   "private": true,
   "scripts": {
-    "build": "webpack -p --progress --colors",
-    "dev": "webpack --watch & karma start"
+    "build": "webpack -p --progress --colors"
   },
   "repository": {
     "type": "git",
     "url": "git@repos.office.luciddg.com:peter/lucid-d3.git"
   },
   "dependencies": {
-    "d3": "^3.5.5"
+    "d3": "^3.5.5",
+    "react": "^0.13.2"
   },
   "devDependencies": {
     "autoprefixer-loader": "^1.2.0",
@@ -26,15 +26,17 @@
     "eslint-loader": "^0.10.0",
     "extract-text-webpack-plugin": "^0.5.0",
     "jasmine-core": "^2.2.0",
+    "jsx-loader": "^0.13.1",
     "karma": "^0.12.31",
     "karma-babel-preprocessor": "^5.0.1",
     "karma-cli": "^0.0.4",
     "karma-jasmine": "^0.3.5",
     "karma-phantomjs-launcher": "^0.1.4",
-    "karma-spec-reporter": "0.0.19",
+    "karma-sourcemap-loader": "^0.3.4",
     "karma-webpack": "^1.5.0",
     "node-sass": "^2.1.1",
     "phantomjs": "^1.9.16",
+    "react-tools": "^0.13.2",
     "sass-loader": "0.4.2",
     "style-loader": "^0.10.2",
     "webpack": "^1.5.3",
