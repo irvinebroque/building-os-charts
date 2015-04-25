@@ -8,13 +8,13 @@ module.exports = {
   },
   module: {
     loaders: [
-      {test: /\.js$/, loaders: ['babel-loader', 'eslint-loader'], exclude: /node_modules/},
-      {test: /\.jsx$/, loaders: ['babel-loader', 'jsx-loader'], exclude: /node_modules/},
-      {test: /\.scss$/, loader: ExtractTextPlugin.extract('style-loader', [
+      {test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader', 'eslint-loader']},
+      {test: /\.jsx$/, exclude: /node_modules/, loaders: ['babel-loader', 'jsx-loader']},
+      {test: /\.scss$/, exclude: /node_modules/, loader: ExtractTextPlugin.extract('style-loader', [
         'css-loader',
         'autoprefixer-loader?browsers=last 2 version',
         'sass-loader?outputStyle=compressed',
-      ].join('!')), exclude: /node_modules/}
+      ].join('!'))}
     ]
   },
   output: {
