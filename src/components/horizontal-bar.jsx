@@ -1,9 +1,19 @@
 var React = require('react');
 var layout = require('css-layout');
 var { getTranslateFromCoords } = require('../utils/svg-util');
-var HorizontalBarIcon = require('../components/horizontal-bar-icon.jsx');
 var Label = require('../components/label.jsx');
-var Icon = require('../components/icon.jsx');
+var ImageLoader = require('../components/image-loader.jsx');
+var RankingBadge = require('../components/ranking-badge.jsx');
+
+var _getIcon = function(props) {
+  if (!props.datum.icon) {
+    return;
+  }
+  if (props.datum.icon === 'rank') {
+    return RankingBadge;
+  }
+  return ImageLoader;
+};
 
 var _getTranslate = function(props) {
   var totalHeight = props.height + props.verticalSpacing;
@@ -40,6 +50,7 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var Icon = _getIcon(this.props);
     return (
       <g className={'horizontal-bar'}
         transform={_getTranslate(this.props)}>
@@ -55,9 +66,10 @@ module.exports = React.createClass({
 
         <g className={'horizontal-bar-content'}>
           {this.props.datum.icon ? (
-            <Icon className={'horizontal-bar-icon'}
+            <Icon
               height={this.props.iconHeight}
               clipPathID={this.props.iconClipPathID}
+              index={this.props.index}
               url={this.props.datum.icon}
               width={this.props.iconHeight} />
           ) : null}
