@@ -28,6 +28,7 @@ module.exports = React.createClass({
       iconHeight: 40,
       iconShape: 'circle',
       sortFunction: numericDescending,
+      sortKey: 'value',
       startAtZero: false,
       verticalSpacing: 1,
       width: 500
@@ -36,7 +37,7 @@ module.exports = React.createClass({
 
   render: function() {
 
-    var data = this.props.sortFunction(this.props.data.slice(), 'value');
+    var data = this.props.sortFunction(this.props.data.slice(), this.props.sortKey);
     var domain = LinearDomain(data, this.props.startAtZero);
     var range = Range(this.props.width);
     var scale = LinearScale(domain, range);
