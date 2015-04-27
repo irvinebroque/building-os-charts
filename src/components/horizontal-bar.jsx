@@ -6,7 +6,7 @@ var Label = require('../components/label.jsx');
 var Icon = require('../components/icon.jsx');
 
 var _getTranslate = function(props) {
-  var totalHeight = props.barHeight + props.barSpacing;
+  var totalHeight = props.height + props.verticalSpacing;
   var posY = Math.ceil(totalHeight * props.index);
   return getTranslateFromCoords(0, posY);
 };
@@ -18,27 +18,14 @@ var _getWidth = function(props) {
 module.exports = React.createClass({
 
   propTypes: {
-    barHeight: React.PropTypes.number.isRequired,
-    barSpacing: React.PropTypes.number,
-    detailIconType: React.PropTypes.string,
-    detailIconURL: React.PropTypes.string,
-    detailLabel: React.PropTypes.string,
-    iconType: React.PropTypes.string,
-    iconURL: React.PropTypes.string,
-    label: React.PropTypes.string,
-    value: React.PropTypes.number.isRequired
-  },
-
-  getDefaultProps: function() {
-    return {
-      detailIconType: undefined,
-      detailIconURL: undefined,
-      detailLabel: '',
-      iconType: undefined,
-      iconURL: undefined,
-      label: '',
-      value: 0
-    };
+    datum: React.PropTypes.object.isRequired,
+    height: React.PropTypes.number.isRequired,
+    iconClipPathID: React.PropTypes.string.isRequired,
+    iconHeight: React.PropTypes.number.isRequired,
+    index: React.PropTypes.number.isRequired,
+    scale: React.PropTypes.func.isRequired,
+    verticalSpacing: React.PropTypes.number.isRequired,
+    width: React.PropTypes.number.isRequired,
   },
 
   render: function() {
@@ -48,34 +35,25 @@ module.exports = React.createClass({
 
         <g className={'horizontal-bar-background'}>
           <rect className={'horizontal-bar-hit-area'}
-            height={this.props.barHeight}
+            height={this.props.height}
             width={this.props.width} />
           <rect className={'horizontal-bar-fill'}
-            height={this.props.barHeight}
+            height={this.props.height}
             width={_getWidth(this.props)} />
         </g>
 
         <g className={'horizontal-bar-content'}>
           {this.props.datum.icon ? (
             <Icon className={'horizontal-bar-icon'}
-              href={this.props.datum.icon} />
+              height={this.props.iconHeight}
+              clipPathID={this.props.iconClipPathID}
+              url={this.props.datum.icon}
+              width={this.props.iconHeight} />
           ) : null}
           {this.props.datum.label ? (
             <Label className={'horizontal-bar-label'}
               text={this.props.datum.label}
-              y={this.props.barHeight / 2} />
-          ) : null}
-        </g>
-
-        <g className={'horizontal-bar-detail'}>
-          {this.props.datum.detailIcon ? (
-            <Icon className={'horizontal-bar-detail-icon'}
-              href={this.props.datum.icon} />
-          ) : null}
-          {this.props.datum.detailLabel ? (
-            <Label className={'horizontal-bar-deta*il-label'}
-              text={this.props.datum.detailLabel}
-              y={this.props.barHeight / 2} />
+              y={Math.round(this.props.height / 2)} />
           ) : null}
         </g>
 

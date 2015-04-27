@@ -1,22 +1,39 @@
 var React = require('react');
 
-var _setHref = function(node, href) {
-  React.findDOMNode(node).setAttribute('xlink:href', href);
-};
-
 module.exports = React.createClass({
 
-  componentDidUpdate: function() {
-    _setHref(this.refs.image, this.props.href);
+  propTypes: {
+    clipPathID: React.PropTypes.string.isRequired,
+    height: React.PropTypes.number.isRequired,
+    url: React.PropTypes.string.isRequired,
+    width: React.PropTypes.number.isRequired
   },
 
-  componentDidMount: function() {
-    _setHref(this.refs.image, this.props.href);
+  getDefaultProps: function() {
+    return {
+      clipPathID: '',
+      height: 0,
+      url: '',
+      width: 0
+    }
   },
 
   render: function() {
+    // React does not support namespaced attributes. So this:
+    var attributes = [
+      'height="' + this.props.height + '"',
+      'width="' + this.props.width + '"'
+    ];
+    if (this.props.clipPathID) {
+      attributes.push('clip-path="url(#' + this.props.clipPathID + ')"');
+    }
+    if (this.props.url) {
+      attributes.push('xlink:href="' + this.props.url + '"');
+    }
     return (
-      <image ref="image" height={50} width={50} />
+      <g dangerouslySetInnerHTML={{
+        __html: '<image ' + attributes.join(' ') + ' />'
+      }} />
     );
   }
 
