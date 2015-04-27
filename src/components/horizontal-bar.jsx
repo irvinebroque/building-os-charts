@@ -25,7 +25,18 @@ module.exports = React.createClass({
     index: React.PropTypes.number.isRequired,
     scale: React.PropTypes.func.isRequired,
     verticalSpacing: React.PropTypes.number.isRequired,
-    width: React.PropTypes.number.isRequired,
+    width: React.PropTypes.number.isRequired
+  },
+
+  getDefaultProps: function() {
+    return {
+      height: 0,
+      iconClipPathID: '',
+      iconHeight: 0,
+      scale: Function,
+      verticalSpacing: 0,
+      width: 0
+    }
   },
 
   render: function() {

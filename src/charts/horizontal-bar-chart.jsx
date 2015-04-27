@@ -15,6 +15,7 @@ module.exports = React.createClass({
     height: React.PropTypes.number.isRequired,
     iconHeight: React.PropTypes.number.isRequired,
     sortFunction: React.PropTypes.func.isRequired,
+    sortKey: React.PropTypes.string.isRequired,
     startAtZero: React.PropTypes.bool.isRequired,
     verticalSpacing: React.PropTypes.number.isRequired,
     width: React.PropTypes.number.isRequired
@@ -64,8 +65,8 @@ module.exports = React.createClass({
               <HorizontalBar
                 datum={datum}
                 height={this.props.barHeight}
-                iconHeight={this.props.iconHeight}
                 iconClipPathID={hasIconClipPath ? ICON_CLIP_PATH_ID : null}
+                iconHeight={this.props.iconHeight}
                 index={index}
                 key={index}
                 scale={scale}
