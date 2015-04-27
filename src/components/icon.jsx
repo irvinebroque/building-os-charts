@@ -32,7 +32,7 @@ module.exports = React.createClass({
     }
     return (
       <g dangerouslySetInnerHTML={{
-        __html: '<image ' + attributes.join(' ') + ' />'
+        __html: '<image ' + attributes.join(' ') + '/>'
       }} />
     );
   }

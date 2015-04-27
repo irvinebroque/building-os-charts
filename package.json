@@ -18,6 +18,8 @@
   },
   "dependencies": {
     "d3": "^3.5.5",
+    "javascript-natural-sort": "^0.7.1",
+    "object-property-natural-sort": "0.0.4",
     "react": "^0.13.2"
   },
   "devDependencies": {

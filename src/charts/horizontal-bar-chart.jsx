@@ -3,6 +3,7 @@ var HorizontalBar = require('../components/horizontal-bar.jsx');
 var Range = require('../ranges/range');
 var LinearDomain = require('../domains/linear-domain');
 var LinearScale = require('../scales/linear-scale');
+var { numericDescending } = require('../utils/sort-util');
 
 const ICON_CLIP_PATH_ID = 'iconClipPath';
 
@@ -24,9 +25,9 @@ module.exports = React.createClass({
       barHeight: 40,
       data: [],
       height: 400,
-      iconHeight: 36,
+      iconHeight: 40,
       iconShape: 'circle',
-      sortFunction: Function,
+      sortFunction: numericDescending,
       startAtZero: false,
       verticalSpacing: 1,
       width: 500
@@ -35,12 +36,12 @@ module.exports = React.createClass({
 
   render: function() {
 
-    var iconClipPathSize = Math.ceil(this.props.iconHeight / 2);
-    var hasIconClipPath = this.props.iconShape === 'circle' ? true : false;
-    var data = this.props.data.slice();
+    var data = this.props.sortFunction(this.props.data.slice(), 'value');
     var domain = LinearDomain(data, this.props.startAtZero);
     var range = Range(this.props.width);
     var scale = LinearScale(domain, range);
+    var hasIconClipPath = this.props.iconShape === 'circle' ? true : false;
+    var iconClipPathSize = Math.ceil(this.props.iconHeight / 2);
 
     return (
       <svg
