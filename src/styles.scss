@@ -33,10 +33,47 @@ svg text {
   pointer-events: none;
 }
 
+.horizontal-bar-detail {
+  pointer-events: none;
+}
+
 .horizontal-bar-fill {
-  fill: #ccc;
+  fill: #666;
 };
 
 .horizontal-bar-hit-area {
   opacity: 0;
+}
+
+// --------------------
+//
+// Components
+//
+// --------------------
+
+.ranking-badge-background {
+  fill: #999;
+  stroke: #ccc;
+  stroke-width: 3px;
+}
+
+.ranking-badge-text {
+  fill: #000;
+  font-weight: bold;
+  text-anchor: middle;
+}
+
+.gold {
+  fill: #e4ac43;
+  stroke: #f8c350;
+}
+
+.silver {
+  fill: #d1d1d1;
+  stroke: #fff;
+}
+
+.bronze {
+  fill: #e09765;
+  stroke: #f2b793;
 }

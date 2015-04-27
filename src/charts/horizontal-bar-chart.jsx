@@ -23,16 +23,16 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      barHeight: 40,
+      barHeight: 100,
       data: [],
-      height: 400,
-      iconHeight: 40,
+      height: 768,
+      iconHeight: 75,
       iconShape: 'circle',
       sortFunction: numericDescending,
       sortKey: 'value',
       startAtZero: false,
       verticalSpacing: 1,
-      width: 500
+      width: 1024
     }
   },
 

@@ -17,6 +17,7 @@
     "url": "git@repos.office.luciddg.com:peter/lucid-d3.git"
   },
   "dependencies": {
+    "classnames": "^1.2.1",
     "d3": "^3.5.5",
     "javascript-natural-sort": "^0.7.1",
     "object-property-natural-sort": "0.0.4",
