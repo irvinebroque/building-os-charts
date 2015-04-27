@@ -1,5 +1,9 @@
-var HorizontalBarChart = require('../horizontal-bar-chart');
+var HorizontalBarChart = require('../horizontal-bar-chart.jsx');
 
-describe('horizontal bar chart', function() {
+describe('HorizontalBarChart', function() {
+
+  it('exists', function() {
+    expect(HorizontalBarChart).toBeDefined();
+  });
 
 });

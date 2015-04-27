@@ -1,3 +1,38 @@
-svg {
+// --------------------
+//
+// Global
+//
+// --------------------
 
+svg {
+  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-weight: 300;
+  fill: #fff;
+  font-size: 18px;
+}
+
+svg text {
+  dominant-baseline: middle;
+}
+
+// --------------------
+//
+// Horizontal bar chart
+//
+// --------------------
+
+.horizontal-bar-background {
+  opacity: 0.35;
+}
+
+.horizontal-bar-background:hover {
+  opacity: 0.45;
+}
+
+.horizontal-bar-fill {
+  fill: #ff00cc;
+};
+
+.horizontal-bar-hit-area {
+  opacity: 0;
 }
