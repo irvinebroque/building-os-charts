@@ -29,8 +29,12 @@ svg text {
   opacity: 0.45;
 }
 
+.horizontal-bar-content {
+  pointer-events: none;
+}
+
 .horizontal-bar-fill {
-  fill: #ff00cc;
+  fill: #ccc;
 };
 
 .horizontal-bar-hit-area {
