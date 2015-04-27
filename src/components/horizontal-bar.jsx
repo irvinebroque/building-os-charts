@@ -29,6 +29,7 @@ module.exports = React.createClass({
 
   propTypes: {
     datum: React.PropTypes.object.isRequired,
+    detailIconHeight: React.PropTypes.number.isRequired,
     height: React.PropTypes.number.isRequired,
     iconClipPathID: React.PropTypes.string.isRequired,
     iconHeight: React.PropTypes.number.isRequired,
@@ -40,6 +41,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
+      detailIconHeight: 0,
       height: 0,
       iconClipPathID: '',
       iconHeight: 0,
@@ -76,6 +78,20 @@ module.exports = React.createClass({
           {this.props.datum.label ? (
             <Label className={'horizontal-bar-label'}
               text={this.props.datum.label}
+              y={Math.round(this.props.height / 2)} />
+          ) : null}
+        </g>
+
+        <g className={'horizontal-bar-detail'}>
+          {this.props.datum.detailIcon ? (
+            <ImageLoader className={'horizontal-bar-detail-icon'}
+              height={this.props.detailIconHeight}
+              url={this.props.datum.detailIcon}
+              width={this.props.detailIconHeight} />
+          ) : null}
+          {this.props.datum.label ? (
+            <Label className={'horizontal-bar-detail-label'}
+              text={this.props.datum.detailLabel}
               y={Math.round(this.props.height / 2)} />
           ) : null}
         </g>
