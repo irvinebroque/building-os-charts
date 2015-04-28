@@ -2,6 +2,7 @@ var React = require('react');
 var { HorizontalBarChart } = require('ld3');
 require('../../src/styles.scss');
 
+var barHeight = 80;
 var data = [];
 for (var ii = 0, nn = 20; ii < nn; ii++) {
   var value = Math.random() * 100;
@@ -11,11 +12,22 @@ for (var ii = 0, nn = 20; ii < nn; ii++) {
     'label': 'Foo ' + ii,
     'icon': 'http://buildingdashboard.net/images/buildingentityavatar/5904/profile/5c3cd86f-d298-4c40-8ec4-0b21d8fe3a53.png',
     //'icon': 'rank',
-    'value': value
+    'value': value,
+    'corners': {
+      topRight: 10,
+      bottomRight: 10
+    },
+    'x': barHeight / 2
   });
 }
 
 React.render(
-  <HorizontalBarChart data={data} />,
+  <HorizontalBarChart
+    barHeight={barHeight}
+    data={data}
+    height={768}
+    iconHeight={barHeight}
+    verticalSpacing={2}
+    width={1024} />,
   document.getElementById('chart')
 );

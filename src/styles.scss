@@ -29,21 +29,31 @@ svg text {
   opacity: 0.45;
 }
 
+.horizontal-bar-background-fill {
+  fill: #666;
+};
+
+.horizontal-bar-background-hit-area {
+  opacity: 0;
+}
+
 .horizontal-bar-content {
   pointer-events: none;
 }
+
+.horizontal-bar-content-icon {
+  background-color: #ff00cc;
+}
+
+.horizontal-bar-content-label {}
 
 .horizontal-bar-detail {
   pointer-events: none;
 }
 
-.horizontal-bar-fill {
-  fill: #666;
-};
+.horizontal-bar-detail-icon {}
 
-.horizontal-bar-hit-area {
-  opacity: 0;
-}
+.horizontal-bar-detail-label {}
 
 // --------------------
 //

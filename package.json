@@ -20,6 +20,7 @@
     "classnames": "^1.2.1",
     "d3": "^3.5.5",
     "javascript-natural-sort": "^0.7.1",
+    "object-assign": "^2.0.0",
     "object-property-natural-sort": "0.0.4",
     "react": "^0.13.2"
   },

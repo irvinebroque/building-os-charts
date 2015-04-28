@@ -15,8 +15,8 @@ describe('SvgUtil', function() {
     expect(getAttribute('', 'bar')).toBeUndefined();
     expect(getAttribute('foo', '')).toEqual('foo=""');
     expect(getAttribute('foo', 'bar')).toEqual('foo="bar"');
-    expect(getAttribute('clip-rect', 'url(#fooBar)').toEqual('clip-rect="url(#fooBar)"');
-    expect(getAttribute('xlink:href', 'https://twitter.com/_floridaman').toEqual('xlink:href="https://twitter.com/_floridaman"');
+    expect(getAttribute('clip-rect', 'url(#fooBar)')).toEqual('clip-rect="url(#fooBar)"');
+    expect(getAttribute('xlink:href', 'https://twitter.com/_floridaman')).toEqual('xlink:href="https://twitter.com/_floridaman"');
   });
 
   it('getCoordsFromTranslate returns x and y coordinates from translate transform', function() {
@@ -32,20 +32,77 @@ describe('SvgUtil', function() {
   it('getRoundedRectPath returns path data for a rectangle with rounded corners', function() {
     expect(getRoundedRectPath).toBeDefined();
     expect(getRoundedRectPath()).toEqual('');
-    expect(getRoundedRectPath(100)).toEqual('');
-    expect(getRoundedRectPath(100, 20)).toEqual('');
-    expect(getRoundedRectPath(undefined, 20)).toEqual('');
-    expect(getRoundedRectPath(undefined, 20, {})).toEqual('');
+    expect(getRoundedRectPath({})).toEqual('');
 
-    var corners = {
-      bottomLeft: 10,
-      bottomRight: 10,
-      topLeft: 10,
-      topRight: 10
-    };
-    expect(getRoundedRectPath(100, 20, corners)).toEqual('M 10 0 H 90 Q 100 0 100 10 V 10 Q 100 20 90 20 H 10 Q 0 20 0 10 V 10 Q 0 0 10 0');
-    delete corners.topRight;
-    expect(getRoundedRectPath(100, 20, corners)).toEqual('');
+    expect(getRoundedRectPath({
+      width: 100
+    })).toEqual('');
+
+    expect(getRoundedRectPath({
+      height: 100
+    })).toEqual('');
+
+    expect(getRoundedRectPath({
+      height: 100,
+      width: 100
+    })).toEqual('M 0 0 H 100 Q 100 0 100 0 V 100 Q 100 100 100 100 H 0 Q 0 100 0 100 V 0 Q 0 0 0 0');
+
+    expect(getRoundedRectPath({
+      height: 100,
+      width: 100,
+      x: NaN,
+      y: NaN
+    })).toEqual('M 0 0 H 100 Q 100 0 100 0 V 100 Q 100 100 100 100 H 0 Q 0 100 0 100 V 0 Q 0 0 0 0');
+
+    expect(getRoundedRectPath({
+      height: 100,
+      width: 100,
+      x: 10,
+      y: 10
+    })).toEqual('M 10 10 H 100 Q 100 10 100 10 V 100 Q 100 100 100 100 H 10 Q 10 100 10 100 V 10 Q 10 10 10 10');
+
+    expect(getRoundedRectPath({
+      height: 100,
+      width: 100,
+      corners: {
+        bottomLeft: 10,
+        bottomRight: 10,
+        topLeft: 10,
+        topRight: 10
+      }
+    })).toEqual('M 10 0 H 90 Q 100 0 100 10 V 90 Q 100 100 90 100 H 10 Q 0 100 0 90 V 10 Q 0 0 10 0');
+
+    expect(getRoundedRectPath({
+      height: 100,
+      width: 100,
+      corners: {
+        bottomLeft: 10
+      }
+    })).toEqual('M 0 0 H 100 Q 100 0 100 0 V 100 Q 100 100 100 100 H 10 Q 0 100 0 90 V 0 Q 0 0 0 0');
+
+    expect(getRoundedRectPath({
+      height: 100,
+      width: 100,
+      x: 10,
+      y: 10,
+      corners: {
+        bottomLeft: 10,
+        bottomRight: 10,
+        topLeft: 10,
+        topRight: 10
+      }
+    })).toEqual('M 20 10 H 90 Q 100 10 100 20 V 90 Q 100 100 90 100 H 20 Q 10 100 10 90 V 20 Q 10 10 20 10');
+
+    expect(getRoundedRectPath({
+      height: 100,
+      width: 100,
+      x: 10,
+      y: 10,
+      corners: {
+        bottomLeft: 10
+      }
+    })).toEqual('M 10 10 H 100 Q 100 10 100 10 V 100 Q 100 100 100 100 H 20 Q 10 100 10 90 V 10 Q 10 10 10 10');
+
   });
 
   it('getTranslateFromCoords returns a translate transform from given x and y coordinates', function() {

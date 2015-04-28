@@ -31,7 +31,7 @@ module.exports = React.createClass({
   render: function() {
     var radius = Math.ceil(this.props.height / 2);
     return (
-      <g className={'ranking-badge'}>
+      <g className={classNames('ranking-badge', this.props.className)}>
         <circle className={classNames(
             'ranking-badge-background',
             _getColorClass(this.props.index)

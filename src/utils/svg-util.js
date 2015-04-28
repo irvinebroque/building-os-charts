@@ -1,4 +1,5 @@
 var { isValid } = require('../validators/number-validator');
+var assign = require('object-assign');
 
 module.exports = {
 
@@ -17,47 +18,59 @@ module.exports = {
         return;
       }
       var coords = matches[1].split(',');
-      var posX = parseFloat(coords[0]);
-      var posY = parseFloat(coords[1]);
-      return [posX, posY];
+      var x = parseFloat(coords[0]);
+      var y = parseFloat(coords[1]);
+      return [x, y];
     }
   },
 
-  getRoundedRectPath: function(width, height, corners) {
-    if (!isValid(width) || !isValid(height) || !corners) {
+  getRoundedRectPath: function(props) {
+    // Width and height are required:
+    if (!props || !isValid(props.width) || !isValid(props.height)) {
       return '';
     }
-    var propNames = [
-      'bottomLeft',
-      'bottomRight',
-      'topLeft',
-      'topRight'
-    ];
-    for (var ii = 0, nn = propNames.length; ii < nn; ii++) {
-      var propName = propNames[ii];
-      if (!corners.hasOwnProperty(propName)) {
-        return '';
+
+    // x and y are optional but must be valid if present:
+    var x = 0;
+    if (props.hasOwnProperty('x') && isValid(props.x)) {
+      x = props.x;
+    }
+    var y = 0;
+    if (props.hasOwnProperty('y') && isValid(props.y)) {
+      y = props.y;
+    }
+
+    // Optional corners default to 0 if none passed:
+    var corners = assign({
+      bottomLeft: 0,
+      bottomRight: 0,
+      topLeft: 0,
+      topRight: 0
+    }, props.corners);
+    for (var propName in corners) {
+      if (!isValid(corners[propName])) {
+        corners[propName] = 0;
       }
     }
 
     return [
-      'M ' + corners.topLeft + ' 0',
-      'H ' + (width - corners.topRight),
-      'Q ' + [width, 0, width, corners.topRight].join(' '),
-      'V ' + (height - corners.bottomRight),
-      'Q ' + [width, height, (width - corners.bottomRight), height].join(' '),
-      'H ' + corners.bottomLeft,
-      'Q ' + [0, height, 0, (height - corners.bottomLeft)].join(' '),
-      'V ' + corners.topLeft,
-      'Q ' + [0, 0, corners.topLeft, 0].join(' ')
+      'M ' + (x + corners.topLeft) + ' ' + y,
+      'H ' + (props.width - corners.topRight),
+      'Q ' + [props.width, y, props.width, (y + corners.topRight)].join(' '),
+      'V ' + (props.height - corners.bottomRight),
+      'Q ' + [props.width, props.height, (props.width - corners.bottomRight), props.height].join(' '),
+      'H ' + (x + corners.bottomLeft),
+      'Q ' + [x, props.height, x, (props.height - corners.bottomLeft)].join(' '),
+      'V ' + (y + corners.topLeft),
+      'Q ' + [x, y, (x + corners.topLeft), y].join(' ')
     ].join(' ');
   },
 
-  getTranslateFromCoords: function(posX, posY) {
-    if (!isValid(posX) || !isValid(posY)) {
+  getTranslateFromCoords: function(x, y) {
+    if (!isValid(x) || !isValid(y)) {
       return;
     }
-    return 'translate(' + Math.ceil(posX) + ',' + Math.ceil(posY) + ')';
+    return 'translate(' + Math.ceil(x) + ',' + Math.ceil(y) + ')';
   }
 
 };

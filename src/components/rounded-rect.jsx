@@ -4,41 +4,47 @@ var { getRoundedRectPath } = require('../utils/svg-util');
 module.exports = React.createClass({
 
   propTypes: {
+    corners: React.PropTypes.object,
+    fill: React.PropTypes.string,
     height: React.PropTypes.number.isRequired,
-    radiusBottomLeft: React.PropTypes.number.isRequired,
-    radiusBottomRight: React.PropTypes.number.isRequired,
-    radiusTopLeft: React.PropTypes.number.isRequired,
-    radiusTopRight: React.PropTypes.number.isRequired,
-    width: React.PropTypes.number.isRequired
+    stroke: React.PropTypes.string,
+    width: React.PropTypes.number.isRequired,
+    x: React.PropTypes.number,
+    y: React.PropTypes.number
   },
 
   getDefaultProps: function() {
     return {
       height: 0,
-      radiusBottomLeft: 0,
-      radiusBottomRight: 0,
-      radiusTopLeft: 0,
-      radiusTopRight: 0,
       width: 0
     }
   },
 
   render: function() {
 
-    var data = getRoundedRectPath(
-      this.props.width,
-      this.props.height,
-      {
-        bottomLeft: this.props.radiusBottomLeft,
-        bottomRight: this.props.radiusBottomRight,
-        topLeft: this.props.radiusTopLeft,
-        topRight: this.props.radiusTopRight
-      });
+    var data = getRoundedRectPath({
+      x: this.props.x,
+      y: this.props.y,
+      width: this.props.width,
+      height: this.props.height,
+      corners: {
+        bottomLeft: this.props.corners.bottomLeft,
+        bottomRight: this.props.corners.bottomRight,
+        topLeft: this.props.corners.topLeft,
+        topRight: this.props.corners.topRight
+      }
+    });
+
+    var style = {
+      fill: this.props.fill,
+      stroke: this.props.stroke
+    };
 
     return (
-      <path className={this.props.className} d={data} />
+      <path className={this.props.className}
+        d={data}
+        style={style} />
     );
-
   }
 
 });

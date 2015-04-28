@@ -1,5 +1,4 @@
 var React = require('react');
-var HorizontalBar = require('../components/horizontal-bar.jsx');
 var Range = require('../ranges/range');
 var LinearDomain = require('../domains/linear-domain');
 var LinearScale = require('../scales/linear-scale');
@@ -45,17 +44,17 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      barHeight: 100,
+      barHeight: 0,
       data: [],
-      detailIconHeight: 75,
-      height: 768,
-      iconHeight: 75,
+      detailIconHeight: 0,
+      height: 0,
+      iconHeight: 0,
       iconShape: 'circle',
       sortFunction: numericDescending,
       sortKey: 'value',
       startAtZero: false,
-      verticalSpacing: 1,
-      width: 1024
+      verticalSpacing: 0,
+      width: 0
     }
   },
 
@@ -94,17 +93,21 @@ module.exports = React.createClass({
                 key={index}>
 
                 <g className={'horizontal-bar-background'}>
-                  <rect className={'horizontal-bar-hit-area'}
-                    height={this.props.height}
-                    width={this.props.width} />
-                  <RoundedRect className={'horizontal-bar-fill'}
+                  <rect className={'horizontal-bar-background-hit-area'}
                     height={this.props.barHeight}
-                    width={Math.ceil(scale(datum.value))} />
+                    width={this.props.width} />
+                  <RoundedRect className={'horizontal-bar-background-fill'}
+                    corners={datum.corners}
+                    fill={datum.fill}
+                    height={this.props.barHeight}
+                    stroke={datum.stroke}
+                    width={Math.ceil(scale(datum.value))}
+                    x={Math.ceil(this.props.barHeight / 2)} />
                 </g>
 
                 <g className={'horizontal-bar-content'}>
                   {datum.icon ? (
-                    <Icon
+                    <Icon className={'horizontal-bar-content-icon'}
                       height={this.props.iconHeight}
                       clipPathID={hasIconClipPath ? ICON_CLIP_PATH_ID : null}
                       index={index}
@@ -112,7 +115,7 @@ module.exports = React.createClass({
                       width={this.props.iconHeight} />
                   ) : null}
                   {datum.label ? (
-                    <Label className={'horizontal-bar-label'}
+                    <Label className={'horizontal-bar-content-label'}
                       text={datum.label} />
                   ) : null}
                 </g>
@@ -124,7 +127,7 @@ module.exports = React.createClass({
                       url={datum.detailIcon}
                       width={this.props.detailIconHeight} />
                   ) : null}
-                  {datum.label ? (
+                  {datum.detailLabel ? (
                     <Label className={'horizontal-bar-detail-label'}
                       text={datum.detailLabel} />
                   ) : null}
