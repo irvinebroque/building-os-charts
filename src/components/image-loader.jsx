@@ -26,10 +26,10 @@ module.exports = React.createClass({
       getAttribute('width', this.props.width)
     ];
     if (this.props.clipPathID) {
-      getAttribute('clip-path', 'url(#' + this.props.clipPathID + ')');
+      attributes.push(getAttribute('clip-path', 'url(#' + this.props.clipPathID + ')'));
     }
     if (this.props.url) {
-      getAttribute('xlink:href', this.props.url);
+      attributes.push(getAttribute('xlink:href', this.props.url));
     }
     return (
       <g dangerouslySetInnerHTML={{
