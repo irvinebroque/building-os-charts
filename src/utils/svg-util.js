@@ -2,6 +2,13 @@ var { isValid } = require('../validators/number-validator');
 
 module.exports = {
 
+  getAttribute: function(name, value) {
+    if (!name) {
+      return;
+    }
+    return [name, '="', value, '"'].join('');
+  },
+
   getCoordsFromTranslate: function(translate) {
     if (translate) {
       var regExp = /\(([^)]+)\)/;

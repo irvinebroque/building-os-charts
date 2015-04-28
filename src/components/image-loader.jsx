@@ -1,4 +1,5 @@
 var React = require('react');
+var { getAttribute } = require('../utils/svg-util');
 
 module.exports = React.createClass({
 
@@ -21,14 +22,14 @@ module.exports = React.createClass({
   render: function() {
     // React does not support namespaced attributes. So this:
     var attributes = [
-      'height="' + this.props.height + '"',
-      'width="' + this.props.width + '"'
+      getAttribute('height', this.props.height),
+      getAttribute('width', this.props.width)
     ];
     if (this.props.clipPathID) {
-      attributes.push('clip-path="url(#' + this.props.clipPathID + ')"');
+      getAttribute('clip-path', 'url(#' + this.props.clipPathID + ')');
     }
     if (this.props.url) {
-      attributes.push('xlink:href="' + this.props.url + '"');
+      getAttribute('xlink:href', this.props.url);
     }
     return (
       <g dangerouslySetInnerHTML={{

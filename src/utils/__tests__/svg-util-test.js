@@ -1,10 +1,23 @@
 var {
+  getAttribute,
   getCoordsFromTranslate,
   getRoundedRectPath,
   getTranslateFromCoords
 } = require('../svg-util');
 
 describe('SvgUtil', function() {
+
+  it('getAttribute returns svg attributes from name/value pairs', function() {
+    expect(getAttribute).toBeDefined();
+    expect(getAttribute()).toBeUndefined();
+    expect(getAttribute('')).toBeUndefined();
+    expect(getAttribute('', '')).toBeUndefined();
+    expect(getAttribute('', 'bar')).toBeUndefined();
+    expect(getAttribute('foo', '')).toEqual('foo=""');
+    expect(getAttribute('foo', 'bar')).toEqual('foo="bar"');
+    expect(getAttribute('clip-rect', 'url(#fooBar)').toEqual('clip-rect="url(#fooBar)"');
+    expect(getAttribute('xlink:href', 'https://twitter.com/_floridaman').toEqual('xlink:href="https://twitter.com/_floridaman"');
+  });
 
   it('getCoordsFromTranslate returns x and y coordinates from translate transform', function() {
     expect(getCoordsFromTranslate).toBeDefined();
