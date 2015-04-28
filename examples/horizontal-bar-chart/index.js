@@ -25,9 +25,10 @@ React.render(
   <HorizontalBarChart
     barHeight={barHeight}
     data={data}
+    detailIconHeight={barHeight / 2}
     height={768}
     iconHeight={barHeight}
-    verticalSpacing={2}
+    verticalSpacing={1}
     width={1024} />,
   document.getElementById('chart')
 );
