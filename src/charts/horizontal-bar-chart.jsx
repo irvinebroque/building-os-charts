@@ -4,8 +4,29 @@ var Range = require('../ranges/range');
 var LinearDomain = require('../domains/linear-domain');
 var LinearScale = require('../scales/linear-scale');
 var { numericDescending } = require('../utils/sort-util');
+var { getTranslateFromCoords } = require('../utils/svg-util');
+var Label = require('../components/label.jsx');
+var ImageLoader = require('../components/image-loader.jsx');
+var RankingBadge = require('../components/ranking-badge.jsx');
+var RoundedRect = require('../components/rounded-rect.jsx');
 
 const ICON_CLIP_PATH_ID = 'iconClipPath';
+
+var _getIcon = function(datum) {
+  if (!datum.icon) {
+    return;
+  }
+  if (datum.icon === 'rank') {
+    return RankingBadge;
+  }
+  return ImageLoader;
+};
+
+var _getTranslate = function(barHeight, verticalSpacing, index) {
+  var totalHeight = barHeight + verticalSpacing;
+  var posY = Math.ceil(totalHeight * index);
+  return getTranslateFromCoords(0, posY);
+};
 
 module.exports = React.createClass({
 
@@ -63,18 +84,53 @@ module.exports = React.createClass({
         </defs>
         <g>
           {data.map(function(datum, index) {
+            var Icon = _getIcon(datum);
             return (
-              <HorizontalBar
-                datum={datum}
-                detailIconHeight={this.props.detailIconHeight}
-                height={this.props.barHeight}
-                iconClipPathID={hasIconClipPath ? ICON_CLIP_PATH_ID : null}
-                iconHeight={this.props.iconHeight}
-                index={index}
-                key={index}
-                scale={scale}
-                verticalSpacing={this.props.verticalSpacing}
-                width={this.props.width} />
+              <g className={'horizontal-bar'}
+                transform={_getTranslate(
+                  this.props.barHeight,
+                  this.props.verticalSpacing,
+                  index)}
+                key={index}>
+
+                <g className={'horizontal-bar-background'}>
+                  <rect className={'horizontal-bar-hit-area'}
+                    height={this.props.height}
+                    width={this.props.width} />
+                  <RoundedRect className={'horizontal-bar-fill'}
+                    height={this.props.barHeight}
+                    width={Math.ceil(scale(datum.value))} />
+                </g>
+
+                <g className={'horizontal-bar-content'}>
+                  {datum.icon ? (
+                    <Icon
+                      height={this.props.iconHeight}
+                      clipPathID={hasIconClipPath ? ICON_CLIP_PATH_ID : null}
+                      index={index}
+                      url={datum.icon}
+                      width={this.props.iconHeight} />
+                  ) : null}
+                  {datum.label ? (
+                    <Label className={'horizontal-bar-label'}
+                      text={datum.label} />
+                  ) : null}
+                </g>
+
+                <g className={'horizontal-bar-detail'}>
+                  {datum.detailIcon ? (
+                    <ImageLoader className={'horizontal-bar-detail-icon'}
+                      height={this.props.detailIconHeight}
+                      url={datum.detailIcon}
+                      width={this.props.detailIconHeight} />
+                  ) : null}
+                  {datum.label ? (
+                    <Label className={'horizontal-bar-detail-label'}
+                      text={datum.detailLabel} />
+                  ) : null}
+                </g>
+
+              </g>
             );
           }, this)}
         </g>
