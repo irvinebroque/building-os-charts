@@ -4,6 +4,7 @@ var { getTranslateFromCoords } = require('../utils/svg-util');
 var Label = require('../components/label.jsx');
 var ImageLoader = require('../components/image-loader.jsx');
 var RankingBadge = require('../components/ranking-badge.jsx');
+var RoundedRect = require('../components/rounded-rect.jsx');
 
 var _getIcon = function(props) {
   if (!props.datum.icon) {
@@ -61,7 +62,7 @@ module.exports = React.createClass({
           <rect className={'horizontal-bar-hit-area'}
             height={this.props.height}
             width={this.props.width} />
-          <rect className={'horizontal-bar-fill'}
+          <RoundedRect className={'horizontal-bar-fill'}
             height={this.props.height}
             width={_getWidth(this.props)} />
         </g>

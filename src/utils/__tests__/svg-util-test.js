@@ -1,11 +1,12 @@
 var {
   getCoordsFromTranslate,
+  getRoundedRectPath,
   getTranslateFromCoords
 } = require('../svg-util');
 
 describe('SvgUtil', function() {
 
-  it('returns x and y coordinates from translate transform', function() {
+  it('getCoordsFromTranslate returns x and y coordinates from translate transform', function() {
     expect(getCoordsFromTranslate).toBeDefined();
     expect(getCoordsFromTranslate()).toBeFalsy();
     expect(getCoordsFromTranslate('')).toBeFalsy();
@@ -15,7 +16,26 @@ describe('SvgUtil', function() {
     expect(getCoordsFromTranslate('translate(10,NaN)')).toBeDefined();
   });
 
-  it('returns a translate transform from given x and y coordinates', function() {
+  it('getRoundedRectPath returns path data for a rectangle with rounded corners', function() {
+    expect(getRoundedRectPath).toBeDefined();
+    expect(getRoundedRectPath()).toEqual('');
+    expect(getRoundedRectPath(100)).toEqual('');
+    expect(getRoundedRectPath(100, 20)).toEqual('');
+    expect(getRoundedRectPath(undefined, 20)).toEqual('');
+    expect(getRoundedRectPath(undefined, 20, {})).toEqual('');
+
+    var corners = {
+      bottomLeft: 10,
+      bottomRight: 10,
+      topLeft: 10,
+      topRight: 10
+    };
+    expect(getRoundedRectPath(100, 20, corners)).toEqual('M 10 0 H 90 Q 100 0 100 10 V 10 Q 100 20 90 20 H 10 Q 0 20 0 10 V 10 Q 0 0 10 0');
+    delete corners.topRight;
+    expect(getRoundedRectPath(100, 20, corners)).toEqual('');
+  });
+
+  it('getTranslateFromCoords returns a translate transform from given x and y coordinates', function() {
     expect(getTranslateFromCoords).toBeDefined();
     expect(getTranslateFromCoords()).toBeFalsy();
     expect(getTranslateFromCoords([])).toBeFalsy();
