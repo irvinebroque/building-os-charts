@@ -3,29 +3,8 @@ var Range = require('../ranges/range');
 var LinearDomain = require('../domains/linear-domain');
 var LinearScale = require('../scales/linear-scale');
 var { numericDescending } = require('../utils/sort-util');
-var { getTranslateFromCoords } = require('../utils/svg-util');
-var Label = require('../components/label.jsx');
-var ImageLoader = require('../components/image-loader.jsx');
-var RankingBadge = require('../components/ranking-badge.jsx');
-var RoundedRect = require('../components/rounded-rect.jsx');
-
-const ICON_CLIP_PATH_ID = 'iconClipPath';
-
-var _getIcon = function(datum) {
-  if (!datum.icon) {
-    return;
-  }
-  if (datum.icon === 'rank') {
-    return RankingBadge;
-  }
-  return ImageLoader;
-};
-
-var _getTranslate = function(barHeight, verticalSpacing, index) {
-  var totalHeight = barHeight + verticalSpacing;
-  var posY = Math.ceil(totalHeight * index);
-  return getTranslateFromCoords(0, posY);
-};
+var HorizontalBar = require('../components/horizontal-bar.jsx');
+var HorizontalBarDefs = require('../components/horizontal-bar-defs.jsx');
 
 module.exports = React.createClass({
 
@@ -34,6 +13,7 @@ module.exports = React.createClass({
     data: React.PropTypes.array.isRequired,
     detailIconHeight: React.PropTypes.number.isRequired,
     height: React.PropTypes.number.isRequired,
+    iconClipPathId: React.PropTypes.string.isRequired,
     iconHeight: React.PropTypes.number.isRequired,
     sortFunction: React.PropTypes.func.isRequired,
     sortKey: React.PropTypes.string.isRequired,
@@ -44,99 +24,79 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      barHeight: 0,
+      barHeight: 80,
       data: [],
-      detailIconHeight: 0,
-      height: 0,
-      iconHeight: 0,
+      detailIconHeight: 20,
+      height: 600,
+      iconClipPathId: 'iconClipPath',
+      iconHeight: 80,
       iconShape: 'circle',
       sortFunction: numericDescending,
       sortKey: 'value',
       startAtZero: false,
-      verticalSpacing: 0,
-      width: 0
+      verticalSpacing: 6,
+      width: 800
     }
   },
 
-  render: function() {
+  getData: function(data, sortFunction, sortKey) {
+    return sortFunction(data.slice(), sortKey);
+  },
 
-    var data = this.props.sortFunction(this.props.data.slice(), this.props.sortKey);
-    var domain = LinearDomain(data, this.props.startAtZero);
-    var range = Range(this.props.width);
-    var scale = LinearScale(domain, range);
-    var hasIconClipPath = this.props.iconShape === 'circle' ? true : false;
-    var iconClipPathSize = Math.ceil(this.props.iconHeight / 2);
+  getScale: function(data, startAtZero, width) {
+    return LinearScale(
+      LinearDomain(data, startAtZero),
+      Range(width)
+    );
+  },
+
+  render: function() {
+    var data = this.getData(
+      this.props.data,
+      this.props.sortFunction,
+      this.props.sortKey);
+
+    var scale = this.getScale(data,
+      this.props.startAtZero,
+      this.props.width);
 
     return (
-      <svg
+      <svg className={'horizontal-bar-chart'}
         height={this.props.height + 1}
         width={this.props.width + 1}>
-        <defs>
-          {hasIconClipPath ? (
-          <clippath id={ICON_CLIP_PATH_ID}>
-            <circle
-              cx={iconClipPathSize}
-              cy={iconClipPathSize}
-              r={iconClipPathSize} />
-          </clippath>
-          ) : null}
-        </defs>
-        <g>
+
+        <HorizontalBarDefs
+          height={this.props.iconHeight}
+          id={this.props.iconClipPathId}
+          shape={this.props.iconShape}
+          width={this.props.iconHeight} />
+
+        <g className={'horizontal-bar-container'}>
           {data.map(function(datum, index) {
-            var Icon = _getIcon(datum);
             return (
-              <g className={'horizontal-bar'}
-                transform={_getTranslate(
-                  this.props.barHeight,
-                  this.props.verticalSpacing,
-                  index)}
-                key={index}>
-
-                <g className={'horizontal-bar-background'}>
-                  <rect className={'horizontal-bar-background-hit-area'}
-                    height={this.props.barHeight}
-                    width={this.props.width} />
-                  <RoundedRect className={'horizontal-bar-background-fill'}
-                    corners={datum.corners}
-                    fill={datum.fill}
-                    height={this.props.barHeight}
-                    stroke={datum.stroke}
-                    width={Math.ceil(scale(datum.value))}
-                    x={Math.ceil(this.props.barHeight / 2)} />
-                </g>
-
-                <g className={'horizontal-bar-content'}>
-                  {datum.icon ? (
-                    <Icon className={'horizontal-bar-content-icon'}
-                      height={this.props.iconHeight}
-                      clipPathID={hasIconClipPath ? ICON_CLIP_PATH_ID : null}
-                      index={index}
-                      url={datum.icon}
-                      width={this.props.iconHeight} />
-                  ) : null}
-                  {datum.label ? (
-                    <Label className={'horizontal-bar-content-label'}
-                      text={datum.label} />
-                  ) : null}
-                </g>
-
-                <g className={'horizontal-bar-detail'}>
-                  {datum.detailIcon ? (
-                    <ImageLoader className={'horizontal-bar-detail-icon'}
-                      height={this.props.detailIconHeight}
-                      url={datum.detailIcon}
-                      width={this.props.detailIconHeight} />
-                  ) : null}
-                  {datum.detailLabel ? (
-                    <Label className={'horizontal-bar-detail-label'}
-                      text={datum.detailLabel} />
-                  ) : null}
-                </g>
-
-              </g>
+              <HorizontalBar
+                corners={datum.corners}
+                detailIcon={datum.detailIcon}
+                detailIconHeight={this.props.detailIconHeight}
+                detailLabel={datum.detailLabel}
+                fill={datum.fill}
+                height={this.props.barHeight}
+                icon={datum.icon}
+                iconClipPathId={this.props.iconClipPathId}
+                iconHeight={this.props.iconHeight}
+                index={index}
+                key={index}
+                label={datum.label}
+                scale={scale}
+                stroke={datum.stroke}
+                value={datum.value}
+                verticalSpacing={this.props.verticalSpacing}
+                width={this.props.width}
+                x={datum.x} />
             );
           }, this)}
         </g>
+
       </svg>
     );
   }

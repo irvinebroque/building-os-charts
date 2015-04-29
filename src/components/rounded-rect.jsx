@@ -15,13 +15,12 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      height: 0,
-      width: 0
+      height: 10,
+      width: 10
     }
   },
 
   render: function() {
-
     var data = getRoundedRectPath({
       x: this.props.x,
       y: this.props.y,

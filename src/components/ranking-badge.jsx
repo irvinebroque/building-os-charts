@@ -1,19 +1,6 @@
 var React = require('react');
 var classNames = require('classnames');
 
-var _getColorClass = function(index) {
-  switch (index) {
-    case 0:
-      return 'gold';
-    case 1:
-      return 'silver';
-    case 2:
-      return 'bronze';
-    default:
-      return;
-  }
-};
-
 module.exports = React.createClass({
 
   propTypes: {
@@ -28,13 +15,26 @@ module.exports = React.createClass({
     }
   },
 
+  getColorClass: function(index) {
+    switch (index) {
+      case 0:
+        return 'gold';
+      case 1:
+        return 'silver';
+      case 2:
+        return 'bronze';
+      default:
+        return;
+    }
+  },
+
   render: function() {
     var radius = Math.ceil(this.props.height / 2);
     return (
       <g className={classNames('ranking-badge', this.props.className)}>
         <circle className={classNames(
             'ranking-badge-background',
-            _getColorClass(this.props.index)
+            this.getColorClass(this.props.index)
           )}
           cx={radius}
           cy={radius}

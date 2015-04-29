@@ -21,6 +21,10 @@ svg text {
 //
 // --------------------
 
+.horizontal-bar {
+  background-color: #ff00cc;
+}
+
 .horizontal-bar-background {
   opacity: 0.35;
 }
@@ -37,13 +41,15 @@ svg text {
   opacity: 0;
 }
 
+.horizontal-bar-chart {}
+
+.horizontal-bar-container {}
+
 .horizontal-bar-content {
   pointer-events: none;
 }
 
-.horizontal-bar-content-icon {
-  background-color: #ff00cc;
-}
+.horizontal-bar-content-icon {}
 
 .horizontal-bar-content-label {}
 
