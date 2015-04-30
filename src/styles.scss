@@ -8,16 +8,49 @@ svg {
   font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   font-weight: 300;
   fill: #fff;
-  font-size: 18px;
+  font-size: 24px;
 }
 
 svg text {
-  dominant-baseline: middle;
+  dominant-baseline: text-before-edge;
 }
 
 // --------------------
 //
-// Horizontal bar chart
+// Generic Components
+//
+// --------------------
+
+.ranking-badge-background {
+  fill: #999;
+  stroke: #ccc;
+  stroke-width: 3px;
+}
+
+.ranking-badge-text {
+  fill: #000;
+  font-weight: bold;
+  text-anchor: middle;
+}
+
+.gold {
+  fill: #e4ac43;
+  stroke: #f8c350;
+}
+
+.silver {
+  fill: #d1d1d1;
+  stroke: #fff;
+}
+
+.bronze {
+  fill: #e09765;
+  stroke: #f2b793;
+}
+
+// --------------------
+//
+// Horizontal bar chart components
 //
 // --------------------
 
@@ -59,37 +92,6 @@ svg text {
 
 .horizontal-bar-detail-icon {}
 
-.horizontal-bar-detail-label {}
-
-// --------------------
-//
-// Components
-//
-// --------------------
-
-.ranking-badge-background {
-  fill: #999;
-  stroke: #ccc;
-  stroke-width: 3px;
-}
-
-.ranking-badge-text {
-  fill: #000;
-  font-weight: bold;
-  text-anchor: middle;
-}
-
-.gold {
-  fill: #e4ac43;
-  stroke: #f8c350;
-}
-
-.silver {
-  fill: #d1d1d1;
-  stroke: #fff;
-}
-
-.bronze {
-  fill: #e09765;
-  stroke: #f2b793;
+.horizontal-bar-detail-label {
+  fill: #333;
 }

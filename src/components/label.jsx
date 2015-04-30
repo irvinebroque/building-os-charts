@@ -4,7 +4,7 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <text>{this.props.text}</text>
+      <text className={this.props.className}>{this.props.text}</text>
     );
   }
 

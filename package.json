@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "classnames": "^1.2.1",
+    "css-layout": "0.0.2",
     "d3": "^3.5.5",
     "javascript-natural-sort": "^0.7.1",
     "object-assign": "^2.0.0",
