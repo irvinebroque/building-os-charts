@@ -1,9 +1,7 @@
-var { flex } = require('../layout');
+var { flexbox } = require('../flexbox');
 
 describe('Layout', function() {
 
-  it('foo', function() {
-    flex();
-  });
+  
 
 });
