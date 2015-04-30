@@ -10,7 +10,7 @@
   "scripts": {
     "build": "webpack -p --progress --colors",
     "examples": "webpack-dev-server --config examples/webpack.config.js --content-base examples",
-    "test": "karma start"
+    "tests": "karma start"
   },
   "repository": {
     "type": "git",
