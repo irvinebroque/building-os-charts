@@ -2,24 +2,50 @@ var React = require('react');
 var { TimeseriesChart } = require('ld3');
 require('../../src/styles.scss');
 
-var data = [];
-for (var ii = 0, nn = 20; ii < nn; ii++) {
-  var value = Math.random() * 100;
-  data.push({
-    'detailIcon': 'http://luciddesigngroup.com/test/blocks/img/kiwi/increase.svg',
-    'detailLabel': Math.round(value).toString(),
-    'label': 'Foo ' + ii,
-    'icon': 'http://buildingdashboard.net/images/buildingentityavatar/5904/profile/5c3cd86f-d298-4c40-8ec4-0b21d8fe3a53.png',
-    'value': value,
-    'corners': {
-      topRight: 10,
-      bottomRight: 10
-    },
-    'x': 40
-  });
-}
+var _getData = function(nn) {
+  var data = [];
+  for (var ii = 0; ii < nn; ii++) {
+    data.push({
+      timestamp: new Date(),
+      value: Math.random() * 100,
+      formattedValue: 'bla'
+    });
+  }
+  return data;
+};
+
+var start = new Date();
+var end = new Date();
+
+var groups = [{
+  label: 'Electricity',
+  className: 'electricity-group',
+  showVerticalAxis: true,
+  showHorizontalAxis: true,
+  series: [{
+    className: 'electricity-series',
+    color: '#ff00cc',
+    data: _getData(12),
+    end: end,
+    start: start,
+    startAtZero: true,
+    legendIndex: 0,
+    legendLabel: 'Meter 1',
+    type: 'column' // clusteredColumn, stackedColumn, differenceColumn, line, area
+  },{
+    className: 'electricity-series',
+    color: '#ff0000',
+    data: _getData(12),
+    end: end,
+    start: start,
+    startAtZero: true,
+    legendIndex: 1,
+    legendLabel: 'Meter 2',
+    type: 'line'
+   }]
+}];
 
 React.render(
-  <TimeseriesChart />,
+  <TimeseriesChart groups={groups} />,
   document.getElementById('chart')
 );
