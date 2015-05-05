@@ -18,10 +18,9 @@ var start = new Date();
 var end = new Date();
 
 var groups = [{
-  label: 'Electricity',
   className: 'electricity-group',
-  showVerticalAxis: true,
-  showHorizontalAxis: true,
+  label: 'Electricity',
+  margins: 20,
   series: [{
     className: 'electricity-series',
     color: '#ff00cc',

@@ -1,6 +1,6 @@
 var React = require('react');
 var Timeseries = require('./timeseries.jsx');
-var { array, bool, string } = React.PropTypes;
+var { array, bool, number, object, string } = React.PropTypes;
 var classNames = require('classnames');
 
 module.exports = React.createClass({
@@ -8,17 +8,18 @@ module.exports = React.createClass({
   propTypes: {
     className: string,
     label: string.isRequired,
-    series: array.isRequired,
-    showHorizontalAxis: bool.isRequired,
-    showVerticalAxis: bool.isRequired
+    margins: React.PropTypes.oneOfType([
+      React.PropTypes.number,
+      React.PropTypes.object
+    ]),
+    series: array.isRequired
   },
 
   getDefaultProps: function() {
     return {
       label: '',
-      series: [],
-      showHorizontalAxis: true,
-      showVerticalAxis: true
+      margins: 0,
+      series: []
     };
   },
 
@@ -28,11 +29,13 @@ module.exports = React.createClass({
         {this.props.series.map((datum, index) => (
           <Timeseries
             className={datum.className}
-            label={datum.label}
+            color={datum.color}
+            data={datum.data}
+            end={datum.end}
             key={index}
-            series={datum.series}
-            showHorizontalAxis={datum.showHorizontalAxis}
-            showVerticalAxis={datum.showVerticalAxis} />
+            start={datum.start}
+            startAtZero={datum.startAtZero}
+            type={datum.type} />
         ))}
       </g>
     );

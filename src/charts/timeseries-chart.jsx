@@ -30,9 +30,8 @@ module.exports = React.createClass({
               className={datum.className}
               label={datum.label}
               key={index}
-              series={datum.series}
-              showHorizontalAxis={datum.showHorizontalAxis}
-              showVerticalAxis={datum.showVerticalAxis} />
+              margin={datum.margin}
+              series={datum.series} />
           ))}
         </g>
 

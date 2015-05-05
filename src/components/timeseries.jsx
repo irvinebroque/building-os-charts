@@ -11,8 +11,7 @@ module.exports = React.createClass({
     end: object.isRequired,
     start: object.isRequired,
     startAtZero: bool.isRequired,
-    legendIndex: number,
-    legendLabel: string.isRequired
+    type: string.isRequired
   },
 
   getDefaultProps: function() {
@@ -22,14 +21,15 @@ module.exports = React.createClass({
       end: now,
       start: now,
       startAtZero: true,
-      legendLabel: ''
+      legendLabel: '',
+      type: 'column'
     };
   },
 
   render: function() {
     return (
       <g className={classNames('timeseries', this.props.className)}>
-
+        {/* append series */}
       </g>
     );
   }
