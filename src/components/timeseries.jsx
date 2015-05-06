@@ -9,9 +9,11 @@ module.exports = React.createClass({
     color: string,
     data: array.isRequired,
     end: object.isRequired,
+    height: number.isRequired,
     start: object.isRequired,
     startAtZero: bool.isRequired,
-    type: string.isRequired
+    type: string.isRequired,
+    width: number.isRequired
   },
 
   getDefaultProps: function() {
@@ -19,10 +21,12 @@ module.exports = React.createClass({
     return {
       data: [],
       end: now,
+      height: 0,
       start: now,
       startAtZero: true,
       legendLabel: '',
-      type: 'column'
+      type: 'column',
+      width: 0
     };
   },
 
