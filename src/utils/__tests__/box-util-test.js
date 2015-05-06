@@ -1,27 +1,27 @@
-var Margins = require('../margins');
+var BoxUtil = require('../box-util');
 
-describe('Margins', function() {
+describe('BoxUtil', function() {
 
   it('returns uniform defaults of 0 for invalid input', function() {
-    expect(Margins()).toEqual({
+    expect(BoxUtil()).toEqual({
       top: 0,
       right: 0,
       bottom: 0,
       left: 0
     });
-    expect(Margins('')).toEqual({
+    expect(BoxUtil('')).toEqual({
       top: 0,
       right: 0,
       bottom: 0,
       left: 0
     });
-    expect(Margins([])).toEqual({
+    expect(BoxUtil([])).toEqual({
       top: 0,
       right: 0,
       bottom: 0,
       left: 0
     });
-    expect(Margins(NaN)).toEqual({
+    expect(BoxUtil(NaN)).toEqual({
       top: 0,
       right: 0,
       bottom: 0,
@@ -30,13 +30,13 @@ describe('Margins', function() {
   });
 
   it('return an object with uniform values from valid numeric input', function() {
-    expect(Margins(0)).toEqual({
+    expect(BoxUtil(0)).toEqual({
       top: 0,
       right: 0,
       bottom: 0,
       left: 0
     });
-    expect(Margins(10)).toEqual({
+    expect(BoxUtil(10)).toEqual({
       top: 10,
       right: 10,
       bottom: 10,
@@ -45,7 +45,7 @@ describe('Margins', function() {
   });
 
   it('return an object with unique values from object input', function() {
-    expect(Margins({
+    expect(BoxUtil({
       top: 0,
       right: 0,
       bottom: 0,
@@ -57,7 +57,7 @@ describe('Margins', function() {
       left: 0
     });
 
-    expect(Margins({
+    expect(BoxUtil({
       top: 1,
       right: 2,
       bottom: 3,
@@ -71,7 +71,7 @@ describe('Margins', function() {
   });
 
   it('return an object with unique values from object input with missing props', function() {
-    expect(Margins({
+    expect(BoxUtil({
       top: 1,
       left: 4
     })).toEqual({

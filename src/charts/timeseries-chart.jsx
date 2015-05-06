@@ -1,7 +1,7 @@
 var React = require('react');
 var TimeseriesGroup = require('../components/timeseries-group.jsx');
 var { array, number, objectOf, oneOfType, string } = React.PropTypes;
-var Margins = require('../margins/margins');
+var BoxUtil = require('../utils/box-util');
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var TimeseriesDefs = require('../components/timeseries-defs.jsx');
 
@@ -26,7 +26,7 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var margins = Margins(this.props.margins);
+    var margins = BoxUtil(this.props.margins);
 
     return (
       <svg className={'timeseries-chart'}
