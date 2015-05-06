@@ -20,7 +20,6 @@ var end = new Date();
 var groups = [{
   className: 'electricity-group',
   label: 'Electricity',
-  margins: 20,
   series: [{
     className: 'electricity-series',
     color: '#ff00cc',
@@ -44,7 +43,12 @@ var groups = [{
    }]
 }];
 
+var width = 1024;
 React.render(
-  <TimeseriesChart groups={groups} />,
+  <TimeseriesChart
+    height={Math.ceil(width * 0.75)}
+    groups={groups}
+    margins={Math.ceil(width * 0.08)}
+    width={width} />,
   document.getElementById('chart')
 );

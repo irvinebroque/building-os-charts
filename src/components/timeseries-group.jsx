@@ -1,6 +1,6 @@
 var React = require('react');
 var Timeseries = require('./timeseries.jsx');
-var { array, bool, number, object, string } = React.PropTypes;
+var { array, string } = React.PropTypes;
 var classNames = require('classnames');
 
 module.exports = React.createClass({
@@ -8,17 +8,12 @@ module.exports = React.createClass({
   propTypes: {
     className: string,
     label: string.isRequired,
-    margins: React.PropTypes.oneOfType([
-      React.PropTypes.number,
-      React.PropTypes.object
-    ]),
     series: array.isRequired
   },
 
   getDefaultProps: function() {
     return {
       label: '',
-      margins: 0,
       series: []
     };
   },
