@@ -15,7 +15,7 @@ describe('LinearDomain...', function() {
     for (var ii = 0, nn = 10; ii < nn; ii++) {
       data.push({value: undefined});
     }
-    expect(LinearDomain(data)).toEqual([0,0]);
+    expect(LinearDomain([data])).toEqual([0,0]);
   });
 
   it('handles input containing all null values, returns [0,0]', function() {
@@ -23,7 +23,7 @@ describe('LinearDomain...', function() {
     for (var ii = 0, nn = 10; ii < nn; ii++) {
       data.push({value: null});
     }
-    expect(LinearDomain(data)).toEqual([0,0]);
+    expect(LinearDomain([data])).toEqual([0,0]);
   });
 
   it('handles input containing all invalid number types, returns [0,0]', function() {
@@ -39,7 +39,7 @@ describe('LinearDomain...', function() {
     for (var ii = 0, nn = invalid.length; ii < nn; ii++) {
       data.push({value: invalid[ii]});
     }
-    expect(LinearDomain(data)).toEqual([0,0]);
+    expect(LinearDomain([data])).toEqual([0,0]);
   });
 
   it('handles a single array of positive numbers', function() {
@@ -47,7 +47,7 @@ describe('LinearDomain...', function() {
     for (var ii = 0, nn = 20; ii < nn; ii++) {
       data.push({value: ii + 1});
     }
-    expect(LinearDomain(data)).toEqual([1,20]);
+    expect(LinearDomain([data])).toEqual([1,20]);
   });
 
   it('handles a single array of positive numbers where some values are falsy/invalid', function() {
@@ -58,7 +58,7 @@ describe('LinearDomain...', function() {
     data[0].value = undefined;
     data[data.length - 1].value = null;
     data[Math.round(data.length * 0.5)].value = NaN;
-    expect(LinearDomain(data)).toEqual([2,19]);
+    expect(LinearDomain([data])).toEqual([2,19]);
   });
 
   it('handles a single array of positive numbers where startAtZero is true', function() {
@@ -66,7 +66,7 @@ describe('LinearDomain...', function() {
     for (var ii = 0, nn = 20; ii < nn; ii++) {
       data.push({value: ii + 1});
     }
-    expect(LinearDomain(data, true)).toEqual([0,20]);
+    expect(LinearDomain([data], true)).toEqual([0,20]);
   });
 
   it('handles a single array of positive numbers where startAtZero is true and some values are falsy/invalid', function() {
@@ -77,7 +77,7 @@ describe('LinearDomain...', function() {
     data[0].value = undefined;
     data[data.length - 1].value = null;
     data[Math.round(data.length * 0.5)].value = NaN;
-    expect(LinearDomain(data, true)).toEqual([0,19]);
+    expect(LinearDomain([data], true)).toEqual([0,19]);
   });
 
   it('handles a single array of negative numbers', function() {
@@ -85,7 +85,7 @@ describe('LinearDomain...', function() {
     for (var ii = 0, nn = 20; ii < nn; ii++) {
       data.push({value: ii - 100});
     }
-    expect(LinearDomain(data)).toEqual([-100,-81]);
+    expect(LinearDomain([data])).toEqual([-100,-81]);
   });
 
   it('handles a single array of negative numbers where some values are falsy/invalid', function() {
@@ -96,7 +96,7 @@ describe('LinearDomain...', function() {
     data[0].value = undefined;
     data[data.length - 1].value = null;
     data[Math.round(data.length * 0.5)].value = NaN;
-    expect(LinearDomain(data)).toEqual([-99,-82]);
+    expect(LinearDomain([data])).toEqual([-99,-82]);
   });
 
   it('handles a single array of negative numbers where startAtZero is true', function() {
@@ -104,7 +104,7 @@ describe('LinearDomain...', function() {
     for (var ii = 0, nn = 20; ii < nn; ii++) {
       data.push({value: ii - 100});
     }
-    expect(LinearDomain(data, true)).toEqual([-100,-81]);
+    expect(LinearDomain([data], true)).toEqual([-100,-81]);
   });
 
   it('handles a single array of negative numbers where startAtZero is true and some values are falsy/invalid', function() {
@@ -115,7 +115,7 @@ describe('LinearDomain...', function() {
     data[0].value = undefined;
     data[data.length - 1].value = null;
     data[Math.round(data.length * 0.5)].value = NaN;
-    expect(LinearDomain(data, true)).toEqual([-99,-82]);
+    expect(LinearDomain([data], true)).toEqual([-99,-82]);
   });
 
   it('handles multiple arrays of positive numbers', function() {
@@ -127,7 +127,7 @@ describe('LinearDomain...', function() {
       data1.push({value: counter});
       data2.push({value: counter * 10});
     }
-    expect(LinearDomain(data1, data2)).toEqual([1,200]);
+    expect(LinearDomain([data1, data2])).toEqual([1,200]);
   });
 
   it('handles multiple arrays of positive and negative numbers', function() {
@@ -139,7 +139,7 @@ describe('LinearDomain...', function() {
       data1.push({value: counter});
       data2.push({value: counter - 11});
     }
-    expect(LinearDomain(data1, data2)).toEqual([-10,10]);
+    expect(LinearDomain([data1, data2])).toEqual([-10,10]);
   });
 
   it('handles multiple arrays of positive and negative and falsy/invalid numbers', function() {
@@ -156,7 +156,7 @@ describe('LinearDomain...', function() {
     data3[0].value = undefined;
     data3[data3.length - 1].value = null;
     data3[Math.round(data3.length * 0.5)].value = NaN;
-    expect(LinearDomain(data1, data2, data3)).toEqual([-10,10]);
+    expect(LinearDomain([data1, data2, data3])).toEqual([-10,10]);
   });
 
   it('handles multiple arrays of positive numbers where startAtZero is true', function() {
@@ -168,7 +168,7 @@ describe('LinearDomain...', function() {
       data1.push({value: counter});
       data2.push({value: counter * 10});
     }
-    expect(LinearDomain(data1, data2, true)).toEqual([0,200]);
+    expect(LinearDomain([data1, data2], true)).toEqual([0,200]);
   });
 
   it('handles multiple arrays of positive and negative numbers where startAtZero is true', function() {
@@ -180,7 +180,7 @@ describe('LinearDomain...', function() {
       data1.push({value: counter});
       data2.push({value: counter - 11});
     }
-    expect(LinearDomain(data1, data2, true)).toEqual([-10,10]);
+    expect(LinearDomain([data1, data2], true)).toEqual([-10,10]);
   });
 
   it('handles multiple arrays of positive and negative and falsy/invalid numbers where startAtZero is true', function() {
@@ -197,7 +197,7 @@ describe('LinearDomain...', function() {
     data3[0].value = undefined;
     data3[data3.length - 1].value = null;
     data3[Math.round(data3.length * 0.5)].value = NaN;
-    expect(LinearDomain(data1, data2, data3, true)).toEqual([-10,10]);
+    expect(LinearDomain([data1, data2, data3], true)).toEqual([-10,10]);
   });
 
 });
