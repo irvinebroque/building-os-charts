@@ -1,8 +1,8 @@
-var DateTimeDomain = require('../date-time-domain');
+var TimeDomain = require('../time-domain');
 
-describe('DateTimeDomain...', function() {
+describe('TimeDomain...', function() {
 
-  var data, data2, timestamps;
+  var data, data2, timestamps, series, series2;
   beforeEach(function() {
     data = [];
     data2 = [];
@@ -17,52 +17,60 @@ describe('DateTimeDomain...', function() {
     }
     timestamps.reverse();
     data2 = data.slice();
+
+    series = {
+      data: data
+    };
+    series2 = {
+      data: data2
+    };
+
   });
 
   it('handles undefined input, returns an empty array', function() {
-    expect(DateTimeDomain()).toEqual([]);
+    expect(TimeDomain()).toEqual([]);
   });
 
   it('handles empty input, returns an empty array', function() {
-    expect(DateTimeDomain([])).toEqual([]);
+    expect(TimeDomain([])).toEqual([]);
   });
 
   it('handles input containing all undefined values, returns an empty array', function() {
-    var data = [];
+    series.data = [];
     for (var ii = 0, nn = 10; ii < nn; ii++) {
-      data.push({timestamp: undefined});
+      series.data.push({timestamp: undefined});
     }
-    expect(DateTimeDomain([data])).toEqual([]);
+    expect(TimeDomain([series])).toEqual([]);
   });
 
   it('handles input containing all null values, returns an empty array', function() {
-    var data = [];
+    series.data = [];
     for (var ii = 0, nn = 10; ii < nn; ii++) {
-      data.push({timestamp: null});
+      series.data.push({timestamp: null});
     }
-    expect(DateTimeDomain([data])).toEqual([]);
+    expect(TimeDomain([series])).toEqual([]);
   });
 
   it('handles a single array of dates', function() {
-    expect(DateTimeDomain([data])).toEqual([timestamps[0], timestamps[timestamps.length - 1]]);
+    expect(TimeDomain([series])).toEqual([timestamps[0], timestamps[timestamps.length - 1]]);
   });
 
   it('handles a single array of dates where some are null or undefined', function() {
-    data[2].timestamp = undefined;
-    data[8].timestamp = null;
-    expect(DateTimeDomain([data])).toEqual([timestamps[0], timestamps[timestamps.length - 1]]);
+    series.data[2].timestamp = undefined;
+    series.data[8].timestamp = null;
+    expect(TimeDomain([series])).toEqual([timestamps[0], timestamps[timestamps.length - 1]]);
   });
 
   it('handles multiple arrays of dates', function() {
-    expect(DateTimeDomain([data, data2])).toEqual([timestamps[0], timestamps[timestamps.length - 1]]);
+    expect(TimeDomain([series, series2])).toEqual([timestamps[0], timestamps[timestamps.length - 1]]);
   });
 
   it('handles multiple arrays of dates where some are null or undefined', function() {
-    data[2].timestamp = undefined;
-    data[8].timestamp = null;
-    data[5].timestamp = undefined;
-    data[17].timestamp = null;
-    expect(DateTimeDomain([data, data2])).toEqual([timestamps[0], timestamps[timestamps.length - 1]]);
+    series.data[2].timestamp = undefined;
+    series.data[8].timestamp = null;
+    series2.data[5].timestamp = undefined;
+    series2.data[17].timestamp = null;
+    expect(TimeDomain([series, series2])).toEqual([timestamps[0], timestamps[timestamps.length - 1]]);
   });
 
 });

@@ -4,7 +4,7 @@ var { isValid } = require('../validators/number-validator');
 var _getExtents = function(series) {
   var extents = [];
   for (var ii = 0, nn = series.length; ii < nn; ii++) {
-    extents = extents.concat(d3.extent(series[ii], function(datum) {
+    extents = extents.concat(d3.extent(series[ii].data, function(datum) {
       if (datum && isValid(datum.value)) {
         return datum.value;
       }

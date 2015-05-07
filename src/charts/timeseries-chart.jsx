@@ -1,8 +1,8 @@
 var React = require('react');
-var TimeseriesGroup = require('../components/timeseries-group.jsx');
 var { array, number, objectOf, oneOfType, string } = React.PropTypes;
-var BoxUtil = require('../utils/box-util');
 var { getTranslateFromCoords } = require('../utils/svg-util');
+var BoxUtil = require('../utils/box-util');
+var TimeseriesGroup = require('../components/timeseries-group.jsx');
 var TimeseriesDefs = require('../components/timeseries-defs.jsx');
 
 module.exports = React.createClass({
@@ -27,7 +27,6 @@ module.exports = React.createClass({
 
   render: function() {
     var margins = BoxUtil(this.props.margins);
-
     return (
       <svg className={'timeseries-chart'}
         height={this.props.height + 1}
@@ -38,7 +37,7 @@ module.exports = React.createClass({
           id={this.props.timeseriesClipPathId}
           width={this.props.width} />
 
-        <g className={'timeseries-container'}
+        <g className={'timeseries-groups-container'}
           clip-path={'url(#' + this.props.timeseriesClipPathId + ')'}
           transform={getTranslateFromCoords(margins.left, margins.top)}>
 
@@ -49,11 +48,11 @@ module.exports = React.createClass({
               key={index}
               margins={datum.margins}
               series={datum.series}
+              startAtZero={datum.startAtZero}
               width={this.props.width - margins.left - margins.right} />
           ))}
 
         </g>
-
       </svg>
     );
   }

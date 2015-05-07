@@ -1,11 +1,12 @@
 var d3 = require('d3');
+var moment = require('moment');
 
 var _getExtents = function(series) {
   var extents = [];
   for (var ii = 0, nn = series.length; ii < nn; ii++) {
-    extents = extents.concat(d3.extent(series[ii], function(datum) {
+    extents = extents.concat(d3.extent(series[ii].data, function(datum) {
       if (datum) {
-        return datum.timestamp ? datum.timestamp : undefined;
+        return moment(datum.timestamp).isValid() ? datum.timestamp : undefined;
       }
     }));
   }

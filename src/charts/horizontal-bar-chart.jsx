@@ -45,7 +45,7 @@ module.exports = React.createClass({
 
   getScale: function(data, startAtZero, width) {
     return LinearScale(
-      LinearDomain([data], startAtZero),
+      LinearDomain([{data: data}], startAtZero),
       Range(width)
     );
   },

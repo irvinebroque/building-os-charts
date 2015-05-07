@@ -2,6 +2,11 @@ var React = require('react');
 var { TimeseriesChart } = require('ld3');
 require('../../src/styles.scss');
 
+
+var end = new Date();
+var start = new Date(end);
+start.setDate(start.getDate() - 1);
+
 var _getData = function(nn) {
   var data = [];
   for (var ii = 0; ii < nn; ii++) {
@@ -14,33 +19,28 @@ var _getData = function(nn) {
   return data;
 };
 
-var start = new Date();
-var end = new Date();
 
 var groups = [{
   className: 'electricity-group',
   label: 'Electricity',
+  startAtZero: true,
   series: [{
-    className: 'electricity-series',
-    color: '#ff00cc',
-    data: _getData(12),
-    end: end,
-    start: start,
-    startAtZero: true,
-    legendIndex: 0,
+    data: _getData(24),
     legendLabel: 'Meter 1',
-    type: 'column' // clusteredColumn, stackedColumn, differenceColumn, line, area
-  },{
+    styles: {
+      fill: '#ff00cc'
+    },
+    type: 'bar'
+  }/*,{
     className: 'electricity-series',
     color: '#ff0000',
-    data: _getData(12),
-    end: end,
-    start: start,
-    startAtZero: true,
+    data: _getData(24),
     legendIndex: 1,
     legendLabel: 'Meter 2',
     type: 'line'
-   }]
+   }*/
+  ]
+
 }];
 
 var width = 1024;
