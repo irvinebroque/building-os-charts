@@ -2,7 +2,6 @@ var React = require('react');
 var { TimeseriesChart } = require('ld3');
 require('../../src/styles.scss');
 
-
 var end = new Date();
 var start = new Date(end);
 start.setDate(start.getDate() - 1);
@@ -18,7 +17,6 @@ var _getData = function(nn) {
   }
   return data;
 };
-
 
 var groups = [{
   className: 'electricity-group',

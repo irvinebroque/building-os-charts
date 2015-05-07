@@ -1,6 +1,6 @@
 var React = require('react');
 var Timeseries = require('./timeseries.jsx');
-var { array, bool, number, string } = React.PropTypes;
+var { array, bool, number, object, string } = React.PropTypes;
 var classNames = require('classnames');
 var LinearDomain = require('../domains/linear-domain');
 var TimeDomain = require('../domains/time-domain');
@@ -14,6 +14,7 @@ module.exports = React.createClass({
     className: string,
     height: number.isRequired,
     label: string.isRequired,
+    margins: object.isRequired,
     series: array.isRequired,
     startAtZero: bool.isRequired,
     width: number.isRequired
@@ -23,6 +24,7 @@ module.exports = React.createClass({
     return {
       height: 0,
       label: '',
+      margins: {},
       series: [],
       startAtZero: true,
       width: 0
@@ -44,11 +46,11 @@ module.exports = React.createClass({
         {this.props.series.map((datum, index) => (
           <Timeseries
             className={datum.className}
-            color={datum.color}
             data={datum.data}
             key={index}
             scaleX={scaleX}
             scaleY={scaleY}
+            style={datum.style}
             type={datum.type} />
         ))}
       </g>
