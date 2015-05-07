@@ -27,26 +27,28 @@ module.exports = React.createClass({
 
   render: function() {
     var margins = BoxUtil(this.props.margins);
-    var contentHeight = this.props.height - margins.top - margins.bottom;
-    var contentWidth = this.props.width - margins.left - margins.right;
+    var contentHeight = Math.ceil(
+      this.props.height - margins.top - margins.bottom);
+    var contentWidth = Math.ceil(
+      this.props.width - margins.left - margins.right);
 
     return (
       <svg className={'timeseries-chart'}
-        height={this.props.height + 1}
-        width={this.props.width + 1}>
+        height={Math.ceil(this.props.height) + 1}
+        width={Math.ceil(this.props.width) + 1}>
 
         <TimeseriesDefs
           height={contentHeight}
           id={this.props.timeseriesClipPathId}
           width={contentWidth} />
 
-        <g className={'timeseries-groups-container'}
+        <g className={'timeseries-groups'}
           clip-path={'url(#' + this.props.timeseriesClipPathId + ')'}
           transform={getTranslateFromCoords(margins.left, margins.top)}>
-
           {this.props.groups.map((datum, index) => (
             <TimeseriesGroup className={datum.className}
               height={contentHeight}
+              index={index}
               label={datum.label}
               key={index}
               margins={margins}
@@ -54,8 +56,8 @@ module.exports = React.createClass({
               startAtZero={datum.startAtZero}
               width={contentWidth} />
           ))}
-
         </g>
+
       </svg>
     );
   }

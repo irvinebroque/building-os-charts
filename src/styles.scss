@@ -21,6 +21,23 @@ svg text {
 //
 // --------------------
 
+.linear-axis-divider {
+  stroke: #000;
+}
+
+.linear-axis-label {
+  dominant-baseline: middle;
+  fill: #000;
+}
+
+.linear-axis-label.left {
+  text-anchor: end;
+}
+
+.linear-axis-label.right {
+  text-anchor: start;
+}
+
 .ranking-badge-background {
   fill: #999;
   stroke: #ccc;

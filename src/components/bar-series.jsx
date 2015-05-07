@@ -37,8 +37,8 @@ module.exports = React.createClass({
         {this.props.data.map((datum, index) => {
 
           var barHeight = Math.ceil(this.props.scaleY(datum.value));
-          var x = barWidth * index;
-          var y = this.props.height - barHeight;
+          var x = Math.ceil(barWidth * index);
+          var y = Math.ceil(this.props.height - barHeight);
 
           return (
             <VerticalBar className={datum.className}

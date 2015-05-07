@@ -1,5 +1,5 @@
 var React = require('react');
-var { array, bool, func, number, object, string } = React.PropTypes;
+var { array, bool, func, number, objectOf, string } = React.PropTypes;
 var classNames = require('classnames');
 var LinearDomain = require('../domains/linear-domain');
 var TimeDomain = require('../domains/time-domain');
@@ -13,14 +13,16 @@ var DifferenceBarSeries = require('./difference-bar-series.jsx');
 var LineSeries = require('./line-series.jsx');
 var PlotSeries = require('./plot-series.jsx');
 var StackedSeries = require('./stacked-bar-series.jsx');
+var LinearAxis = require('./linear-axis.jsx');
 
 module.exports = React.createClass({
 
   propTypes: {
     className: string,
     height: number.isRequired,
+    index: number.isRequired,
     label: string.isRequired,
-    margins: object.isRequired,
+    margins: objectOf(number).isRequired,
     series: array.isRequired,
     startAtZero: bool.isRequired,
     width: number.isRequired
@@ -29,12 +31,24 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       height: 0,
+      index: 0,
       label: '',
-      margins: {},
+      margins: {
+        bottom: 0,
+        left: 0,
+        right: 0,
+        top: 0
+      },
       series: [],
       startAtZero: true,
       width: 0
     };
+  },
+
+  getTickPadding: function(index, margins) {
+    return index ?
+      Math.ceil(margins.right / 10) :
+      Math.floor(margins.left / 10)
   },
 
   getTimeSeries: function(type) {
@@ -61,20 +75,23 @@ module.exports = React.createClass({
   render: function() {
     var scaleX = TimeScale(
       TimeDomain(this.props.series),
-      Range(this.props.width)
-    );
+      Range(this.props.width));
+
     var scaleY = LinearScale(
       LinearDomain(this.props.series, this.props.startAtZero),
-      Range(this.props.height, true)
-    );
+      Range(this.props.height, true));
+
+    var tickPadding = this.getTickPadding(
+      this.props.index,
+      this.props.margins);
 
     return (
       <g className={classNames('timeseries-group', this.props.className)}>
+
         {this.props.series.map((datum, index) => {
           var TimeSeries = this.getTimeSeries(datum.type);
           return (
-            <TimeSeries
-              className={datum.className}
+            <TimeSeries className={datum.className}
               data={datum.data}
               height={this.props.height}
               key={index}
@@ -84,6 +101,17 @@ module.exports = React.createClass({
               width={this.props.width} />
           );
         })}
+
+        {this.props.index < 2 ? (
+          <LinearAxis className={'timeseries-axis-y'}
+            height={this.props.height}
+            orient={this.props.index ? 'right' : 'left'}
+            scale={scaleY}
+            tickPadding={tickPadding}
+            x={this.props.index ? this.props.width : 0}
+            y={-this.props.margins.top} />
+        ) : null}
+
       </g>
     );
   }

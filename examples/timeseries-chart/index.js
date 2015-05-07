@@ -39,7 +39,7 @@ React.render(
   <TimeseriesChart
     height={Math.ceil(width * 0.75)}
     groups={groups}
-    margins={Math.ceil(width * 0.08)}
+    margins={Math.ceil(width * 0.04)}
     width={width} />,
   document.getElementById('chart')
 );
