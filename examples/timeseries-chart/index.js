@@ -10,9 +10,11 @@ var _getData = function(nn) {
   var data = [];
   for (var ii = 0; ii < nn; ii++) {
     data.push({
+      className: 'my-class',
+      style: {fill: '#ccc'},
       timestamp: new Date(),
       value: Math.random() * 100,
-      formattedValue: 'bla'
+      valueFormatted: 'bla'
     });
   }
   return data;
@@ -29,16 +31,7 @@ var groups = [{
       fill: '#ff00cc'
     },
     type: 'bar'
-  }/*,{
-    className: 'electricity-series',
-    color: '#ff0000',
-    data: _getData(24),
-    legendIndex: 1,
-    legendLabel: 'Meter 2',
-    type: 'line'
-   }*/
-  ]
-
+  }]
 }];
 
 var width = 1024;
