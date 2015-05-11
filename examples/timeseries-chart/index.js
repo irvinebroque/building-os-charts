@@ -17,7 +17,7 @@ var _getData = function(nn) {
     data.push({
       style: {fill: '#ccc'},
       timestamp: new Date(end),
-      value: Math.random() * 100,
+      value: (Math.random() * 100) - 50,
       valueFormatted: 'bla'
     });
   }

@@ -30,6 +30,7 @@ module.exports = React.createClass({
 
   render: function() {
     var barWidth = Math.floor(this.props.width / this.props.data.length);
+    var zeroY = Math.round(this.props.scaleY(0));
 
     return (
       <g className={classNames('bar-series', this.props.className)}
@@ -37,9 +38,9 @@ module.exports = React.createClass({
 
         {this.props.data.map((datum, index) => {
 
-          var barHeight = Math.ceil(this.props.scaleY(datum.value));
+          var barHeight = Math.ceil(zeroY - this.props.scaleY(Math.abs(datum.value)));
           var x = Math.ceil(barWidth * index);
-          var y = Math.ceil(this.props.height - barHeight);
+          var y = datum.value > 0 ? zeroY - barHeight : zeroY;
 
           return (
             <VerticalBar className={datum.className}
@@ -55,6 +56,11 @@ module.exports = React.createClass({
               y={y} />
           );
         })}
+
+        <line className={'linear-axis-divider'}
+          x1={0} y1={zeroY}
+          x2={this.props.width} y2={zeroY} />
+
       </g>
     );
   }
