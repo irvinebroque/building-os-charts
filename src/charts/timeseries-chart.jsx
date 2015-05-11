@@ -61,6 +61,7 @@ module.exports = React.createClass({
               margins={margins}
               numTicksY={datum.numTicksY}
               series={datum.series}
+              type={datum.type}
               width={contentWidth} />
           ))}
         </g>

@@ -6,24 +6,24 @@ var VerticalBar = require('./vertical-bar.jsx');
 module.exports = React.createClass({
 
   propTypes: {
+    barSpacing: number.isRequired,
     className: string,
     data: array.isRequired,
     height: number.isRequired,
     scaleX: func.isRequired,
     scaleY: func.isRequired,
     style: object,
-    type: string.isRequired,
     width: number.isRequired
   },
 
   getDefaultProps: function() {
     return {
+      barSpacing: 0,
       data: [],
       height: 0,
       legendLabel: '',
       scaleX: Function,
       scaleY: Function,
-      type: '',
       width: 0
     };
   },
@@ -38,8 +38,14 @@ module.exports = React.createClass({
 
         {this.props.data.map((datum, index) => {
 
-          var barHeight = Math.ceil(zeroY - this.props.scaleY(Math.abs(datum.value)));
-          var x = Math.ceil(barWidth * index);
+          var barHeight = Math.ceil(
+            zeroY - this.props.scaleY(Math.abs(datum.value)));
+
+          var x = Math.floor(
+            (barWidth * index) +
+            (this.props.barSpacing / 2)
+          );
+
           var y = datum.value > 0 ? zeroY - barHeight : zeroY;
 
           return (
@@ -51,7 +57,7 @@ module.exports = React.createClass({
               timestamp={datum.timestamp}
               value={datum.value}
               valueFormatted={datum.valueFormatted}
-              width={barWidth}
+              width={barWidth - this.props.barSpacing}
               x={x}
               y={y} />
           );

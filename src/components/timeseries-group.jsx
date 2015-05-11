@@ -1,5 +1,5 @@
 var React = require('react');
-var { array, bool, func, number, objectOf, string } = React.PropTypes;
+var { array, bool, func, number, objectOf, oneOf, string } = React.PropTypes;
 var LinearDomain = require('../domains/linear-domain');
 var TimeDomain = require('../domains/time-domain');
 var Range = require('../ranges/range');
@@ -26,6 +26,15 @@ module.exports = React.createClass({
     margins: objectOf(number).isRequired,
     numTicksY: number.isRequired,
     series: array.isRequired,
+    type: oneOf([
+      'area',
+      'bar',
+      'clusteredBar',
+      'differenceBar',
+      'line',
+      'plot',
+      'stackedBar'
+    ]),
     width: number.isRequired
   },
 
@@ -47,7 +56,8 @@ module.exports = React.createClass({
     };
   },
 
-  getTimeSeries: function(type) {
+  getTimeSeries: function(groupType, seriesType) {
+    var type = seriesType ? seriesType : groupType;
     switch (type) {
       case 'area':
         return AreaSeries;
@@ -64,7 +74,7 @@ module.exports = React.createClass({
       case 'stackedBar':
         return StackedBarSeries;
       default:
-        return;
+        return null;
     }
   },
 
@@ -100,12 +110,14 @@ module.exports = React.createClass({
         ) : null}
 
         {this.props.series.map((datum, index) => {
-          var TimeSeries = this.getTimeSeries(datum.type);
+          var TimeSeries = this.getTimeSeries(this.props.type, datum.type);
           return (
             <TimeSeries className={datum.className}
               data={datum.data}
               height={this.props.height}
+              index={index}
               key={index}
+              numSeries={this.props.series.length}
               scaleX={scaleX}
               scaleY={scaleY}
               style={datum.style}
