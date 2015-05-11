@@ -1,29 +1,28 @@
 var React = require('react');
-var { array, func, number, string } = React.PropTypes;
-var classNames = require('classnames');
+var { func, number } = React.PropTypes;
 
 module.exports = React.createClass({
 
   propTypes: {
-    className: string,
+    numTicks: number.isRequired,
     scale: func.isRequired,
-    ticks: array.isRequired,
     width: number.isRequired
   },
 
   getDefaultProps: function() {
     return {
+      numTicks: 0,
       scale: Function,
-      ticks: [],
       width: 0
     };
   },
 
   render: function() {
-    return (
-      <g className={classNames('horizontal-grid-lines', this.props.className)}>
+    var ticks = this.props.scale.ticks(this.props.numTicks);
 
-        {this.props.ticks.map((datum, index) => {
+    return (
+      <g className={'horizontal-grid-lines'}>
+        {ticks.map((datum, index) => {
           var y = Math.ceil(this.props.scale(datum));
           return (
             <line className={'horizontal-grid-line'}
@@ -32,7 +31,6 @@ module.exports = React.createClass({
               x2={this.props.width} y2={y} />
           );
         })}
-
       </g>
     );
   }

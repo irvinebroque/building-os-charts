@@ -1,6 +1,5 @@
 var React = require('react');
 var { array, bool, func, number, objectOf, string } = React.PropTypes;
-var classNames = require('classnames');
 var LinearDomain = require('../domains/linear-domain');
 var TimeDomain = require('../domains/time-domain');
 var Range = require('../ranges/range');
@@ -15,23 +14,24 @@ var PlotSeries = require('./plot-series.jsx');
 var StackedSeries = require('./stacked-bar-series.jsx');
 var LinearAxis = require('./linear-axis.jsx');
 var HorizontalGridLines = require('./horizontal-grid-lines.jsx');
+var TimeAxis = require('./time-axis.jsx');
 
 module.exports = React.createClass({
 
   propTypes: {
-    className: string,
+    clampToZero: bool.isRequired,
     height: number.isRequired,
     index: number.isRequired,
     label: string.isRequired,
     margins: objectOf(number).isRequired,
-    numTicks: number,
+    numTicksY: number.isRequired,
     series: array.isRequired,
-    startAtZero: bool.isRequired,
     width: number.isRequired
   },
 
   getDefaultProps: function() {
     return {
+      clampToZero: true,
       height: 0,
       index: 0,
       label: '',
@@ -41,17 +41,10 @@ module.exports = React.createClass({
         right: 0,
         top: 0
       },
-      numTicks: 5,
+      numTicksY: 5,
       series: [],
-      startAtZero: true,
       width: 0
     };
-  },
-
-  getTickPadding: function(index, margins) {
-    return index ?
-      Math.ceil(margins.right / 10) :
-      Math.floor(margins.left / 10)
   },
 
   getTimeSeries: function(type) {
@@ -71,32 +64,38 @@ module.exports = React.createClass({
       case 'stackedBar':
         return StackedBarSeries;
       default:
-        return null;
+        return;
     }
   },
 
   render: function() {
-    var scaleX = TimeScale(
-      TimeDomain(this.props.series),
-      Range(this.props.width));
+    var domainX = TimeDomain(this.props.series);
+    var domainY = LinearDomain(
+      this.props.series,
+      this.props.clampToZero);
 
-    var scaleY = LinearScale(
-      LinearDomain(this.props.series, this.props.startAtZero),
-      Range(this.props.height, true));
+    var rangeX = Range(this.props.width);
+    var rangeY = Range(this.props.height, true);
 
-    var ticksY = scaleY.ticks(this.props.numTicks);
+    var scaleX = TimeScale(domainX, rangeX);
+    var scaleY = LinearScale(domainY, rangeY);
 
-    var tickPaddingY = this.getTickPadding(
-      this.props.index,
-      this.props.margins);
+    var tickPaddingX = Math.ceil(
+      this.props.margins.bottom / 10);
+    var tickPaddingY = this.props.index ?
+      Math.ceil(this.props.margins.right / 10) :
+      Math.floor(this.props.margins.left / 10);
+
+    var numTicksX = this.props.series[0].data ?
+      this.props.series[0].data.length : 0;
 
     return (
-      <g className={classNames('timeseries-group', this.props.className)}>
+      <g className={'timeseries-group'}>
 
         {this.props.index === 0 ? (
           <HorizontalGridLines
+            numTicks={this.props.numTicksY}
             scale={scaleY}
-            ticks={ticksY}
             width={this.props.width} />
         ) : null}
 
@@ -115,14 +114,25 @@ module.exports = React.createClass({
         })}
 
         {this.props.index < 2 ? (
-          <LinearAxis className={'timeseries-axis-y'}
+          <LinearAxis
             height={this.props.height}
+            numTicks={this.props.numTicksY}
             orient={this.props.index ? 'right' : 'left'}
             scale={scaleY}
             tickPadding={tickPaddingY}
-            ticks={ticksY}
             x={this.props.index ? this.props.width : 0}
             y={-this.props.margins.top} />
+        ) : null}
+
+        {this.props.index === 0 ? (
+          <TimeAxis
+            domain={domainX}
+            numTicks={numTicksX}
+            scale={scaleX}
+            tickPadding={tickPaddingX}
+            width={this.props.width}
+            x={0}
+            y={this.props.height} />
         ) : null}
 
       </g>

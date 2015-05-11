@@ -56,6 +56,15 @@ svg text {
   text-anchor: middle;
 }
 
+.time-axis-divider {
+  stroke: #000;
+}
+
+.time-axis-label {
+  fill: #000;
+  text-anchor: middle;
+}
+
 .gold {
   fill: #e4ac43;
   stroke: #f8c350;

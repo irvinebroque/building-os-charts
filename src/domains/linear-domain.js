@@ -13,7 +13,7 @@ var _getExtents = function(series) {
   return d3.extent(extents);
 };
 
-module.exports = function(series, startAtZero) {
+module.exports = function(series, clampToZero) {
   if (!series || !series.length) {
     return [0, 0];
   }
@@ -22,7 +22,7 @@ module.exports = function(series, startAtZero) {
   var min = isValid(extents[0]) ? extents[0] : 0;
   var max = isValid(extents[1]) ? extents[1] : 0;
 
-  if (startAtZero && min > 0) {
+  if (clampToZero && min > 0) {
     min = 0;
   }
 

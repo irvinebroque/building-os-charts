@@ -29,11 +29,12 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var barWidth = Math.ceil(this.props.width / this.props.data.length);
+    var barWidth = Math.floor(this.props.width / this.props.data.length);
 
     return (
       <g className={classNames('bar-series', this.props.className)}
         style={this.props.style}>
+
         {this.props.data.map((datum, index) => {
 
           var barHeight = Math.ceil(this.props.scaleY(datum.value));

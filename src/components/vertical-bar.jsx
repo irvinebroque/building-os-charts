@@ -31,7 +31,7 @@ module.exports = React.createClass({
 
   render: function() {
     var translate = getTranslateFromCoords(
-      this.props.x + Math.ceil(this.props.width / 2),
+      this.props.x,
       this.props.y);
 
     return (
@@ -39,8 +39,7 @@ module.exports = React.createClass({
         <rect
           height={this.props.height}
           style={this.props.style}
-          width={this.props.width - 1}
-          x={Math.ceil(-this.props.width / 2)} />
+          width={this.props.width - 1} />
       </g>
     );
   }

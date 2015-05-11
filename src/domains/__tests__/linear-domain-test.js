@@ -69,14 +69,14 @@ describe('LinearDomain...', function() {
     expect(LinearDomain([series])).toEqual([2,19]);
   });
 
-  it('handles a single array of positive numbers where startAtZero is true', function() {
+  it('handles a single array of positive numbers where clampToZero is true', function() {
     for (var ii = 0, nn = 20; ii < nn; ii++) {
       series.data.push({value: ii + 1});
     }
     expect(LinearDomain([series], true)).toEqual([0,20]);
   });
 
-  it('handles a single array of positive numbers where startAtZero is true and some values are falsy/invalid', function() {
+  it('handles a single array of positive numbers where clampToZero is true and some values are falsy/invalid', function() {
     for (var ii = 0, nn = 20; ii < nn; ii++) {
       series.data.push({value: ii + 1});
     }
@@ -103,14 +103,14 @@ describe('LinearDomain...', function() {
     expect(LinearDomain([series])).toEqual([-99,-82]);
   });
 
-  it('handles a single array of negative numbers where startAtZero is true', function() {
+  it('handles a single array of negative numbers where clampToZero is true', function() {
     for (var ii = 0, nn = 20; ii < nn; ii++) {
       series.data.push({value: ii - 100});
     }
     expect(LinearDomain([series], true)).toEqual([-100,-81]);
   });
 
-  it('handles a single array of negative numbers where startAtZero is true and some values are falsy/invalid', function() {
+  it('handles a single array of negative numbers where clampToZero is true and some values are falsy/invalid', function() {
     for (var ii = 0, nn = 20; ii < nn; ii++) {
       series.data.push({value: ii - 100});
     }
@@ -151,7 +151,7 @@ describe('LinearDomain...', function() {
     expect(LinearDomain([series, series2, series3])).toEqual([-10,10]);
   });
 
-  it('handles multiple arrays of positive numbers where startAtZero is true', function() {
+  it('handles multiple arrays of positive numbers where clampToZero is true', function() {
     for (var ii = 0, nn = 20; ii < nn; ii++) {
       counter = ii + 1;
       series.data.push({value: counter});
@@ -160,7 +160,7 @@ describe('LinearDomain...', function() {
     expect(LinearDomain([series, series2], true)).toEqual([0,200]);
   });
 
-  it('handles multiple arrays of positive and negative numbers where startAtZero is true', function() {
+  it('handles multiple arrays of positive and negative numbers where clampToZero is true', function() {
     for (var ii = 0, nn = 10; ii < nn; ii++) {
       counter = ii + 1;
       series.data.push({value: counter});
@@ -169,7 +169,7 @@ describe('LinearDomain...', function() {
     expect(LinearDomain([series, series2], true)).toEqual([-10,10]);
   });
 
-  it('handles multiple arrays of positive and negative and falsy/invalid numbers where startAtZero is true', function() {
+  it('handles multiple arrays of positive and negative and falsy/invalid numbers where clampToZero is true', function() {
     var counter;
     for (var ii = 0, nn = 10; ii < nn; ii++) {
       counter = ii + 1;
