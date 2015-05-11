@@ -5,7 +5,6 @@ var { getTranslateFromCoords } = require('../utils/svg-util');
 module.exports = React.createClass({
 
   propTypes: {
-    className: string,
     height: number.isRequired,
     index: number.isRequired,
     style: object,
@@ -31,13 +30,11 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <g className={'vertical-bar'}
-        transform={getTranslateFromCoords(this.props.x, this.props.y)}>
-        <rect className={'vertical-bar-fill'}
-          height={this.props.height}
-          style={this.props.style}
-          width={this.props.width} />
-      </g>
+      <circle className={'plot-point'}
+        cx={this.props.x}
+        cy={this.props.y}
+        r={Math.round(this.props.width / 4)}
+        style={this.props.style} />
     );
   }
 

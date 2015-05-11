@@ -38,8 +38,7 @@ module.exports = React.createClass({
     var ticks = this.props.scale.ticks(this.props.numTicks);
     var zeroY = Math.ceil(this.props.scale(0));
     var x = this.props.orient === 'right' ?
-      this.props.tickPadding :
-      -this.props.tickPadding;
+      this.props.tickPadding : -this.props.tickPadding;
 
     return (
       <g className={'linear-axis'}

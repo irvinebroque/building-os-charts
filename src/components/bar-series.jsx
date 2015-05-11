@@ -18,7 +18,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      barSpacing: 0,
+      barSpacing: 2,
       data: [],
       height: 0,
       legendLabel: '',

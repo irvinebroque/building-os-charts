@@ -29,16 +29,14 @@ var _getData = function(nn, color) {
 var groups = [{
   clampToZero: true,
   label: 'Electricity',
-  type: 'clusteredBar',
   series: [{
-    data: _getData(24, '#ccc'),
+    type: 'bar',
+    data: _getData(24, 'blue'),
     legendLabel: 'Meter 1'
   },{
-    data: _getData(24, '#ff00cc'),
+    type: 'plot',
+    data: _getData(24, 'red'),
     legendLabel: 'Meter 2'
-  },{
-    data: _getData(24, 'blue'),
-    legendLabel: 'Meter 3'
   }]
 }];
 
