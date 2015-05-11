@@ -2,20 +2,22 @@ var React = require('react');
 var { TimeseriesChart } = require('ld3');
 require('../../src/styles.scss');
 
-var start = new Date();
-start.setMinutes(0);
-start.setSeconds(0);
-start.setMilliseconds(0);
-var end = new Date(start);
 
-var _getData = function(nn) {
+
+var _getData = function(nn, color) {
+  var start = new Date();
+  start.setMinutes(0);
+  start.setSeconds(0);
+  start.setMilliseconds(0);
+  var end = new Date(start);
+
   var data = [];
   for (var ii = 0; ii < nn; ii++) {
     //end.setMinutes(end.getMinutes() + 1);
     end.setHours(end.getHours() + 1);
     //end.setDate(end.getDate() + 1);
     data.push({
-      style: {fill: '#ccc'},
+      style: {fill: color},
       timestamp: new Date(end),
       value: (Math.random() * 100) - 50,
       valueFormatted: 'bla'
@@ -29,11 +31,17 @@ var groups = [{
   label: 'Electricity',
   numTicksY: 5,
   series: [{
-    data: _getData(24),
+    data: _getData(24, '#ccc'),
     legendLabel: 'Meter 1',
-    styles: {
-      fill: '#ff00cc'
-    },
+    type: 'bar'
+  }]
+},{
+  clampToZero: true,
+  label: 'Electricity',
+  numTicksY: 5,
+  series: [{
+    data: _getData(24, '#ff00cc'),
+    legendLabel: 'Meter 1',
     type: 'bar'
   }]
 }];

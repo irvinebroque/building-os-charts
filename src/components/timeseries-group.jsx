@@ -115,10 +115,12 @@ module.exports = React.createClass({
 
         {this.props.index < 2 ? (
           <LinearAxis
+            contentWidth={this.props.width}
             height={this.props.height}
             numTicks={this.props.numTicksY}
             orient={this.props.index ? 'right' : 'left'}
             scale={scaleY}
+            showDividerAtZero={this.props.index ? false : true}
             tickPadding={tickPaddingY}
             x={this.props.index ? this.props.width : 0}
             y={-this.props.margins.top} />

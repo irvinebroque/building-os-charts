@@ -57,10 +57,6 @@ module.exports = React.createClass({
           );
         })}
 
-        <line className={'linear-axis-divider'}
-          x1={0} y1={zeroY}
-          x2={this.props.width} y2={zeroY} />
-
       </g>
     );
   }
