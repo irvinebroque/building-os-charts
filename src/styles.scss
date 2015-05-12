@@ -82,9 +82,28 @@ svg text {
 
 // --------------------
 //
-// Horizontal bar chart components
+//
 //
 // --------------------
+
+.area {
+  fill: red;
+  fill-opacity: 0.5;
+}
+
+.line {
+  fill: none;
+  stroke: red;
+  stroke-width: 3px;
+}
+
+.higher {
+  fill: red;
+}
+
+.lower {
+  fill: green;
+}
 
 .horizontal-bar {
   background-color: #ff00cc;
@@ -126,6 +145,12 @@ svg text {
 
 .horizontal-bar-detail-label {
   fill: #333;
+}
+
+.line-series {
+  fill: none;
+  stroke: red;
+  stroke-width: 3px;
 }
 
 .plot-point {

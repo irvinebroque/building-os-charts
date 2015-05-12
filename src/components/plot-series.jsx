@@ -39,7 +39,7 @@ module.exports = React.createClass({
             (pointWidth / 2)
           );
 
-          var y = Math.ceil(this.props.scaleY(datum.value));
+          var y = Math.round(this.props.scaleY(datum.value));
 
           return (
             <PlotPoint

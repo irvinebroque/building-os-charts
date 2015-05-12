@@ -2,8 +2,6 @@ var React = require('react');
 var { TimeseriesChart } = require('ld3');
 require('../../src/styles.scss');
 
-
-
 var _getData = function(nn, color) {
   var start = new Date();
   start.setMinutes(0);
@@ -13,9 +11,7 @@ var _getData = function(nn, color) {
 
   var data = [];
   for (var ii = 0; ii < nn; ii++) {
-    //end.setMinutes(end.getMinutes() + 1);
     end.setHours(end.getHours() + 1);
-    //end.setDate(end.getDate() + 1);
     data.push({
       style: {fill: color},
       timestamp: new Date(end),
@@ -26,16 +22,20 @@ var _getData = function(nn, color) {
   return data;
 };
 
+var data1 = _getData(24, 'blue');
+var data2 = _getData(24, 'red');
+
 var groups = [{
   clampToZero: true,
   label: 'Electricity',
   series: [{
     type: 'bar',
-    data: _getData(24, 'blue'),
+    data: data1,
     legendLabel: 'Meter 1'
   },{
-    type: 'plot',
-    data: _getData(24, 'red'),
+    type: 'differenceBar',
+    data: data2,
+    comparisonData: data1,
     legendLabel: 'Meter 2'
   }]
 }];

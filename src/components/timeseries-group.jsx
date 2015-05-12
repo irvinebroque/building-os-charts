@@ -113,6 +113,7 @@ module.exports = React.createClass({
           var TimeSeries = this.getTimeSeries(this.props.type, datum.type);
           return (
             <TimeSeries className={datum.className}
+              comparisonData={datum.comparisonData}
               data={datum.data}
               height={this.props.height}
               index={index}

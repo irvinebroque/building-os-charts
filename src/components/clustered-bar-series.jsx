@@ -52,7 +52,7 @@ module.exports = React.createClass({
 
         {this.props.data.map((datum, index) => {
 
-          var barHeight = Math.ceil(
+          var barHeight = Math.round(
             zeroY - this.props.scaleY(Math.abs(datum.value)));
 
           var x = Math.floor(
