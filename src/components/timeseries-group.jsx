@@ -80,6 +80,7 @@ module.exports = React.createClass({
   },
 
   render: function() {
+
     var domainX = TimeDomain(this.props.series);
     var domainY = LinearDomain(
       this.props.series,
@@ -90,6 +91,8 @@ module.exports = React.createClass({
 
     var scaleX = TimeScale(domainX, rangeX);
     var scaleY = LinearScale(domainY, rangeY);
+
+    var zeroY = Math.round(scaleY(0));
 
     var tickPaddingX = Math.ceil(
       this.props.margins.bottom / 10);
@@ -125,7 +128,8 @@ module.exports = React.createClass({
               scaleY={scaleY}
               style={datum.style}
               tickWidth={tickWidth}
-              width={this.props.width} />
+              width={this.props.width}
+              zeroY={zeroY} />
           );
         })}
 
@@ -139,7 +143,8 @@ module.exports = React.createClass({
             showDividerAtZero={this.props.index ? false : true}
             tickPadding={tickPaddingY}
             x={this.props.index ? this.props.width : 0}
-            y={-this.props.margins.top} />
+            y={-this.props.margins.top}
+            zeroY={zeroY} />
         ) : null}
 
         {this.props.index === 0 ? (

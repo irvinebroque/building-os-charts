@@ -18,7 +18,8 @@ module.exports = React.createClass({
     style: object,
     tickWidth: number.isRequired,
     type: string.isRequired,
-    width: number.isRequired
+    width: number.isRequired,
+    zeroY: number.isRequired
   },
 
   getDefaultProps: function() {
@@ -32,12 +33,12 @@ module.exports = React.createClass({
       scaleY: Function,
       tickWidth: 0,
       type: '',
-      width: 0
+      width: 0,
+      zeroY: 0
     };
   },
 
   render: function() {
-    var zeroY = Math.round(this.props.scaleY(0));
 
     var barSpacing = isValid(this.props.barSpacing) ?
       this.props.barSpacing : Math.floor(this.props.tickWidth / 3);
@@ -52,7 +53,7 @@ module.exports = React.createClass({
         {this.props.data.map((datum, index) => {
 
           var barHeight = Math.round(
-            zeroY - this.props.scaleY(Math.abs(datum.value)));
+            this.props.zeroY - this.props.scaleY(Math.abs(datum.value)));
 
           var x = Math.floor(
             (this.props.tickWidth * index) +
@@ -60,7 +61,9 @@ module.exports = React.createClass({
             (barSpacing / 2)
           );
 
-          var y = datum.value > 0 ? zeroY - barHeight : zeroY;
+          var y = datum.value > 0 ?
+            this.props.zeroY - barHeight :
+            this.props.zeroY;
 
           return (
             <VerticalBar className={datum.className}

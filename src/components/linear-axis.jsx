@@ -16,7 +16,8 @@ module.exports = React.createClass({
     tickPadding: number.isRequired,
     ticks: array.isRequired,
     x: number.isRequired,
-    y: number.isRequired
+    y: number.isRequired,
+    zeroY: number.isRequired
   },
 
   getDefaultProps: function() {
@@ -30,13 +31,13 @@ module.exports = React.createClass({
       tickPadding: 0,
       ticks: [],
       x: 0,
-      y: 0
+      y: 0,
+      zeroY: 0
     };
   },
 
   render: function() {
     var ticks = this.props.scale.ticks(this.props.numTicks);
-    var zeroY = Math.ceil(this.props.scale(0));
     var x = this.props.orient === 'right' ?
       this.props.tickPadding : -this.props.tickPadding;
 
@@ -65,9 +66,9 @@ module.exports = React.createClass({
         {this.props.showDividerAtZero ? (
           <line className={'linear-axis-divider'}
             x1={0}
-            y1={zeroY}
+            y1={this.props.zeroY}
             x2={this.props.contentWidth}
-            y2={zeroY} />
+            y2={this.props.zeroY} />
         ) : null}
 
       </g>
