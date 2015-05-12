@@ -99,6 +99,7 @@ module.exports = React.createClass({
 
     var numTicksX = this.props.series[0].data ?
       this.props.series[0].data.length : 0;
+    var tickWidth = Math.floor(this.props.width / numTicksX);
 
     return (
       <g className={classNames('timeseries-group', this.props.className)}>
@@ -123,6 +124,7 @@ module.exports = React.createClass({
               scaleX={scaleX}
               scaleY={scaleY}
               style={datum.style}
+              tickWidth={tickWidth}
               width={this.props.width} />
           );
         })}

@@ -15,7 +15,7 @@ var _getData = function(nn, color) {
     data.push({
       style: {fill: color},
       timestamp: new Date(end),
-      value: (Math.random() * 100) - 50,
+      value: (Math.random() * 100),
       valueFormatted: 'bla'
     });
   }
@@ -29,13 +29,12 @@ var groups = [{
   clampToZero: true,
   label: 'Electricity',
   series: [{
-    type: 'bar',
+    type: 'area',
     data: data1,
     legendLabel: 'Meter 1'
   },{
-    type: 'differenceBar',
+    type: 'line',
     data: data2,
-    comparisonData: data1,
     legendLabel: 'Meter 2'
   }]
 }];

@@ -11,6 +11,7 @@ module.exports = React.createClass({
     height: number.isRequired,
     scaleY: func.isRequired,
     style: object,
+    tickWidth: number.isRequired,
     width: number.isRequired
   },
 
@@ -21,12 +22,12 @@ module.exports = React.createClass({
       legendLabel: '',
       scaleX: Function,
       scaleY: Function,
+      tickWidth: 0,
       width: 0
     };
   },
 
   render: function() {
-    var pointWidth = Math.floor(this.props.width / this.props.data.length);
 
     return (
       <g className={classNames('plot-series', this.props.className)}
@@ -35,8 +36,8 @@ module.exports = React.createClass({
         {this.props.data.map((datum, index) => {
 
           var x = Math.floor(
-            (pointWidth * index) +
-            (pointWidth / 2)
+            (this.props.tickWidth * index) +
+            (this.props.tickWidth / 2)
           );
 
           var y = Math.round(this.props.scaleY(datum.value));
@@ -49,7 +50,7 @@ module.exports = React.createClass({
               timestamp={datum.timestamp}
               value={datum.value}
               valueFormatted={datum.valueFormatted}
-              width={pointWidth}
+              width={this.props.tickWidth}
               x={x}
               y={y} />
           );

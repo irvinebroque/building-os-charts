@@ -28,6 +28,7 @@ module.exports = React.createClass({
     ]).isRequired,
     scaleY: func.isRequired,
     style: object,
+    tickWidth: number.isRequired,
     width: number.isRequired
   },
 
@@ -37,20 +38,20 @@ module.exports = React.createClass({
       height: 0,
       interpolate: 'cardinal',
       scaleY: Function,
+      tickWidth: 0,
       width: 0
     };
   },
 
   render: function() {
-    var segmentWidth = Math.floor(this.props.width / this.props.data.length);
 
     var area = d3.svg.area()
       .defined((datum) => isValid(datum.value) ? datum.value : null)
       .interpolate(this.props.interpolate)
       .x((datum, index) => {
         return Math.floor(
-          (segmentWidth * index) +
-          (segmentWidth / 2)
+          (this.props.tickWidth * index) +
+          (this.props.tickWidth / 2)
         );
       })
       .y0(this.props.height)
@@ -61,8 +62,8 @@ module.exports = React.createClass({
       .interpolate(this.props.interpolate)
       .x((datum, index) => {
         return Math.floor(
-          (segmentWidth * index) +
-          (segmentWidth / 2)
+          (this.props.tickWidth * index) +
+          (this.props.tickWidth / 2)
         );
       })
       .y((datum) => Math.round(this.props.scaleY(datum.value)));

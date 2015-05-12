@@ -16,6 +16,7 @@ module.exports = React.createClass({
     scaleX: func.isRequired,
     scaleY: func.isRequired,
     style: object,
+    tickWidth: number.isRequired,
     type: string.isRequired,
     width: number.isRequired
   },
@@ -29,6 +30,7 @@ module.exports = React.createClass({
       numSeries: 0,
       scaleX: Function,
       scaleY: Function,
+      tickWidth: 0,
       type: '',
       width: 0
     };
@@ -37,14 +39,11 @@ module.exports = React.createClass({
   render: function() {
     var zeroY = Math.round(this.props.scaleY(0));
 
-    var clusterWidth = Math.floor(
-      this.props.width / this.props.data.length);
-
     var barSpacing = isValid(this.props.barSpacing) ?
-      this.props.barSpacing : Math.floor(clusterWidth / 3);
+      this.props.barSpacing : Math.floor(this.props.tickWidth / 3);
 
     var barWidth = Math.floor(
-      (clusterWidth - barSpacing) / this.props.numSeries);
+      (this.props.tickWidth - barSpacing) / this.props.numSeries);
 
     return (
       <g className={classNames('clustered-bar-series', this.props.className)}
@@ -56,7 +55,7 @@ module.exports = React.createClass({
             zeroY - this.props.scaleY(Math.abs(datum.value)));
 
           var x = Math.floor(
-            (clusterWidth * index) +
+            (this.props.tickWidth * index) +
             (barWidth * this.props.index) +
             (barSpacing / 2)
           );

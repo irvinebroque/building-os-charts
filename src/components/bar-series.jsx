@@ -13,6 +13,7 @@ module.exports = React.createClass({
     scaleX: func.isRequired,
     scaleY: func.isRequired,
     style: object,
+    tickWidth: number.isRequired,
     width: number.isRequired
   },
 
@@ -24,12 +25,12 @@ module.exports = React.createClass({
       legendLabel: '',
       scaleX: Function,
       scaleY: Function,
+      tickWidth: 0,
       width: 0
     };
   },
 
   render: function() {
-    var barWidth = Math.floor(this.props.width / this.props.data.length);
     var zeroY = Math.round(this.props.scaleY(0));
 
     return (
@@ -42,7 +43,7 @@ module.exports = React.createClass({
             zeroY - this.props.scaleY(Math.abs(datum.value)));
 
           var x = Math.floor(
-            (barWidth * index) +
+            (this.props.tickWidth * index) +
             (this.props.barSpacing / 2)
           );
 
@@ -57,7 +58,7 @@ module.exports = React.createClass({
               timestamp={datum.timestamp}
               value={datum.value}
               valueFormatted={datum.valueFormatted}
-              width={barWidth - this.props.barSpacing}
+              width={this.props.tickWidth - this.props.barSpacing}
               x={x}
               y={y} />
           );
