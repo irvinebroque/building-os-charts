@@ -15,6 +15,7 @@ var StackedSeries = require('./stacked-bar-series.jsx');
 var LinearAxis = require('./linear-axis.jsx');
 var HorizontalGridLines = require('./horizontal-grid-lines.jsx');
 var TimeAxis = require('./time-axis.jsx');
+var classNames = require('classnames');
 
 module.exports = React.createClass({
 
@@ -100,7 +101,7 @@ module.exports = React.createClass({
       this.props.series[0].data.length : 0;
 
     return (
-      <g className={'timeseries-group'}>
+      <g className={classNames('timeseries-group', this.props.className)}>
 
         {this.props.index === 0 ? (
           <HorizontalGridLines

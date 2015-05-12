@@ -2,10 +2,12 @@ var React = require('react');
 var d3 = require('d3');
 var { array, func, number, object, oneOf, string } = React.PropTypes;
 var { isValid } = require('../validators/number-validator');
+var classNames = require('classnames');
 
 module.exports = React.createClass({
 
   propTypes: {
+    className: string,
     data: array.isRequired,
     height: number.isRequired,
     interpolate: oneOf([
@@ -66,7 +68,8 @@ module.exports = React.createClass({
       .y((datum) => Math.round(this.props.scaleY(datum.value)));
 
     return (
-      <g className={'area-series'} style={this.props.style}>
+      <g className={classNames('area-series', this.props.className)}
+        style={this.props.style}>
         <path className={'area'} d={area(this.props.data)} />
         <path className={'line'} d={line(this.props.data)} />
       </g>

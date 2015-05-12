@@ -3,6 +3,7 @@ var { array, number, object, objectOf, oneOfType, string } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var BoxUtil = require('../utils/box-util');
 var TimeseriesGroup = require('../components/timeseries-group.jsx');
+var classNames = require('classnames');
 
 module.exports = React.createClass({
 
@@ -45,7 +46,7 @@ module.exports = React.createClass({
       this.props.width - margins.left - margins.right);
 
     return (
-      <svg className={'timeseries-chart'}
+      <svg className={classNames('timeseries-chart', this.props.className)}
         height={Math.ceil(this.props.height) + 1}
         width={Math.ceil(this.props.width) + 1}>
 

@@ -1,6 +1,7 @@
 var React = require('react');
 var { number, object, string } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
+var classNames = require('classnames');
 
 module.exports = React.createClass({
 
@@ -31,7 +32,7 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <g className={'vertical-bar'}
+      <g className={classNames('vertical-bar', this.props.className)}
         style={this.props.style}
         transform={getTranslateFromCoords(this.props.x, this.props.y)}>
         <rect className={'vertical-bar-fill'}

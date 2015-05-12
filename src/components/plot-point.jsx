@@ -1,10 +1,12 @@
 var React = require('react');
 var { number, object, string } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
+var classNames = require('classnames');
 
 module.exports = React.createClass({
 
   propTypes: {
+    className: string,
     height: number.isRequired,
     index: number.isRequired,
     style: object,
@@ -30,7 +32,7 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <circle className={'plot-point'}
+      <circle className={classNames('plot-point', this.props.className)}
         cx={this.props.x}
         cy={this.props.y}
         r={Math.round(this.props.width / 4)}
