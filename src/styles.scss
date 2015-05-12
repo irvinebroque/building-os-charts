@@ -27,20 +27,29 @@ svg text {
 
 .horizontal-grid-lines {}
 
+.linear-axis {
+  pointer-events: none;
+}
+
 .linear-axis-divider {
   stroke: #000;
 }
 
 .linear-axis-label {
+  text-anchor: middle;
+  fill: #000;
+}
+
+.linear-axis-tick-label {
   dominant-baseline: middle;
   fill: #000;
 }
 
-.linear-axis-label.left {
+.linear-axis-tick-label.left {
   text-anchor: end;
 }
 
-.linear-axis-label.right {
+.linear-axis-tick-label.right {
   text-anchor: start;
 }
 
@@ -54,6 +63,10 @@ svg text {
   fill: #000;
   font-weight: bold;
   text-anchor: middle;
+}
+
+.time-axis {
+  pointer-events: none;
 }
 
 .time-axis-divider {

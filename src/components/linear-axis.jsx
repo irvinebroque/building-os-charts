@@ -2,13 +2,16 @@ var React = require('react');
 var { array, bool, func, number, oneOf, string } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var { format } = require('../formatters/number-formatter');
+var { getRotate } = require('../utils/svg-util');
 var classNames = require('classnames');
+var Label = require('./label.jsx');
 
 module.exports = React.createClass({
 
   propTypes: {
     contentWidth: number.isRequired,
     height: number.isRequired,
+    label: string.isRequired,
     numTicks: number.isRequired,
     orient: oneOf(['left', 'right']).isRequired,
     scale: func.isRequired,
@@ -24,6 +27,7 @@ module.exports = React.createClass({
     return {
       contentWidth: 0,
       height: 0,
+      label: '',
       numTicks: 0,
       orient: 'left',
       scale: Function,
@@ -37,9 +41,21 @@ module.exports = React.createClass({
   },
 
   render: function() {
+
     var ticks = this.props.scale.ticks(this.props.numTicks);
-    var x = this.props.orient === 'right' ?
-      this.props.tickPadding : -this.props.tickPadding;
+
+    var labelX, labelY, rotate, x;
+    if (this.props.orient === 'right') {
+      labelX = Math.round(this.props.height / 2);
+      labelY = this.props.tickPadding;
+      rotate = getRotate(90);
+      x = this.props.tickPadding;
+    } else {
+      labelX = Math.round(-this.props.height / 2);
+      labelY = this.props.tickPadding;
+      rotate = getRotate(270);
+      x = -this.props.tickPadding;
+    }
 
     return (
       <g className={'linear-axis'}
@@ -53,7 +69,7 @@ module.exports = React.createClass({
 
         {ticks.map((datum, index) => {
           return (
-            <text className={classNames('linear-axis-label', this.props.orient)}
+            <text className={classNames('linear-axis-tick-label', this.props.orient)}
               key={index}
               style={this.props.style}
               x={x}
@@ -70,6 +86,12 @@ module.exports = React.createClass({
             x2={this.props.contentWidth}
             y2={this.props.zeroY} />
         ) : null}
+
+        <Label className={'linear-axis-label'}
+          text={this.props.label}
+          transform={rotate}
+          x={labelX}
+          y={labelY} />
 
       </g>
     );

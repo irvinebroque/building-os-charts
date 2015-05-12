@@ -137,6 +137,7 @@ module.exports = React.createClass({
           <LinearAxis
             contentWidth={this.props.width}
             height={this.props.height}
+            label={this.props.label}
             numTicks={this.props.numTicksY}
             orient={this.props.index ? 'right' : 'left'}
             scale={scaleY}

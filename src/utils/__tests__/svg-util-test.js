@@ -1,6 +1,7 @@
 var {
   getAttribute,
   getCoordsFromTranslate,
+  getRotate,
   getRoundedRectPath,
   getTranslateFromCoords
 } = require('../svg-util');
@@ -27,6 +28,16 @@ describe('SvgUtil', function() {
     expect(getCoordsFromTranslate('translate(10,10)')).toEqual([10,10]);
     expect(getCoordsFromTranslate('translate(10)')).toBeDefined();
     expect(getCoordsFromTranslate('translate(10,NaN)')).toBeDefined();
+  });
+
+  it('getRotate returns a rotate transform from and angle and optional x and y coordinates', function() {
+    expect(getRotate).toBeDefined();
+    expect(getRotate()).toEqual('');
+    expect(getRotate(90)).toEqual('rotate(90)');
+    expect(getRotate(90, null, null)).toEqual('rotate(90)');
+    expect(getRotate(90, 0)).toEqual('rotate(90)');
+    expect(getRotate(90, 0, 0)).toEqual('rotate(90 0 0)');
+    expect(getRotate(NaN, 0, 0)).toEqual('');
   });
 
   it('getRoundedRectPath returns path data for a rectangle with rounded corners', function() {

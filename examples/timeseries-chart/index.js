@@ -27,12 +27,16 @@ var data2 = _getData(24, 'red');
 
 var groups = [{
   clampToZero: true,
-  label: 'Electricity',
+  label: 'Electricity 1',
   series: [{
     type: 'area',
     data: data1,
     legendLabel: 'Meter 1'
-  },{
+  }]
+},{
+  clampToZero: true,
+  label: 'Electricity 2',
+  series: [{
     type: 'line',
     data: data2,
     legendLabel: 'Meter 2'

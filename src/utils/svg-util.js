@@ -24,6 +24,22 @@ module.exports = {
     }
   },
 
+  getRotate: function(angle, x, y) {
+    if (!isValid(angle)) {
+      return '';
+    }
+
+    if (isValid(x) && isValid(y)) {
+      return [
+        'rotate(',
+        [angle, x, y].join(' '),
+        ')'
+      ].join('');
+    }
+
+    return 'rotate(' + angle + ')';
+  },
+
   getRoundedRectPath: function(props) {
     // Width and height are required:
     if (!props || !isValid(props.width) || !isValid(props.height)) {
