@@ -35,10 +35,10 @@ module.exports = React.createClass({
   render: function() {
     return (
       <g className={classNames('difference-bar', this.props.className)}
+        style={this.props.style}
         transform={getTranslateFromCoords(this.props.x, this.props.y)}>
         <rect className={'difference-bar-fill'}
           height={Math.abs(this.props.fillHeight)}
-          style={this.props.style}
           width={this.props.width}
           y={this.props.fillHeight > 0 ? 0 : this.props.fillHeight} />
       </g>

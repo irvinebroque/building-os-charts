@@ -32,10 +32,10 @@ module.exports = React.createClass({
   render: function() {
     return (
       <g className={'vertical-bar'}
+        style={this.props.style}
         transform={getTranslateFromCoords(this.props.x, this.props.y)}>
         <rect className={'vertical-bar-fill'}
           height={this.props.height}
-          style={this.props.style}
           width={this.props.width} />
       </g>
     );

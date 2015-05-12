@@ -25,6 +25,7 @@ module.exports = React.createClass({
       'step-after'
     ]).isRequired,
     scaleY: func.isRequired,
+    style: object,
     width: number.isRequired
   },
 
@@ -65,7 +66,7 @@ module.exports = React.createClass({
       .y((datum) => Math.round(this.props.scaleY(datum.value)));
 
     return (
-      <g className={'area-series'}>
+      <g className={'area-series'} style={this.props.style}>
         <path className={'area'} d={area(this.props.data)} />
         <path className={'line'} d={line(this.props.data)} />
       </g>

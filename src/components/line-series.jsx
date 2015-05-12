@@ -25,6 +25,7 @@ module.exports = React.createClass({
       'step-after'
     ]).isRequired,
     scaleY: func.isRequired,
+    style: object,
     width: number.isRequired
   },
 
@@ -53,7 +54,7 @@ module.exports = React.createClass({
       .y((datum) => Math.round(this.props.scaleY(datum.value)));
 
     return (
-      <g className={'line-series'}>
+      <g className={'line-series'} style={this.props.style}>
         <path d={line(this.props.data)} />
       </g>
     );

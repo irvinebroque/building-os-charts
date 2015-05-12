@@ -1,5 +1,5 @@
 var React = require('react');
-var { array, number, objectOf, oneOfType, string } = React.PropTypes;
+var { array, number, object, objectOf, oneOfType, string } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var BoxUtil = require('../utils/box-util');
 var TimeseriesGroup = require('../components/timeseries-group.jsx');
@@ -61,6 +61,7 @@ module.exports = React.createClass({
               margins={margins}
               numTicksY={datum.numTicksY}
               series={datum.series}
+              style={datum.style}
               type={datum.type}
               width={contentWidth} />
           ))}

@@ -1,5 +1,5 @@
 var React = require('react');
-var { array, bool, func, number, objectOf, oneOf, string } = React.PropTypes;
+var { array, bool, func, number, object, objectOf, oneOf, string } = React.PropTypes;
 var LinearDomain = require('../domains/linear-domain');
 var TimeDomain = require('../domains/time-domain');
 var Range = require('../ranges/range');
