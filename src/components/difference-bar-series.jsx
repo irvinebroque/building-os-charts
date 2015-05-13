@@ -48,18 +48,16 @@ module.exports = React.createClass({
 
     Dispatcher.register((payload) => {
       switch (payload.actionType) {
-
         case Events.MOUSE_MOVE:
-          var activeIndex = Math.floor(payload.x / this.props.tickWidth);
-          if (activeIndex !== this.state.activeIndex) {
-            this.setState({activeIndex: activeIndex});
+          if (payload.activeIndex !== this.state.activeIndex) {
+            this.setState({activeIndex: payload.activeIndex});
           }
           break;
-
         case Events.MOUSE_OUT:
-          this.setState({activeIndex: -1});
+          if (this.state.activeIndex !== -1) {
+            this.setState({activeIndex: -1});
+          }
           break;
-
         default:
           break;
       }

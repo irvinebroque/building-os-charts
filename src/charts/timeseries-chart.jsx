@@ -18,7 +18,11 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      groups: [],
+      groups: [{
+        series: [{
+          data: []
+        }]
+      }],
       height: 0,
       margins: 0,
       width: 0
@@ -47,6 +51,9 @@ module.exports = React.createClass({
     var contentWidth = Math.ceil(
       this.props.width - margins.left - margins.right);
 
+    var numTicksX = this.props.groups[0].series[0].data.length;
+    var tickWidth = Math.floor(contentWidth / numTicksX);
+
     return (
       <svg className={classNames('timeseries-chart', this.props.className)}
         height={Math.ceil(this.props.height) + 1}
@@ -62,9 +69,11 @@ module.exports = React.createClass({
               label={datum.label}
               key={index}
               margins={margins}
+              numTicksX={numTicksX}
               numTicksY={datum.numTicksY}
               series={datum.series}
               style={datum.style}
+              tickWidth={tickWidth}
               type={datum.type}
               width={contentWidth} />
           ))}
@@ -79,6 +88,7 @@ module.exports = React.createClass({
 
         <InteractionSurface
           height={contentHeight}
+          tickWidth={tickWidth}
           width={contentWidth}
           x={margins.left}
           y={margins.top} />

@@ -101,6 +101,7 @@ module.exports = React.createClass({
 
         {data.map((datum, index) => (
           <TimeseriesLegendItem
+            data={datum.data}
             height={this.props.height}
             key={index}
             label={datum.legendLabel}

@@ -25,8 +25,10 @@ module.exports = React.createClass({
     index: number.isRequired,
     label: string.isRequired,
     margins: objectOf(number).isRequired,
+    numTicksX: number.isRequired,
     numTicksY: number.isRequired,
     series: array.isRequired,
+    tickWidth: number.isRequired,
     type: oneOf([
       'area',
       'bar',
@@ -51,8 +53,10 @@ module.exports = React.createClass({
         right: 0,
         top: 0
       },
+      numTicksX: 0,
       numTicksY: 5,
       series: [],
+      tickWidth: 0,
       width: 0
     };
   },
@@ -129,14 +133,10 @@ module.exports = React.createClass({
       Math.ceil(this.props.margins.right / 10) :
       Math.floor(this.props.margins.left / 10);
 
-    var numTicksX = this.props.series[0].data ?
-      this.props.series[0].data.length : 0;
-    var tickWidth = Math.floor(this.props.width / numTicksX);
-
     var offset = this.getOffset(
       this.props.type,
       this.props.series,
-      tickWidth);
+      this.props.tickWidth);
 
     var stretch = offset ? false : true;
 
@@ -166,7 +166,7 @@ module.exports = React.createClass({
               scaleY={scaleY}
               stretch={datum.stretch ? datum.stretch : stretch}
               style={datum.style}
-              tickWidth={tickWidth}
+              tickWidth={this.props.tickWidth}
               width={this.props.width}
               zeroY={zeroY} />
           );
@@ -190,10 +190,10 @@ module.exports = React.createClass({
         {this.props.index === 0 ? (
           <TimeAxis
             domain={domainX}
-            numTicks={numTicksX}
+            numTicks={this.props.numTicksX}
             scale={scaleX}
             tickPadding={tickPaddingX}
-            tickWidth={tickWidth}
+            tickWidth={this.props.tickWidth}
             width={this.props.width}
             x={0}
             y={this.props.height} />
