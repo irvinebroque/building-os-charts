@@ -4,7 +4,8 @@ var path = require('path');
 
 module.exports = {
   entry: {
-    ld3: ['./src/index']
+    ld3: ['./src/index'],
+    vendor: ['./src/vendor']
   },
   module: {
     loaders: [
@@ -23,5 +24,6 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('[name].css'),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
   ]
 };
