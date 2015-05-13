@@ -27,6 +27,23 @@ svg text {
 
 .horizontal-grid-lines {}
 
+.timeseries-legend {
+  font-size: 18px;
+  pointer-events: none;
+}
+
+.timeseries-legend-item {
+
+}
+
+.timeseries-legend-item-label {
+  fill: #000;
+}
+
+.timeseries-legend-item-readout {
+  fill: #000;
+}
+
 .linear-axis {
   pointer-events: none;
 }

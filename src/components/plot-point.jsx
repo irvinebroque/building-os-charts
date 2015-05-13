@@ -10,9 +10,6 @@ module.exports = React.createClass({
     height: number.isRequired,
     index: number.isRequired,
     style: object,
-    timestamp: object.isRequired,
-    value: number.isRequired,
-    valueFormatted: string,
     width: number.isRequired,
     x: number.isRequired,
     y: number.isRequired
@@ -35,7 +32,7 @@ module.exports = React.createClass({
       <circle className={classNames('plot-point', this.props.className)}
         cx={this.props.x}
         cy={this.props.y}
-        r={Math.round(this.props.width / 4)}
+        r={Math.round(this.props.width / 2)}
         style={this.props.style} />
     );
   }

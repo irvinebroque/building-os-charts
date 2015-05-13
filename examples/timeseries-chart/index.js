@@ -27,11 +27,14 @@ var data2 = _getData(24, 'red');
 
 var groups = [{
   clampToZero: true,
-  label: 'Electricity 1',
+  label: 'OH hai axis label',
   series: [{
     type: 'bar',
-    data: data1,
-    legendLabel: 'Meter 1'
+    data: data2,
+    legendLabel: 'Meter 1',
+    style: {
+      stroke: 'red'
+    }
   },{
     type: 'line',
     data: data2,

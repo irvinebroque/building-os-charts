@@ -3,6 +3,7 @@ var { array, number, object, objectOf, oneOfType, string } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var BoxUtil = require('../utils/box-util');
 var TimeseriesGroup = require('../components/timeseries-group.jsx');
+var TimeseriesLegend = require('../components/timeseries-legend.jsx');
 var classNames = require('classnames');
 
 module.exports = React.createClass({
@@ -67,6 +68,13 @@ module.exports = React.createClass({
               width={contentWidth} />
           ))}
         </g>
+
+        <TimeseriesLegend
+          groups={this.props.groups}
+          height={Math.round(margins.top)}
+          width={contentWidth}
+          x={margins.left}
+          y={Math.round(margins.top / 4)} />
 
       </svg>
     );

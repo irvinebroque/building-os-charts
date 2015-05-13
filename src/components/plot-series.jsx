@@ -51,7 +51,7 @@ module.exports = React.createClass({
               timestamp={datum.timestamp}
               value={datum.value}
               valueFormatted={datum.valueFormatted}
-              width={this.props.tickWidth}
+              width={Math.round(this.props.tickWidth / 2)}
               x={x}
               y={y} />
           );

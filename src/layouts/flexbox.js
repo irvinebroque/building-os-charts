@@ -67,11 +67,10 @@ var _setPosition = function(node, x, y) {
 };
 
 module.exports = {
-  layout: function(node, parentStyle, childStyles) {
-    var childNodes = _getChildNodes(node.childNodes, childStyles);
-    _applyComputedLayout(childNodes, cssLayout({
+  getLayout: function(node, parentStyle, childStyles) {
+    return cssLayout({
       style: parentStyle,
-      children: childNodes
-    }));
+      children: _getChildNodes(node.childNodes, childStyles ? childStyles : [])
+    });
   }
 };
