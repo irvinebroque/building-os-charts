@@ -1,10 +1,9 @@
 var React = require('react');
 var { number, string } = React.PropTypes;
-var { layout } = require('../layouts/flexbox');
-var PlotPoint = require('./plot-point.jsx');
-var Label = require('./label.jsx');
 var { getLayout } = require('../layouts/flexbox');
 var { getTranslateFromCoords } = require('../utils/svg-util');
+var PlotPoint = require('./plot-point.jsx');
+var Label = require('./label.jsx');
 
 module.exports = React.createClass({
 
@@ -25,17 +24,7 @@ module.exports = React.createClass({
   },
 
   getInitialState: function() {
-    return {
-      readout: 'hai'
-    };
-  },
-
-  componentDidMount: function() {
-    // add listener
-  },
-
-  componentWillUnmount: function() {
-    // remove listener
+    return {readout: ''};
   },
 
   render: function() {

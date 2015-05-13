@@ -1,8 +1,10 @@
 var React = require('react');
-var { array, func, number, object, string } = React.PropTypes;
+var { array, func, number, object, oneOf, string } = React.PropTypes;
 var classNames = require('classnames');
 var VerticalBar = require('./vertical-bar.jsx');
 var { isValid } = require('../validators/number-validator');
+var Dispatcher = require('../events/dispatcher');
+var Events = require('../events/events');
 
 module.exports = React.createClass({
 
@@ -12,6 +14,7 @@ module.exports = React.createClass({
     data: array.isRequired,
     height: number.isRequired,
     index: number.isRequired,
+    interaction: oneOf(['none', 'mouseover']),
     numSeries: number.isRequired,
     offset: number.isRequired,
     scaleX: func.isRequired,
@@ -28,6 +31,7 @@ module.exports = React.createClass({
       data: [],
       height: 0,
       index: 0,
+      interaction: 'mouseover',
       legendLabel: '',
       numSeries: 0,
       offset: 0,
@@ -38,6 +42,40 @@ module.exports = React.createClass({
       width: 0,
       zeroY: 0
     };
+  },
+
+  getInitialState: function() {
+    return {activeIndex: -1};
+  },
+
+  componentDidMount: function() {
+    if (this.props.interaction === 'none') {
+      return;
+    }
+
+    Dispatcher.register((payload) => {
+      switch (payload.actionType) {
+
+        case Events.MOUSE_MOVE:
+          var activeIndex = Math.floor(payload.x / this.props.tickWidth);
+          if (activeIndex !== this.state.activeIndex) {
+            this.setState({activeIndex: activeIndex});
+          }
+          break;
+
+        case Events.MOUSE_OUT:
+          this.setState({activeIndex: -1});
+          break;
+
+        default:
+          break;
+      }
+    });
+  },
+
+  componentWillUnmount: function() {
+    Dispatcher.unregister(Events.MOUSE_MOVE);
+    Dispatcher.unregister(Events.MOUSE_OUT);
   },
 
   render: function() {
@@ -69,6 +107,7 @@ module.exports = React.createClass({
 
           return (
             <VerticalBar className={datum.className}
+              active={this.state.activeIndex === index ? true : false}
               height={barHeight}
               index={index}
               key={index}

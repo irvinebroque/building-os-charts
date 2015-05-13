@@ -1,11 +1,12 @@
 var React = require('react');
-var { number, object, string } = React.PropTypes;
+var { bool, number, object, string } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var classNames = require('classnames');
 
 module.exports = React.createClass({
 
   propTypes: {
+    active: bool.isRequired,
     className: string,
     height: number.isRequired,
     index: number.isRequired,
@@ -20,6 +21,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
+      active: false,
       height: 0,
       index: 0,
       timestamp: new Date(),
@@ -31,8 +33,9 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var active = this.props.active ? 'active' : null;
     return (
-      <g className={classNames('vertical-bar', this.props.className)}
+      <g className={classNames('vertical-bar', this.props.className, active)}
         style={this.props.style}
         transform={getTranslateFromCoords(this.props.x, this.props.y)}>
         <rect className={'vertical-bar-fill'}

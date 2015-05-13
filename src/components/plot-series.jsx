@@ -1,7 +1,9 @@
 var React = require('react');
-var { array, func, number, object, string } = React.PropTypes;
+var { array, func, number, object, oneOf, string } = React.PropTypes;
 var classNames = require('classnames');
 var PlotPoint = require('./plot-point.jsx');
+var Dispatcher = require('../events/dispatcher');
+var Events = require('../events/events');
 
 module.exports = React.createClass({
 
@@ -9,6 +11,7 @@ module.exports = React.createClass({
     className: string,
     data: array.isRequired,
     height: number.isRequired,
+    interaction: oneOf(['none', 'mouseover']),
     offset: number.isRequired,
     scaleY: func.isRequired,
     style: object,
@@ -20,6 +23,7 @@ module.exports = React.createClass({
     return {
       data: [],
       height: 0,
+      interaction: 'mouseover',
       legendLabel: '',
       offset: 0,
       scaleX: Function,
@@ -27,6 +31,40 @@ module.exports = React.createClass({
       tickWidth: 0,
       width: 0
     };
+  },
+
+  getInitialState: function() {
+    return {activeIndex: -1};
+  },
+
+  componentDidMount: function() {
+    if (this.props.interaction === 'none') {
+      return;
+    }
+
+    Dispatcher.register((payload) => {
+      switch (payload.actionType) {
+
+        case Events.MOUSE_MOVE:
+          var activeIndex = Math.floor(payload.x / this.props.tickWidth);
+          if (activeIndex !== this.state.activeIndex) {
+            this.setState({activeIndex: activeIndex});
+          }
+          break;
+
+        case Events.MOUSE_OUT:
+          this.setState({activeIndex: -1});
+          break;
+
+        default:
+          break;
+      }
+    });
+  },
+
+  componentWillUnmount: function() {
+    Dispatcher.unregister(Events.MOUSE_MOVE);
+    Dispatcher.unregister(Events.MOUSE_OUT);
   },
 
   render: function() {
@@ -44,7 +82,8 @@ module.exports = React.createClass({
           var y = Math.round(this.props.scaleY(datum.value));
 
           return (
-            <PlotPoint
+            <PlotPoint className={datum.className}
+              active={this.state.activeIndex === index ? true : false}
               index={index}
               key={index}
               style={datum.style}

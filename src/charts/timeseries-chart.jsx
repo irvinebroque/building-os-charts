@@ -1,10 +1,11 @@
 var React = require('react');
-var { array, number, object, objectOf, oneOfType, string } = React.PropTypes;
+var { array, number, objectOf, oneOfType } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var BoxUtil = require('../utils/box-util');
 var TimeseriesGroup = require('../components/timeseries-group.jsx');
 var TimeseriesLegend = require('../components/timeseries-legend.jsx');
 var classNames = require('classnames');
+var InteractionSurface = require('../components/interaction-surface.jsx');
 
 module.exports = React.createClass({
 
@@ -18,9 +19,9 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       groups: [],
-      height: 600,
-      margins: 20,
-      width: 800
+      height: 0,
+      margins: 0,
+      width: 0
     };
   },
 
@@ -75,6 +76,12 @@ module.exports = React.createClass({
           width={contentWidth}
           x={margins.left}
           y={Math.round(margins.top / 4)} />
+
+        <InteractionSurface
+          height={contentHeight}
+          width={contentWidth}
+          x={margins.left}
+          y={margins.top} />
 
       </svg>
     );

@@ -1,7 +1,9 @@
 var React = require('react');
-var { array, func, number, object, string } = React.PropTypes;
+var { array, func, number, object, oneOf, string } = React.PropTypes;
 var classNames = require('classnames');
 var VerticalBar = require('./vertical-bar.jsx');
+var Dispatcher = require('../events/dispatcher');
+var Events = require('../events/events');
 
 module.exports = React.createClass({
 
@@ -10,7 +12,7 @@ module.exports = React.createClass({
     className: string,
     data: array.isRequired,
     height: number.isRequired,
-    offset: number.isRequired,
+    interaction: oneOf(['none', 'mouseover']),
     scaleX: func.isRequired,
     scaleY: func.isRequired,
     style: object,
@@ -24,14 +26,48 @@ module.exports = React.createClass({
       barSpacing: 2,
       data: [],
       height: 0,
+      interaction: 'mouseover',
       legendLabel: '',
-      offset: 0,
       scaleX: Function,
       scaleY: Function,
       tickWidth: 0,
       width: 0,
       zeroY: 0
     };
+  },
+
+  getInitialState: function() {
+    return {activeIndex: -1};
+  },
+
+  componentDidMount: function() {
+    if (this.props.interaction === 'none') {
+      return;
+    }
+
+    Dispatcher.register((payload) => {
+      switch (payload.actionType) {
+
+        case Events.MOUSE_MOVE:
+          var activeIndex = Math.floor(payload.x / this.props.tickWidth);
+          if (activeIndex !== this.state.activeIndex) {
+            this.setState({activeIndex: activeIndex});
+          }
+          break;
+
+        case Events.MOUSE_OUT:
+          this.setState({activeIndex: -1});
+          break;
+
+        default:
+          break;
+      }
+    });
+  },
+
+  componentWillUnmount: function() {
+    Dispatcher.unregister(Events.MOUSE_MOVE);
+    Dispatcher.unregister(Events.MOUSE_OUT);
   },
 
   render: function() {
@@ -52,6 +88,7 @@ module.exports = React.createClass({
 
           return (
             <VerticalBar className={datum.className}
+              active={this.state.activeIndex === index ? true : false}
               height={barHeight}
               index={index}
               key={index}

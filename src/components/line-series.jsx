@@ -4,6 +4,9 @@ var { array, bool, func, number, object, oneOf, string } = React.PropTypes;
 var { isValid } = require('../validators/number-validator');
 var classNames = require('classnames');
 var { stretch } = require('../utils/data-util');
+var Dispatcher = require('../events/dispatcher');
+var Events = require('../events/events');
+var LineMarker = require('./line-marker.jsx');
 
 module.exports = React.createClass({
 
@@ -11,6 +14,7 @@ module.exports = React.createClass({
     className: string,
     data: array.isRequired,
     height: number.isRequired,
+    interaction: oneOf(['none', 'mouseover']),
     interpolate: oneOf([
       // From https://github.com/mbostock/d3/wiki/SVG-Shapes#line_interpolate
       'basis',
@@ -39,12 +43,47 @@ module.exports = React.createClass({
     return {
       data: [],
       height: 0,
+      interaction: 'mouseover',
       interpolate: 'cardinal',
       offset: 0,
       scaleY: Function,
       tickWidth: 0,
       width: 0
     };
+  },
+
+  getInitialState: function() {
+    return {activeIndex: -1};
+  },
+
+  componentDidMount: function() {
+    if (this.props.interaction === 'none') {
+      return;
+    }
+
+    Dispatcher.register((payload) => {
+      switch (payload.actionType) {
+
+        case Events.MOUSE_MOVE:
+          var activeIndex = Math.floor(payload.x / this.props.tickWidth);
+          if (activeIndex !== this.state.activeIndex) {
+            this.setState({activeIndex: activeIndex});
+          }
+          break;
+
+        case Events.MOUSE_OUT:
+          this.setState({activeIndex: -1});
+          break;
+
+        default:
+          break;
+      }
+    });
+  },
+
+  componentWillUnmount: function() {
+    Dispatcher.unregister(Events.MOUSE_MOVE);
+    Dispatcher.unregister(Events.MOUSE_OUT);
   },
 
   render: function() {
@@ -61,12 +100,25 @@ module.exports = React.createClass({
       )
       .y((datum) => Math.round(this.props.scaleY(datum.value)));
 
-    var data = this.props.stretch ? stretch(this.props.data) : this.props.data;
+    var data = this.props.stretch ?
+      stretch(this.props.data) : this.props.data;
+
+    var activeDatum = data[this.state.activeIndex];
 
     return (
       <g className={classNames('line-series', this.props.className)}
         style={this.props.style}>
-        <path d={line(data)} />
+
+        <path className={'line'}
+          d={line(data)} />
+
+        {activeDatum ? (
+          <LineMarker
+            width={Math.floor(this.props.tickWidth / 2)}
+            x={Math.floor((segmentWidth * this.state.activeIndex) + this.props.offset)}
+            y={Math.round(this.props.scaleY(activeDatum.value))} />
+        ) : null}
+
       </g>
     );
   }

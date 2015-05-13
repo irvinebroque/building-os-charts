@@ -158,6 +158,7 @@ module.exports = React.createClass({
               data={datum.data}
               height={this.props.height}
               index={index}
+              interaction={datum.interaction}
               key={index}
               numSeries={this.props.series.length}
               offset={offset}
