@@ -29,17 +29,16 @@ var groups = [{
   clampToZero: true,
   label: 'Electricity 1',
   series: [{
-    type: 'area',
+    type: 'bar',
     data: data1,
     legendLabel: 'Meter 1'
-  }]
-},{
-  clampToZero: true,
-  label: 'Electricity 2',
-  series: [{
+  },{
     type: 'line',
     data: data2,
-    legendLabel: 'Meter 2'
+    legendLabel: 'Meter 2',
+    style: {
+      stroke: 'blue'
+    }
   }]
 }];
 

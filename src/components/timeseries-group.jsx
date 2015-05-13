@@ -57,6 +57,22 @@ module.exports = React.createClass({
     };
   },
 
+  getOffset: function(groupType, series, tickWidth) {
+    var offset = Math.floor(tickWidth / 2);
+
+    if (this.isBarBased(groupType)) {
+      return offset;
+    }
+
+    for (var ii = 0, nn = series.length; ii < nn; ii++) {
+      if (this.isBarBased(series[ii].type)) {
+        return offset;
+      }
+    }
+
+    return 0;
+  },
+
   getTimeSeries: function(groupType, seriesType) {
     var type = seriesType ? seriesType : groupType;
     switch (type) {
@@ -76,6 +92,19 @@ module.exports = React.createClass({
         return StackedBarSeries;
       default:
         return null;
+    }
+  },
+
+  isBarBased: function(type) {
+    switch (type) {
+      case 'bar':
+      case 'clusteredBar':
+      case 'differenceBar':
+      case 'plot':
+      case 'stackedBar':
+        return true;
+      default:
+        return false;
     }
   },
 
@@ -104,6 +133,13 @@ module.exports = React.createClass({
       this.props.series[0].data.length : 0;
     var tickWidth = Math.floor(this.props.width / numTicksX);
 
+    var offset = this.getOffset(
+      this.props.type,
+      this.props.series,
+      tickWidth);
+
+    var stretch = offset ? false : true;
+
     return (
       <g className={classNames('timeseries-group', this.props.className)}>
 
@@ -124,8 +160,10 @@ module.exports = React.createClass({
               index={index}
               key={index}
               numSeries={this.props.series.length}
+              offset={offset}
               scaleX={scaleX}
               scaleY={scaleY}
+              stretch={datum.stretch ? datum.stretch : stretch}
               style={datum.style}
               tickWidth={tickWidth}
               width={this.props.width}
@@ -154,6 +192,7 @@ module.exports = React.createClass({
             numTicks={numTicksX}
             scale={scaleX}
             tickPadding={tickPaddingX}
+            tickWidth={tickWidth}
             width={this.props.width}
             x={0}
             y={this.props.height} />

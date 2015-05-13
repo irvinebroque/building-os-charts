@@ -13,6 +13,7 @@ module.exports = React.createClass({
     height: number.isRequired,
     index: number.isRequired,
     numSeries: number.isRequired,
+    offset: number.isRequired,
     scaleX: func.isRequired,
     scaleY: func.isRequired,
     style: object,
@@ -29,6 +30,7 @@ module.exports = React.createClass({
       index: 0,
       legendLabel: '',
       numSeries: 0,
+      offset: 0,
       scaleX: Function,
       scaleY: Function,
       tickWidth: 0,
@@ -58,7 +60,7 @@ module.exports = React.createClass({
           var x = Math.floor(
             (this.props.tickWidth * index) +
             (barWidth * this.props.index) +
-            (barSpacing / 2)
+            this.props.offset
           );
 
           var y = datum.value > 0 ?

@@ -11,6 +11,7 @@ module.exports = React.createClass({
     comparisonData: array.isRequired,
     data: array.isRequired,
     height: number.isRequired,
+    offset: number.isRequired,
     scaleX: func.isRequired,
     scaleY: func.isRequired,
     style: object,
@@ -25,6 +26,7 @@ module.exports = React.createClass({
       comparisonData: [],
       data: [],
       height: 0,
+      offset: 0,
       scaleX: Function,
       scaleY: Function,
       tickWidth: 0,
@@ -43,10 +45,7 @@ module.exports = React.createClass({
           var barHeight = Math.round(
             this.props.zeroY - this.props.scaleY(Math.abs(datum.value)));
 
-          var x = Math.floor(
-            (this.props.tickWidth * index) +
-            (this.props.barSpacing / 2)
-          );
+          var x = Math.floor((this.props.tickWidth * index) + this.props.offset);
 
           var y = datum.value > 0 ?
             this.props.zeroY - barHeight :

@@ -32,9 +32,11 @@ module.exports = React.createClass({
   propTypes: {
     domain: array.isRequired,
     numTicks: number.isRequired,
+    offset: number.isRequired,
     orient: oneOf(['bottom']).isRequired,
     scale: func.isRequired,
     tickPadding: number.isRequired,
+    tickWidth: number.isRequired,
     width: number.isRequired,
     x: number.isRequired,
     y: number.isRequired
@@ -44,9 +46,11 @@ module.exports = React.createClass({
     return {
       domain: [],
       numTicks: 12,
+      offset: 0,
       orient: 'bottom',
       scale: Function,
       tickPadding: 0,
+      tickWidth: 0,
       width: 0,
       x: 0,
       y: 0
@@ -66,7 +70,6 @@ module.exports = React.createClass({
 
   render: function() {
     var ticks = this.props.scale.ticks(this.props.numTicks);
-    var tickWidth = Math.floor(this.props.width / this.props.numTicks);
     var tickFormat = this.getTickFormat(this.props.domain);
 
     return (
@@ -82,7 +85,7 @@ module.exports = React.createClass({
             return (
               <text className={'time-axis-label'}
                 key={index}
-                x={Math.floor((tickWidth * index) + (tickWidth / 2))}
+                x={Math.floor((this.props.tickWidth * index) + this.props.offset)}
                 y={Math.ceil(this.props.tickPadding)}>
                 {moment(datum).format(tickFormat)}
               </text>

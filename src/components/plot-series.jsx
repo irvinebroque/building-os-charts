@@ -9,6 +9,7 @@ module.exports = React.createClass({
     className: string,
     data: array.isRequired,
     height: number.isRequired,
+    offset: number.isRequired,
     scaleY: func.isRequired,
     style: object,
     tickWidth: number.isRequired,
@@ -20,6 +21,7 @@ module.exports = React.createClass({
       data: [],
       height: 0,
       legendLabel: '',
+      offset: 0,
       scaleX: Function,
       scaleY: Function,
       tickWidth: 0,
@@ -28,18 +30,17 @@ module.exports = React.createClass({
   },
 
   render: function() {
-
     return (
       <g className={classNames('plot-series', this.props.className)}
         style={this.props.style}>
 
         {this.props.data.map((datum, index) => {
 
-          var x = Math.floor(
-            (this.props.tickWidth * index) +
-            (this.props.tickWidth / 2)
-          );
-
+          var x = Math.floor((this.props.tickWidth * index) + this.props.offset);
+          if (x % 2 == 0) {
+            // 1-pixel tweak for even numbers:
+            x--;
+          }
           var y = Math.round(this.props.scaleY(datum.value));
 
           return (
