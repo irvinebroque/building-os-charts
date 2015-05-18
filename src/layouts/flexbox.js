@@ -1,21 +1,5 @@
 var cssLayout = require('css-layout');
 var assign = require('object-assign');
-var { getTranslateFromCoords } = require('../utils/svg-util');
-
-/*
-
-NOTE: flexbox layout works, but should be considered experimental
-for now. Tests to come later as it solidifies.
-
-*/
-
-var _applyComputedLayout = function(childNodes, computedLayout) {
-  for (var ii = 0, nn = computedLayout.children.length; ii < nn; ii++) {
-    var child = computedLayout.children[ii];
-    var node = childNodes[ii].node;
-    _setPosition(node, child.left, child.top);
-  }
-};
 
 var _getChildNodes = function(childNodes, childStyles) {
   var styleNodes = [];
@@ -38,32 +22,6 @@ var _getChildNodes = function(childNodes, childStyles) {
     }
   }
   return styleNodes;
-};
-
-var _getPosition = function(node, x, y) {
-  switch (node.nodeName) {
-    case 'g':
-      node.getAttribute('transform', getTranslateFromCoords(x, y));
-      break;
-    default:
-      return {
-        x: node.getAttribute('x'),
-        y: node.getAttribute('y')
-      };
-      break;
-  }
-};
-
-var _setPosition = function(node, x, y) {
-  switch (node.nodeName) {
-    case 'g':
-      node.setAttribute('transform', getTranslateFromCoords(x, y));
-      break;
-    default:
-      node.setAttribute('x', x);
-      node.setAttribute('y', y);
-      break;
-  }
 };
 
 module.exports = {

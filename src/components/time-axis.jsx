@@ -1,5 +1,5 @@
 var React = require('react');
-var { array, func, number, oneOf, string } = React.PropTypes;
+var { array, func, number, oneOf } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var classNames = require('classnames');
 var moment = require('moment');

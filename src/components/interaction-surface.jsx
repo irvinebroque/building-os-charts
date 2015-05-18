@@ -1,5 +1,5 @@
 var React = require('react');
-var { array, number } = React.PropTypes;
+var { number } = React.PropTypes;
 var d3 = require('d3');
 var Dispatcher = require('../events/dispatcher');
 var Events = require('../events/events');

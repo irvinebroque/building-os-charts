@@ -5,7 +5,7 @@ module.exports = {
 
   getAttribute: function(name, value) {
     if (!name) {
-      return;
+      return '';
     }
     return [name, '="', value, '"'].join('');
   },
@@ -15,13 +15,14 @@ module.exports = {
       var regExp = /\(([^)]+)\)/;
       var matches = regExp.exec(translate);
       if (!matches) {
-        return;
+        return [];
       }
       var coords = matches[1].split(',');
       var x = parseFloat(coords[0]);
       var y = parseFloat(coords[1]);
       return [x, y];
     }
+    return [];
   },
 
   getRotate: function(angle, x, y) {
@@ -84,7 +85,7 @@ module.exports = {
 
   getTranslateFromCoords: function(x, y) {
     if (!isValid(x) || !isValid(y)) {
-      return;
+      return '';
     }
     return 'translate(' + Math.ceil(x) + ',' + Math.ceil(y) + ')';
   }

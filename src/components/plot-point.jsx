@@ -1,6 +1,5 @@
 var React = require('react');
 var { bool, number, object, string } = React.PropTypes;
-var { getTranslateFromCoords } = require('../utils/svg-util');
 var classNames = require('classnames');
 
 module.exports = React.createClass({

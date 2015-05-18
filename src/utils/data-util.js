@@ -3,7 +3,6 @@ var clone = require('clone');
 module.exports = {
 
   stretch: function(data) {
-
     /*
     Lucid timeseries data is inclusive.
     If you request one day of data, from
@@ -18,7 +17,6 @@ module.exports = {
     can be rendered edge-to-edge.
     Nasty but necessary.
     */
-
     if (!data || !data.length || data.length < 2) {
       return data;
     }
@@ -39,4 +37,4 @@ module.exports = {
     return cloned;
   }
 
-}
+};

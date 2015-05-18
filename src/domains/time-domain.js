@@ -3,12 +3,18 @@ var moment = require('moment');
 
 var _getExtents = function(series) {
   var extents = [];
-  for (var ii = 0, nn = series.length; ii < nn; ii++) {
-    extents = extents.concat(d3.extent(series[ii].data, function(datum) {
+
+  function _getSeriesExtents(timeseries) {
+    return d3.extent(timeseries.data, (datum) => {
       if (datum) {
-        return moment(datum.timestamp).isValid() ? datum.timestamp : undefined;
+        return moment(datum.timestamp).isValid() ?
+          datum.timestamp : undefined;
       }
-    }));
+    });
+  }
+
+  for (var ii = 0, nn = series.length; ii < nn; ii++) {
+    extents = extents.concat(_getSeriesExtents(series[ii]));
   }
   return d3.extent(extents);
 };

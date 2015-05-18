@@ -10,6 +10,7 @@
   "scripts": {
     "build": "webpack -p --progress --colors",
     "examples": "webpack-dev-server --config examples/webpack.config.js --content-base examples",
+    "lint": "eslint src/index.js",
     "tests": "karma start"
   },
   "repository": {

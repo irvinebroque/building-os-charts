@@ -3,12 +3,17 @@ var { isValid } = require('../validators/number-validator');
 
 var _getExtents = function(series) {
   var extents = [];
-  for (var ii = 0, nn = series.length; ii < nn; ii++) {
-    extents = extents.concat(d3.extent(series[ii].data, function(datum) {
+
+  function _getSeriesExtents(timeseries) {
+    return d3.extent(timeseries.data, (datum) => {
       if (datum && isValid(datum.value)) {
         return datum.value;
       }
-    }));
+    });
+  }
+
+  for (var ii = 0, nn = series.length; ii < nn; ii++) {
+    extents = extents.concat(_getSeriesExtents(series[ii]));
   }
   return d3.extent(extents);
 };
