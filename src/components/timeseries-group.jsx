@@ -5,7 +5,6 @@ var TimeDomain = require('../domains/time-domain');
 var Range = require('../ranges/range');
 var LinearScale = require('../scales/linear-scale');
 var TimeScale = require('../scales/time-scale');
-var AreaSeries = require('./area-series.jsx');
 var BarSeries = require('./bar-series.jsx');
 var ClusteredBarSeries = require('./clustered-bar-series.jsx');
 var DifferenceBarSeries = require('./difference-bar-series.jsx');
@@ -92,7 +91,7 @@ module.exports = React.createClass({
     var type = seriesType ? seriesType : groupType;
     switch (type) {
       case 'area':
-        return AreaSeries;
+        return LineSeries;
       case 'bar':
         return BarSeries;
       case 'clusteredBar':
@@ -182,13 +181,14 @@ module.exports = React.createClass({
             var TimeSeries = this.getTimeSeries(this.props.type, datum.type);
             return (
               <TimeSeries className={datum.className}
+                clipShapeId={this.props.clipShapeId}
                 comparisonData={datum.comparisonData}
                 data={datum.data}
                 height={this.props.height}
                 index={index}
                 interaction={datum.interaction}
                 key={index}
-                clipShapeId={this.props.clipShapeId}
+                marker={datum.marker}
                 numSeries={this.props.series.length}
                 offset={offset}
                 scaleX={scaleX}
@@ -196,6 +196,7 @@ module.exports = React.createClass({
                 stretch={datum.stretch ? datum.stretch : stretch}
                 style={datum.style}
                 tickWidth={this.props.tickWidth}
+                type={this.props.type ? this.props.type : datum.type}
                 width={this.props.width}
                 zeroY={zeroY} />
             );
