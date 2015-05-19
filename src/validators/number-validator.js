@@ -1,7 +1,7 @@
 module.exports = {
   isValid: function(value) {
     if (typeof value !== 'number') {
-      return;
+      return false;
     }
     if (value || value === 0) {
       switch (value) {
@@ -10,7 +10,7 @@ module.exports = {
         case Number.MIN_VALUE:
         case Number.MAX_VALUE:
         case Infinity:
-          return;
+          return false;
         default:
           return true;
       }

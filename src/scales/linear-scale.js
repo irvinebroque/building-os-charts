@@ -5,7 +5,7 @@ var _isValid = function(values) {
   if (values && values.length > 1) {
     for (var ii = 0, nn = values.length; ii < nn; ii++) {
       if (!isValid(values[ii])) {
-        return;
+        return false;
       }
     }
     return true;

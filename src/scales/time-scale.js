@@ -6,7 +6,7 @@ var _domainIsValid = function(values) {
   if (values && values.length > 1) {
     for (var ii = 0, nn = values.length; ii < nn; ii++) {
       if (!moment(values[ii]).isValid()) {
-        return;
+        return false;
       }
     }
     return true;
@@ -17,7 +17,7 @@ var _rangeIsValid = function(values) {
   if (values && values.length > 1) {
     for (var ii = 0, nn = values.length; ii < nn; ii++) {
       if (!isValid(values[ii])) {
-        return;
+        return false;
       }
     }
     return true;

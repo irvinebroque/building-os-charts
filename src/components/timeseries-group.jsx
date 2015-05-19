@@ -1,5 +1,5 @@
 var React = require('react');
-var { array, bool, func, number, object, objectOf, oneOf, string } = React.PropTypes;
+var { array, bool, number, objectOf, oneOf, string } = React.PropTypes;
 var LinearDomain = require('../domains/linear-domain');
 var TimeDomain = require('../domains/time-domain');
 var Range = require('../ranges/range');
@@ -11,7 +11,7 @@ var ClusteredBarSeries = require('./clustered-bar-series.jsx');
 var DifferenceBarSeries = require('./difference-bar-series.jsx');
 var LineSeries = require('./line-series.jsx');
 var PlotSeries = require('./plot-series.jsx');
-var StackedSeries = require('./stacked-bar-series.jsx');
+var StackedBarSeries = require('./stacked-bar-series.jsx');
 var LinearAxis = require('./linear-axis.jsx');
 var HorizontalGridLines = require('./horizontal-grid-lines.jsx');
 var TimeAxis = require('./time-axis.jsx');

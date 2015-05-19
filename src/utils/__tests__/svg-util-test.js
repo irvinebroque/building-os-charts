@@ -10,10 +10,10 @@ describe('SvgUtil', function() {
 
   it('getAttribute returns svg attributes from name/value pairs', function() {
     expect(getAttribute).toBeDefined();
-    expect(getAttribute()).toBeUndefined();
-    expect(getAttribute('')).toBeUndefined();
-    expect(getAttribute('', '')).toBeUndefined();
-    expect(getAttribute('', 'bar')).toBeUndefined();
+    expect(getAttribute()).toEqual('');
+    expect(getAttribute('')).toEqual('');
+    expect(getAttribute('', '')).toEqual('');
+    expect(getAttribute('', 'bar')).toEqual('');
     expect(getAttribute('foo', '')).toEqual('foo=""');
     expect(getAttribute('foo', 'bar')).toEqual('foo="bar"');
     expect(getAttribute('clip-rect', 'url(#fooBar)')).toEqual('clip-rect="url(#fooBar)"');
@@ -22,9 +22,9 @@ describe('SvgUtil', function() {
 
   it('getCoordsFromTranslate returns x and y coordinates from translate transform', function() {
     expect(getCoordsFromTranslate).toBeDefined();
-    expect(getCoordsFromTranslate()).toBeFalsy();
-    expect(getCoordsFromTranslate('')).toBeFalsy();
-    expect(getCoordsFromTranslate('translate')).toBeFalsy();
+    expect(getCoordsFromTranslate()).toEqual([]);
+    expect(getCoordsFromTranslate('')).toEqual([]);
+    expect(getCoordsFromTranslate('translate')).toEqual([]);
     expect(getCoordsFromTranslate('translate(10,10)')).toEqual([10,10]);
     expect(getCoordsFromTranslate('translate(10)')).toBeDefined();
     expect(getCoordsFromTranslate('translate(10,NaN)')).toBeDefined();
@@ -118,15 +118,15 @@ describe('SvgUtil', function() {
 
   it('getTranslateFromCoords returns a translate transform from given x and y coordinates', function() {
     expect(getTranslateFromCoords).toBeDefined();
-    expect(getTranslateFromCoords()).toBeFalsy();
-    expect(getTranslateFromCoords([])).toBeFalsy();
-    expect(getTranslateFromCoords({})).toBeFalsy();
-    expect(getTranslateFromCoords('')).toBeFalsy();
-    expect(getTranslateFromCoords(0)).toBeFalsy();
-    expect(getTranslateFromCoords(undefined,0)).toBeFalsy();
-    expect(getTranslateFromCoords(NaN,0)).toBeFalsy();
-    expect(getTranslateFromCoords(Infinity,0)).toBeFalsy();
-    expect(getTranslateFromCoords(null,0)).toBeFalsy();
+    expect(getTranslateFromCoords()).toEqual('');
+    expect(getTranslateFromCoords([])).toEqual('');
+    expect(getTranslateFromCoords({})).toEqual('');
+    expect(getTranslateFromCoords('')).toEqual('');
+    expect(getTranslateFromCoords(0)).toEqual('');
+    expect(getTranslateFromCoords(undefined,0)).toEqual('');
+    expect(getTranslateFromCoords(NaN,0)).toEqual('');
+    expect(getTranslateFromCoords(Infinity,0)).toEqual('');
+    expect(getTranslateFromCoords(null,0)).toEqual('');
     expect(getTranslateFromCoords(0,0)).toEqual('translate(0,0)');
     expect(getTranslateFromCoords(123,456)).toEqual('translate(123,456)');
   });
