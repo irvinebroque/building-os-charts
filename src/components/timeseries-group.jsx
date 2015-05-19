@@ -68,7 +68,7 @@ module.exports = React.createClass({
     this.setClipShape();
   },
 
-  componentWillUpdate: function() {
+  componentDidUpdate: function() {
     this.setClipShape();
   },
 
