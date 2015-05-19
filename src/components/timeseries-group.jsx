@@ -15,12 +15,14 @@ var StackedBarSeries = require('./stacked-bar-series.jsx');
 var LinearAxis = require('./linear-axis.jsx');
 var HorizontalGridLines = require('./horizontal-grid-lines.jsx');
 var TimeAxis = require('./time-axis.jsx');
+var ClipShape = require('./clip-shape.jsx');
 var classNames = require('classnames');
 
 module.exports = React.createClass({
 
   propTypes: {
     clampToZero: bool.isRequired,
+    clipShapeId: string.isRequired,
     height: number.isRequired,
     index: number.isRequired,
     label: string.isRequired,
@@ -44,6 +46,7 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       clampToZero: true,
+      clipShapeId: 'timeseriesClipShape',
       height: 0,
       index: 0,
       label: '',
@@ -59,6 +62,14 @@ module.exports = React.createClass({
       tickWidth: 0,
       width: 0
     };
+  },
+
+  componentDidMount: function() {
+    this.setClipShape();
+  },
+
+  componentDidUpdate: function() {
+    this.setClipShape();
   },
 
   getOffset: function(groupType, series, tickWidth) {
@@ -95,7 +106,7 @@ module.exports = React.createClass({
       case 'stackedBar':
         return StackedBarSeries;
       default:
-        return null;
+        return '';
     }
   },
 
@@ -112,8 +123,17 @@ module.exports = React.createClass({
     }
   },
 
-  render: function() {
+  setClipShape: function() {
+    /*
+    React does not currently whitelist the clip-path
+    attribute for SVG elements, so we set it manually
+    whenever the component mounts or updates.
+    */
+    React.findDOMNode(this.refs.timeseriesContainer)
+      .setAttribute('clip-path', 'url(#' + this.props.clipShapeId + ')');
+  },
 
+  render: function() {
     var domainX = TimeDomain(this.props.series);
     var domainY = LinearDomain(
       this.props.series,
@@ -150,27 +170,38 @@ module.exports = React.createClass({
             width={this.props.width} />
         ) : null}
 
-        {this.props.series.map((datum, index) => {
-          var TimeSeries = this.getTimeSeries(this.props.type, datum.type);
-          return (
-            <TimeSeries className={datum.className}
-              comparisonData={datum.comparisonData}
-              data={datum.data}
-              height={this.props.height}
-              index={index}
-              interaction={datum.interaction}
-              key={index}
-              numSeries={this.props.series.length}
-              offset={offset}
-              scaleX={scaleX}
-              scaleY={scaleY}
-              stretch={datum.stretch ? datum.stretch : stretch}
-              style={datum.style}
-              tickWidth={this.props.tickWidth}
-              width={this.props.width}
-              zeroY={zeroY} />
-          );
-        })}
+        <ClipShape className={'timeseries-container-clip-shape'}
+          height={this.props.height}
+          id={this.props.clipShapeId}
+          width={this.props.width} />
+
+        <g className={'timeseries-container'}
+          ref={'timeseriesContainer'}>
+
+          {this.props.series.map((datum, index) => {
+            var TimeSeries = this.getTimeSeries(this.props.type, datum.type);
+            return (
+              <TimeSeries className={datum.className}
+                comparisonData={datum.comparisonData}
+                data={datum.data}
+                height={this.props.height}
+                index={index}
+                interaction={datum.interaction}
+                key={index}
+                clipShapeId={this.props.clipShapeId}
+                numSeries={this.props.series.length}
+                offset={offset}
+                scaleX={scaleX}
+                scaleY={scaleY}
+                stretch={datum.stretch ? datum.stretch : stretch}
+                style={datum.style}
+                tickWidth={this.props.tickWidth}
+                width={this.props.width}
+                zeroY={zeroY} />
+            );
+          })}
+
+        </g>
 
         {this.props.index < 2 ? (
           <LinearAxis
