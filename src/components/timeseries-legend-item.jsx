@@ -1,17 +1,17 @@
 var React = require('react');
-var { array, number, string } = React.PropTypes;
+var { number, string } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var PlotPoint = require('./plot-point.jsx');
 var Label = require('./label.jsx');
 var Dispatcher = require('../events/dispatcher');
-var Events = require('../events/events');
 var { format } = require('../formatters/number-formatter');
+var { DATA_HOVER, MOUSE_OUT, getNamespaced } = require('../events/events');
 
 module.exports = React.createClass({
 
   propTypes: {
-    data: array.isRequired,
     height: number.isRequired,
+    id: number.isRequired,
     label: string.isRequired,
     type: string.isRequired,
     x: number.isRequired
@@ -19,8 +19,8 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      data: [],
       height: 0,
+      id: 0,
       label: '',
       type: '',
       x: 0
@@ -32,36 +32,36 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    Dispatcher.register((payload) => {
-      switch (payload.actionType) {
-        case Events.MOUSE_MOVE:
-          var readout = '';
-          var activeDatum = this.props.data[payload.activeIndex];
-          if (activeDatum) {
-            if (activeDatum.valueFormatted) {
-              readout = activeDatum.valueFormatted;
-            } else {
-              readout = format(activeDatum.value);
-            }
-          }
-          if (readout !== this.state.readout) {
-            this.setState({readout: readout});
-          }
-          break;
-        case Events.MOUSE_OUT:
-          if (this.state.readout !== '') {
-            this.setState({readout: ''});
-          }
-          break;
-        default:
-          break;
-      }
-    });
+    this.addEventListeners();
   },
 
   componentWillUnmount: function() {
-    Dispatcher.unregister(Events.MOUSE_MOVE);
-    Dispatcher.unregister(Events.MOUSE_OUT);
+    this.removeEventListeners();
+  },
+
+  addEventListeners: function() {
+    Dispatcher.on(getNamespaced(
+      DATA_HOVER, 'legend' + this.props.id), (event) => {
+
+      if (event.datum && event.id === this.props.id) {
+        var readout = event.datum.valueFormatted ?
+          event.datum.valueFormatted :
+          format(event.datum.value);
+        this.setState({readout: readout});
+      }
+    });
+
+    Dispatcher.on(getNamespaced(
+      MOUSE_OUT, 'legend' + this.props.id), (event) => {
+      this.setState({readout: ''});
+    });
+  },
+
+  removeEventListeners: function() {
+    Dispatcher.on(getNamespaced(
+      DATA_HOVER, 'legend' + this.props.id), null);
+    Dispatcher.on(getNamespaced(
+      MOUSE_OUT, 'legend' + this.props.id), null);
   },
 
   render: function() {
