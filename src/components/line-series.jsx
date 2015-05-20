@@ -1,15 +1,14 @@
 var React = require('react');
 var d3 = require('d3');
 var { array, bool, func, number, object, oneOf, string } = React.PropTypes;
+var { DATA_HOVER, MOUSE_MOVE, MOUSE_OUT, getNamespaced } = require('../events/events');
 var { isValid } = require('../validators/number-validator');
-var classNames = require('classnames');
 var { stretch } = require('../utils/data-util');
+var classNames = require('classnames');
 var Dispatcher = require('../events/dispatcher');
-var Events = require('../events/events');
 var LineMarker = require('./line-marker.jsx');
 
 var _componentShouldResetPoints = false;
-var _dispatchToken;
 
 module.exports = React.createClass({
 
@@ -18,6 +17,7 @@ module.exports = React.createClass({
     className: string,
     data: array.isRequired,
     height: number.isRequired,
+    id: number.isRequired,
     interaction: oneOf(['none', 'mouseover']),
     interpolate: oneOf([
       // From https://github.com/mbostock/d3/wiki/SVG-Shapes#line_interpolate
@@ -57,6 +57,7 @@ module.exports = React.createClass({
       }).right,
       data: [],
       height: 0,
+      id: 0,
       interaction: 'mouseover',
       interpolate: 'cardinal',
       marker: 'snap',
@@ -79,7 +80,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    this.registerEvents();
+    this.addEventListeners();
     this.setPoints();
   },
 
@@ -88,6 +89,7 @@ module.exports = React.createClass({
       _componentShouldResetPoints = false;
       this.setPoints();
     }
+    this.dispatchEvents();
   },
 
   componentWillReceiveProps: function() {
@@ -95,7 +97,15 @@ module.exports = React.createClass({
   },
 
   componentWillUnmount: function() {
-    this.unregisterEvents();
+    this.removeEventListeners();
+  },
+
+  dispatchEvents: function() {
+    Dispatcher[DATA_HOVER]({
+      type: DATA_HOVER,
+      datum: this.state.activeDatum,
+      id: this.props.id
+    });
   },
 
   getMarkerPosition: function(activeIndex, mouseX) {
@@ -119,8 +129,6 @@ module.exports = React.createClass({
       var index = this.props.bisector(this.state.points, mouseX);
       var point = this.state.points[index];
       var value = this.props.scaleY.invert(point.y);
-      //var datumIndex = this.props.bisector(this.props.data, value);
-      //var datum = clone(this.props.data[datumIndex]);
       return {
         datum: {value: value},
         x: Math.round(point.x),
@@ -147,40 +155,36 @@ module.exports = React.createClass({
     }
   },
 
-  registerEvents: function() {
+  addEventListeners: function() {
     if (this.props.interaction === 'none') {
       return;
     }
 
-    _dispatchToken = Dispatcher.register((payload) => {
-      switch (payload.actionType) {
-        case Events.MOUSE_MOVE:
-          var markerPosition = this.getMarkerPosition(
-            payload.activeIndex,
-            payload.x);
-          this.setState({
-            activeDatum: markerPosition.datum,
-            activeIndex: payload.activeIndex,
-            markerX: markerPosition.x,
-            markerY: markerPosition.y
-          });
-          break;
-        case Events.MOUSE_OUT:
-          this.setState({
-            activeDatum: null,
-            activeIndex: -1,
-            markerX: 0,
-            markerY: 0
-          });
-          break;
-        default:
-          break;
-      }
+    Dispatcher.on(getNamespaced(MOUSE_MOVE, this.props.id), (event) => {
+      var markerPosition = this.getMarkerPosition(
+        event.activeIndex,
+        event.x);
+      this.setState({
+        activeDatum: markerPosition.datum,
+        activeIndex: event.activeIndex,
+        markerX: markerPosition.x,
+        markerY: markerPosition.y
+      });
+    });
+
+    Dispatcher.on(getNamespaced(MOUSE_OUT, this.props.id), (event) => {
+      this.setState({
+        activeDatum: null,
+        activeIndex: -1,
+        markerX: 0,
+        markerY: 0
+      });
     });
   },
 
-  unregisterEvents: function() {
-    Dispatcher.unregister(_dispatchToken);
+  removeEventListeners: function() {
+    Dispatcher.on(getNamespaced(MOUSE_MOVE, this.props.id), null);
+    Dispatcher.on(getNamespaced(MOUSE_OUT, this.props.id), null);
   },
 
   render: function() {

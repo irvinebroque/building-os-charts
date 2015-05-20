@@ -185,6 +185,7 @@ module.exports = React.createClass({
                 comparisonData={datum.comparisonData}
                 data={datum.data}
                 height={this.props.height}
+                id={datum.id}
                 index={index}
                 interaction={datum.interaction}
                 key={index}

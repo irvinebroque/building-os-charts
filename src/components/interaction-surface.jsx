@@ -26,14 +26,22 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
+    this.addEventListeners();
+  },
+
+  componentWillUnmount: function() {
+    this.removeEventListeners();
+  },
+
+  addEventListeners: function() {
     var node = React.findDOMNode(this.refs.node);
     var mouse = [];
 
     d3.select(node)
       .on(Events.MOUSE_MOVE, (event) => {
         mouse = d3.mouse(node);
-        Dispatcher.dispatch({
-          actionType: Events.MOUSE_MOVE,
+        Dispatcher[Events.MOUSE_MOVE]({
+          type: Events.MOUSE_MOVE,
           activeIndex: Math.floor(mouse[0] / this.props.tickWidth),
           x: mouse[0],
           y: mouse[1]
@@ -41,8 +49,8 @@ module.exports = React.createClass({
       })
       .on(Events.MOUSE_OUT, (event) => {
         mouse = d3.mouse(node);
-        Dispatcher.dispatch({
-          actionType: Events.MOUSE_OUT,
+        Dispatcher[Events.MOUSE_OUT]({
+          type: Events.MOUSE_OUT,
           activeIndex: -1,
           x: mouse[0],
           y: mouse[1]
@@ -50,9 +58,8 @@ module.exports = React.createClass({
       });
   },
 
-  componentWillUnmount: function() {
+  removeEventListeners: function() {
     var node = React.findDOMNode(this.refs.node);
-
     d3.select(node)
       .on(Events.MOUSE_MOVE, null)
       .on(Events.MOUSE_OUT, null);

@@ -103,6 +103,7 @@ module.exports = React.createClass({
           <TimeseriesLegendItem
             data={datum.data}
             height={this.props.height}
+            id={datum.id}
             key={index}
             label={datum.legendLabel}
             style={datum.style}

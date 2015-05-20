@@ -1,9 +1,9 @@
 var React = require('react');
 var { array, func, number, object, oneOf, string } = React.PropTypes;
+var { DATA_HOVER, MOUSE_MOVE, MOUSE_OUT, getNamespaced } = require('../events/events');
 var classNames = require('classnames');
 var PlotPoint = require('./plot-point.jsx');
 var Dispatcher = require('../events/dispatcher');
-var Events = require('../events/events');
 
 module.exports = React.createClass({
 
@@ -11,6 +11,7 @@ module.exports = React.createClass({
     className: string,
     data: array.isRequired,
     height: number.isRequired,
+    id: number.isRequired,
     interaction: oneOf(['none', 'mouseover']),
     offset: number.isRequired,
     scaleY: func.isRequired,
@@ -23,6 +24,7 @@ module.exports = React.createClass({
     return {
       data: [],
       height: 0,
+      id: 0,
       interaction: 'mouseover',
       legendLabel: '',
       offset: 0,
@@ -38,31 +40,48 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
+    this.addEventListeners();
+  },
+
+  componentDidUpdate: function() {
+    this.dispatchEvents();
+  },
+
+  componentWillUnmount: function() {
+    this.removeEventListeners();
+  },
+
+  addEventListeners: function() {
     if (this.props.interaction === 'none') {
       return;
     }
 
-    Dispatcher.register((payload) => {
-      switch (payload.actionType) {
-        case Events.MOUSE_MOVE:
-          if (payload.activeIndex !== this.state.activeIndex) {
-            this.setState({activeIndex: payload.activeIndex});
-          }
-          break;
-        case Events.MOUSE_OUT:
-          if (this.state.activeIndex !== -1) {
-            this.setState({activeIndex: -1});
-          }
-          break;
-        default:
-          break;
-      }
+    Dispatcher.on(getNamespaced(MOUSE_MOVE, this.props.id), (event) => {
+      this.setState({
+        activeDatum: this.props.data[event.activeIndex],
+        activeIndex: event.activeIndex
+      });
+    });
+
+    Dispatcher.on(getNamespaced(MOUSE_OUT, this.props.id), (event) => {
+      this.setState({
+        activeDatum: undefined,
+        activeIndex: -1
+      });
     });
   },
 
-  componentWillUnmount: function() {
-    Dispatcher.unregister(Events.MOUSE_MOVE);
-    Dispatcher.unregister(Events.MOUSE_OUT);
+  dispatchEvents: function() {
+    Dispatcher[DATA_HOVER]({
+      type: DATA_HOVER,
+      datum: this.state.activeDatum,
+      id: this.props.id
+    });
+  },
+
+  removeEventListeners: function() {
+    Dispatcher.on(getNamespaced(MOUSE_MOVE, this.props.id), null);
+    Dispatcher.on(getNamespaced(MOUSE_OUT, this.props.id), null);
   },
 
   render: function() {
