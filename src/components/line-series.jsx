@@ -212,23 +212,38 @@ module.exports = React.createClass({
 
     var className = (this.props.type === 'area' ? 'area' : 'line') + '-series';
 
+    var style = {};
+    if (this.props.style) {
+      style.area = {
+        fill: this.props.style.fill,
+        opacity: this.props.style.opacity
+      };
+      style.line = {
+        fill: 'none',
+        stroke: this.props.style.stroke
+      };
+      style.marker = {
+        stroke: this.props.style.stroke
+      };
+    }
+
     return (
-      <g className={classNames(className, this.props.className)}
-        style={this.props.style}>
+      <g className={classNames(className, this.props.className)}>
 
         {this.props.type === 'area' ? (
           <path className={'area'}
-            d={area(data)} />
+            d={area(data)}
+            style={style.area} />
         ) : null}
 
         <path className={'line'}
           d={line(data)}
-          style={this.props.style} />
+          style={style.line}
           ref={'path'} />
 
         {this.props.data[this.state.activeIndex] ? (
           <LineMarker
-            width={Math.floor(this.props.tickWidth / 2)}
+            style={style.marker}
             x={this.state.markerX}
             y={this.state.markerY} />
         ) : null}

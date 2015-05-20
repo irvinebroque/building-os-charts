@@ -1,5 +1,7 @@
+@import '../colors/colors';
+
 .line-marker {
-  fill: #ccc;
-  stroke: #fff;
+  fill: $white;
+  stroke: $green;
   stroke-width: 3px;
 }
