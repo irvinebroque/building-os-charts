@@ -1,3 +1,9 @@
+@import '../colors/colors';
+
 .bar-series {
-  
+  fill: $green;
+
+  .active {
+    opacity: 0.5;
+  }
 }
