@@ -5,6 +5,14 @@ module.exports = {
   MOUSE_OUT: 'mouseout',
 
   getNamespaced: function(type, namespace) {
+    if (!type) {
+      return '';
+    }
+
+    if (!namespace) {
+      return type;
+    }
+
     return type + '.' + namespace;
   }
 
