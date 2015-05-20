@@ -1,5 +1,5 @@
 var React = require('react');
-var { array, number, string } = React.PropTypes;
+var { number, string } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var PlotPoint = require('./plot-point.jsx');
 var Label = require('./label.jsx');

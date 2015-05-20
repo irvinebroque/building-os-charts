@@ -76,8 +76,8 @@ module.exports = React.createClass({
   },
 
   dispatchEvents: function() {
-    Dispatcher[Events.DATA_HOVER]({
-      type: Events.DATA_HOVER,
+    Dispatcher[DATA_HOVER]({
+      type: DATA_HOVER,
       datum: this.state.activeDatum,
       id: this.props.id
     });
