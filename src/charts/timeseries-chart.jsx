@@ -6,6 +6,7 @@ var TimeseriesGroup = require('../components/timeseries-group.jsx');
 var TimeseriesLegend = require('../components/timeseries-legend.jsx');
 var classNames = require('classnames');
 var InteractionSurface = require('../components/interaction-surface.jsx');
+var clone = require('clone');
 
 module.exports = React.createClass({
 
@@ -29,6 +30,18 @@ module.exports = React.createClass({
     };
   },
 
+  getGroups: function() {
+    var counter = 0;
+    var groups = clone(this.props.groups);
+    groups.forEach(function(group) {
+      group.series.forEach(function(timeseries) {
+        counter++;
+        timeseries.id = counter;
+      });
+    });
+    return groups;
+  },
+
   getMargins: function(groups, margins) {
     if (groups.length < 2) {
       /*
@@ -42,8 +55,10 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var groups = this.getGroups();
+
     var margins = this.getMargins(
-      this.props.groups, BoxUtil(this.props.margins));
+      groups, BoxUtil(this.props.margins));
 
     var contentHeight = Math.ceil(
       this.props.height - margins.top - margins.bottom);
@@ -51,7 +66,7 @@ module.exports = React.createClass({
     var contentWidth = Math.ceil(
       this.props.width - margins.left - margins.right);
 
-    var numTicksX = this.props.groups[0].series[0].data.length;
+    var numTicksX = groups[0].series[0].data.length;
     var tickWidth = Math.floor(contentWidth / numTicksX);
 
     return (
@@ -61,7 +76,7 @@ module.exports = React.createClass({
 
         <g className={'timeseries-groups'}
           transform={getTranslateFromCoords(margins.left, margins.top)}>
-          {this.props.groups.map((datum, index) => (
+          {groups.map((datum, index) => (
             <TimeseriesGroup
               clampToZero={datum.clampToZero}
               height={contentHeight}
@@ -80,7 +95,7 @@ module.exports = React.createClass({
         </g>
 
         <TimeseriesLegend
-          groups={this.props.groups}
+          groups={groups}
           height={Math.round(margins.top)}
           width={contentWidth}
           x={margins.left}

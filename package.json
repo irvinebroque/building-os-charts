@@ -22,7 +22,6 @@
     "clone": "^1.0.2",
     "css-layout": "0.0.2",
     "d3": "^3.5.5",
-    "flux": "^2.0.3",
     "javascript-natural-sort": "^0.7.1",
     "moment": "^2.10.2",
     "object-assign": "^2.0.0",
