@@ -1,11 +1,13 @@
 @import 'charts/horizontal-bar-chart';
 @import 'charts/timeseries-chart';
 @import 'components/area-series';
+@import 'components/axis-label';
 @import 'components/bar-series';
 @import 'components/clip-shape';
 @import 'components/clustered-bar-series';
 @import 'components/difference-bar-series';
 @import 'components/difference-bar';
+@import 'components/divider';
 @import 'components/horizontal-bar-background';
 @import 'components/horizontal-bar-content';
 @import 'components/horizontal-bar-defs';
@@ -24,6 +26,7 @@
 @import 'components/rounded-rect';
 @import 'components/stacked-bar-series';
 @import 'components/svg-image';
+@import 'components/tick-label';
 @import 'components/time-axis';
 @import 'components/timeseries-group';
 @import 'components/timeseries-legend-item';
@@ -35,7 +38,6 @@
     dominant-baseline: text-before-edge;
     fill: $black;
     font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-    font-size: 24px;
-    font-weight: 300;
+    font-size: 12px;
   }
 }

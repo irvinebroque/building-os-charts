@@ -5,6 +5,9 @@ var { format } = require('../formatters/number-formatter');
 var { getRotate } = require('../utils/svg-util');
 var classNames = require('classnames');
 var Label = require('./label.jsx');
+var Divider = require('./divider.jsx');
+var TickLabel = require('./tick-label.jsx');
+var AxisLabel = require('./axis-label.jsx');
 
 module.exports = React.createClass({
 
@@ -61,7 +64,7 @@ module.exports = React.createClass({
       <g className={'linear-axis'}
         transform={getTranslateFromCoords(this.props.x, 0)}>
 
-        <line className={'linear-axis-divider'}
+        <Divider
           x1={0}
           y1={this.props.y}
           x2={0}
@@ -69,25 +72,23 @@ module.exports = React.createClass({
 
         {ticks.map((datum, index) => {
           return (
-            <text className={classNames('linear-axis-tick-label', this.props.orient)}
+            <TickLabel className={this.props.orient}
               key={index}
-              style={this.props.style}
+              text={format(datum)}
               x={x}
-              y={Math.ceil(this.props.scale(datum))}>
-              {format(datum)}
-            </text>
+              y={Math.ceil(this.props.scale(datum))} />
           );
         })}
 
         {this.props.showDividerAtZero ? (
-          <line className={'linear-axis-divider'}
+          <Divider
             x1={0}
             y1={this.props.zeroY}
             x2={this.props.contentWidth}
             y2={this.props.zeroY} />
         ) : null}
 
-        <Label className={'linear-axis-label'}
+        <AxisLabel
           text={this.props.label}
           transform={rotate}
           x={labelX}
