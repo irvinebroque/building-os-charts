@@ -27,19 +27,14 @@ var groups = [{
   series: [{
     data: data1,
     legendLabel: 'Electricity 1',
-    marker: 'smooth',
+    type: 'bar',
     style: {
-      fill: 'green'
-    },
-    type: 'bar'
+      fill: '#ccc'
+    }
   },{
     data: data2,
     comparisonData: data1,
     legendLabel: 'Electricity 2',
-    marker: 'smooth',
-    style: {
-      fill: 'yellow'
-    },
     type: 'differenceBar'
   }]
 }];
