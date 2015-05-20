@@ -1,7 +1,7 @@
 var React = require('react');
 var { TimeseriesChart } = require('ld3');
 var moment = require('moment');
-require('../../src/styles.scss');
+require('../../src/theme.scss');
 
 function getData() {
   var start = moment().startOf('day');
@@ -22,11 +22,15 @@ function getData() {
 var data = getData();
 var groups = [{
   label: 'kWh',
-  type: 'line',
+  type: 'area',
   series: [{
     data: data,
     legendLabel: 'Electricity',
-    marker: 'smooth'
+    marker: 'smooth',
+    style: {
+      fill: 'gray',
+      stroke: 'black'
+    }
   }]
 }];
 

@@ -1,7 +1,7 @@
 var React = require('react');
 var { TimeseriesChart } = require('ld3');
 var moment = require('moment');
-require('../../src/styles.scss');
+require('../../src/theme.scss');
 
 function getData() {
   var start = moment().startOf('month');
@@ -28,16 +28,13 @@ var groups = [{
   series: [{
     data: data1,
     legendLabel: 'Electricity 1',
-    marker: 'smooth',
-    style: {
-      fill: 'green'
-    }
+    marker: 'smooth'
   },{
     data: data2,
     legendLabel: 'Electricity 2',
     marker: 'smooth',
     style: {
-      fill: 'yellow'
+      fill: 'blue'
     }
   }]
 }];
