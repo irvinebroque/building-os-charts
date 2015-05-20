@@ -104,11 +104,11 @@ module.exports = React.createClass({
     var activeDatum = data[this.state.activeIndex];
 
     return (
-      <g className={classNames('line-series', this.props.className)}
-        style={this.props.style}>
+      <g className={classNames('line-series', this.props.className)}>
 
         <path className={'line'}
-          d={line(data)} />
+          d={line(data)}
+          style={this.props.style} />
 
         {activeDatum ? (
           <LineMarker
