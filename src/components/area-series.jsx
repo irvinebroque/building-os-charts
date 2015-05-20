@@ -112,14 +112,28 @@ module.exports = React.createClass({
 
     var activeDatum = data[this.state.activeIndex];
 
+    var style = {};
+    if (this.props.style) {
+      style.area = {
+        fill: this.props.style.fill
+      };
+      style.line = {
+        fill: 'none',
+        stroke: this.props.style.stroke
+      };
+    }
+
     return (
       <g className={classNames('area-series', this.props.className)}
         style={this.props.style}>
 
         <path className={'area'}
-          d={area(data)} />
+          d={area(data)}
+          style={style.area} />
+
         <path className={'line'}
-          d={line(data)} />
+          d={line(data)}
+          style={style.line} />
 
         {activeDatum ? (
           <LineMarker

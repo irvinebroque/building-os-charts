@@ -1,0 +1,9 @@
+@import '../colors/colors';
+
+.line-series {
+  .line {
+    fill: none;
+    stroke: $green;
+    stroke-width: 3px;
+  }
+}

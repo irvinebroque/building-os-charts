@@ -5,6 +5,7 @@ var LinearScale = require('../scales/linear-scale');
 var { numericDescending } = require('../utils/sort-util');
 var HorizontalBar = require('../components/horizontal-bar.jsx');
 var HorizontalBarDefs = require('../components/horizontal-bar-defs.jsx');
+var classNames = require('classnames');
 
 module.exports = React.createClass({
 
@@ -61,7 +62,7 @@ module.exports = React.createClass({
       this.props.width);
 
     return (
-      <svg className={'horizontal-bar-chart'}
+      <svg className={classNames('chart', 'horizontal-bar-chart')}
         height={this.props.height + 1}
         width={this.props.width + 1}>
 

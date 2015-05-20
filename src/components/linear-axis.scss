@@ -1,0 +1,22 @@
+.linear-axis {
+
+}
+.linear-axis-divider {
+  stroke: #000;
+}
+.linear-axis-label {
+  text-anchor: middle;
+  fill: #000;
+}
+
+.linear-axis-tick-label {
+  dominant-baseline: middle;
+  fill: #000;
+}
+.linear-axis-tick-label.left {
+  text-anchor: end;
+}
+
+.linear-axis-tick-label.right {
+  text-anchor: start;
+}

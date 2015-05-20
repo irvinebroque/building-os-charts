@@ -1,203 +1,41 @@
-// --------------------
-//
-// Global
-//
-// --------------------
+@import 'charts/horizontal-bar-chart';
+@import 'charts/timeseries-chart';
+@import 'components/area-series';
+@import 'components/bar-series';
+@import 'components/clip-shape';
+@import 'components/clustered-bar-series';
+@import 'components/difference-bar-series';
+@import 'components/difference-bar';
+@import 'components/horizontal-bar-background';
+@import 'components/horizontal-bar-content';
+@import 'components/horizontal-bar-defs';
+@import 'components/horizontal-bar-detail';
+@import 'components/horizontal-bar-icon';
+@import 'components/horizontal-bar';
+@import 'components/horizontal-grid-lines';
+@import 'components/interaction-surface';
+@import 'components/label';
+@import 'components/line-marker';
+@import 'components/line-series';
+@import 'components/linear-axis';
+@import 'components/plot-point';
+@import 'components/plot-series';
+@import 'components/ranking-badge';
+@import 'components/rounded-rect';
+@import 'components/stacked-bar-series';
+@import 'components/svg-image';
+@import 'components/time-axis';
+@import 'components/timeseries-group';
+@import 'components/timeseries-legend-item';
+@import 'components/timeseries-legend';
+@import 'components/vertical-bar';
 
-svg {
-  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  font-weight: 300;
-  fill: #fff;
-  font-size: 24px;
-  pointer-events: none;
-}
-
-svg text {
-  dominant-baseline: text-before-edge;
-}
-
-// --------------------
-//
-// Generic Components
-//
-// --------------------
-
-.line-marker {
-  fill: #ccc;
-  stroke: #fff;
-  stroke-width: 3px;
-}
-
-.active {
-  opacity: 0.6;
-}
-
-.interaction-surface {
-  pointer-events: all;
-}
-
-.horizontal-grid-line {
-  stroke: #f0f0f0;
-}
-
-.horizontal-grid-lines {}
-
-.timeseries-legend {
-  font-size: 18px;
-}
-
-.timeseries-legend-item {
-
-}
-
-.timeseries-legend-item-label {
-  fill: #000;
-}
-
-.timeseries-legend-item-readout {
-  fill: #000;
-}
-
-.linear-axis {
-}
-
-.linear-axis-divider {
-  stroke: #000;
-}
-
-.linear-axis-label {
-  text-anchor: middle;
-  fill: #000;
-}
-
-.linear-axis-tick-label {
-  dominant-baseline: middle;
-  fill: #000;
-}
-
-.linear-axis-tick-label.left {
-  text-anchor: end;
-}
-
-.linear-axis-tick-label.right {
-  text-anchor: start;
-}
-
-.ranking-badge-background {
-  fill: #999;
-  stroke: #ccc;
-  stroke-width: 3px;
-}
-
-.ranking-badge-text {
-  fill: #000;
-  font-weight: bold;
-  text-anchor: middle;
-}
-
-.time-axis {
-  pointer-events: none;
-}
-
-.time-axis-divider {
-  stroke: #000;
-}
-
-.time-axis-label {
-  fill: #000;
-  text-anchor: middle;
-}
-
-.gold {
-  fill: #e4ac43;
-  stroke: #f8c350;
-}
-
-.silver {
-  fill: #d1d1d1;
-  stroke: #fff;
-}
-
-.bronze {
-  fill: #e09765;
-  stroke: #f2b793;
-}
-
-// --------------------
-//
-//
-//
-// --------------------
-
-.area {
-  fill: red;
-  fill-opacity: 0.5;
-}
-
-.line {
-  fill: none;
-  stroke: red;
-  stroke-width: 3px;
-}
-
-.higher {
-  fill: red;
-}
-
-.lower {
-  fill: green;
-}
-
-.horizontal-bar {
-  background-color: #ff00cc;
-}
-
-.horizontal-bar-background {
-  opacity: 0.35;
-}
-
-.horizontal-bar-background:hover {
-  opacity: 0.45;
-}
-
-.horizontal-bar-background-fill {
-  fill: #666;
-};
-
-.horizontal-bar-background-hit-area {
-  opacity: 0;
-}
-
-.horizontal-bar-chart {}
-
-.horizontal-bar-container {}
-
-.horizontal-bar-content {
-  pointer-events: none;
-}
-
-.horizontal-bar-content-icon {}
-
-.horizontal-bar-content-label {}
-
-.horizontal-bar-detail {
-  pointer-events: none;
-}
-
-.horizontal-bar-detail-icon {}
-
-.horizontal-bar-detail-label {
-  fill: #333;
-}
-
-.line-series {
-  fill: none;
-  stroke: red;
-  stroke-width: 3px;
-}
-
-.plot-point {
-  fill: #ccc;
-  stroke: #fff;
-  stroke-width: 2px;
+.chart {
+  text {
+    dominant-baseline: text-before-edge;
+    fill: $black;
+    font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+  }
 }

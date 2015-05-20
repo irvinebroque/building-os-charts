@@ -55,7 +55,7 @@ module.exports = React.createClass({
     var tickWidth = Math.floor(contentWidth / numTicksX);
 
     return (
-      <svg className={classNames('timeseries-chart', this.props.className)}
+      <svg className={classNames('chart', 'timeseries-chart', this.props.className)}
         height={Math.ceil(this.props.height) + 1}
         width={Math.ceil(this.props.width) + 1}>
 
