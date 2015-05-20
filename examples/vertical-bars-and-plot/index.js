@@ -27,16 +27,10 @@ var groups = [{
   series: [{
     data: data1,
     legendLabel: 'Electricity 1',
-    style: {
-      fill: 'green'
-    },
     type: 'bar'
   },{
     data: data2,
     legendLabel: 'Electricity 2',
-    style: {
-      fill: 'yellow'
-    },
     type: 'plot'
   }]
 }];
