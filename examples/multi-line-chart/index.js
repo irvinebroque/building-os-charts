@@ -5,10 +5,10 @@ require('../../src/styles.scss');
 
 function getData() {
   var start = moment().startOf('day');
-  var end = moment(start).endOf('day');
+  var end = moment(start).endOf('tomorrow');
   var quarterHour = moment(start).subtract(15, 'minutes');
   var data = [];
-  var nn = (24 * 4);
+  var nn = (48 * 4);
   for (var ii = 0; ii < nn; ii++) {
     quarterHour.add(15, 'minutes');
     data.push({
