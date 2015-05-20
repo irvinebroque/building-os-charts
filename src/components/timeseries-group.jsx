@@ -169,7 +169,7 @@ module.exports = React.createClass({
             width={this.props.width} />
         ) : null}
 
-        <ClipShape className={'timeseries-container-clip-shape'}
+        <ClipShape
           height={this.props.height}
           id={this.props.clipShapeId}
           width={this.props.width} />

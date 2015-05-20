@@ -4,7 +4,6 @@ var { number, string } = React.PropTypes;
 module.exports = React.createClass({
 
   propTypes: {
-    className: string,
     height: number.isRequired,
     id: string.isRequired,
     width: number.isRequired
@@ -20,7 +19,7 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <clipPath className={this.props.className}
+      <clipPath className={'clip-shape'}
         id={this.props.id}>
         <rect
           height={this.props.height}
