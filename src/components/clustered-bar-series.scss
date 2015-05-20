@@ -1,3 +1,9 @@
+@import '../colors/colors';
+
 .clustered-bar-series {
-  
+  fill: $green;
+
+  .active {
+    opacity: 0.5;
+  }
 }
