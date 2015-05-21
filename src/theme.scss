@@ -1,46 +1,48 @@
-@import 'charts/horizontal-bar-chart';
-@import 'charts/timeseries-chart';
-@import 'components/area-series';
-@import 'components/axis-label';
-@import 'components/bar-series';
-@import 'components/clip-shape';
-@import 'components/clustered-bar-series';
-@import 'components/difference-bar-series';
-@import 'components/difference-bar';
-@import 'components/divider';
-@import 'components/horizontal-bar-background';
-@import 'components/horizontal-bar-content';
-@import 'components/horizontal-bar-defs';
-@import 'components/horizontal-bar-detail';
-@import 'components/horizontal-bar-icon';
-@import 'components/horizontal-bar';
-@import 'components/horizontal-grid-lines';
-@import 'components/interaction-surface';
-@import 'components/label';
-@import 'components/line-marker';
-@import 'components/line-series';
-@import 'components/linear-axis';
-@import 'components/plot-point';
-@import 'components/plot-series';
-@import 'components/ranking-badge';
-@import 'components/rounded-rect';
-@import 'components/stacked-bar-series';
-@import 'components/svg-image';
-@import 'components/tick-label';
-@import 'components/time-axis';
-@import 'components/timeseries-group';
-@import 'components/timeseries-legend';
-@import 'components/timeseries-legend-icon';
-@import 'components/timeseries-legend-item';
-@import 'components/timeseries-legend-label';
-@import 'components/timeseries-legend-readout';
-@import 'components/vertical-bar';
+@import
+  'charts/horizontal-bar-chart',
+  'charts/timeseries-chart',
+  'components/area-series',
+  'components/axis-label',
+  'components/bar-series',
+  'components/clip-shape',
+  'components/clustered-bar-series',
+  'components/difference-bar-series',
+  'components/difference-bar',
+  'components/divider',
+  'components/horizontal-bar-background',
+  'components/horizontal-bar-content',
+  'components/horizontal-bar-defs',
+  'components/horizontal-bar-detail',
+  'components/horizontal-bar-icon',
+  'components/horizontal-bar',
+  'components/horizontal-grid-lines',
+  'components/interaction-surface',
+  'components/label',
+  'components/line-marker',
+  'components/line-series',
+  'components/linear-axis',
+  'components/plot-point',
+  'components/plot-series',
+  'components/ranking-badge',
+  'components/rounded-rect',
+  'components/stacked-bar-series',
+  'components/svg-image',
+  'components/tick-label',
+  'components/time-axis',
+  'components/timeseries-group',
+  'components/timeseries-legend',
+  'components/timeseries-legend-icon',
+  'components/timeseries-legend-item',
+  'components/timeseries-legend-label',
+  'components/timeseries-legend-readout',
+  'components/vertical-bar';
 
 .chart {
   text {
     dominant-baseline: text-before-edge;
     fill: $black;
-    font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light',
+      'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
     font-size: 12px;
   }
 }
