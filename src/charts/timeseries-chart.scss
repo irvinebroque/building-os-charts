@@ -1,9 +1,11 @@
+@import '../styles/_variables';
+
 .timeseries-chart {
   pointer-events: none;
 
   text {
     dominant-baseline: text-before-edge;
-    fill: $black;
+    fill: $mid-dark-gray;
     font-family: $font-family;
     font-size: 12px;
   }

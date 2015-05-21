@@ -1,5 +1,5 @@
 var React = require('react');
-var { getAttribute } = require('../utils/svg-util');
+var { getAttribute, getTranslateFromCoords } = require('../utils/svg-util');
 
 module.exports = React.createClass({
 
@@ -7,7 +7,9 @@ module.exports = React.createClass({
     clipPathID: React.PropTypes.string.isRequired,
     height: React.PropTypes.number.isRequired,
     url: React.PropTypes.string.isRequired,
-    width: React.PropTypes.number.isRequired
+    width: React.PropTypes.number.isRequired,
+    x: React.PropTypes.number.isRequired,
+    y: React.PropTypes.number.isRequired
   },
 
   getDefaultProps: function() {
@@ -15,7 +17,9 @@ module.exports = React.createClass({
       clipPathID: '',
       height: 0,
       url: '',
-      width: 0
+      width: 0,
+      x: 0,
+      y: 0
     }
   },
 
@@ -33,7 +37,8 @@ module.exports = React.createClass({
     }
     return (
       <g className={this.props.className}
-         dangerouslySetInnerHTML={{
+        transform={getTranslateFromCoords(this.props.x, this.props.y)}
+        dangerouslySetInnerHTML={{
         __html: '<image ' + attributes.join(' ') + '/>'
       }} />
     );

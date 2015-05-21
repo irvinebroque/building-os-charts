@@ -1,12 +1,17 @@
+@import '../styles/_variables';
+
 .horizontal-bar-background {
+
   opacity: 0.35;
-}
-.horizontal-bar-background:hover {
-  opacity: 0.45;
-}
-.horizontal-bar-background-fill {
-  fill: #666;
-};
-.horizontal-bar-background-hit-area {
-  opacity: 0;
+  &:hover {
+    opacity: 0.45;
+  }
+
+  .horizontal-bar-background-interaction-rect {
+    opacity: 0;
+  }
+
+  .horizontal-bar-background-fill {
+    fill: $mid-gray;
+  };
 }
