@@ -1,11 +1,14 @@
 var React = require('react');
-var { number, string } = React.PropTypes;
+var { number, object, oneOf, string } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
-var PlotPoint = require('./plot-point.jsx');
-var Label = require('./label.jsx');
-var Dispatcher = require('../events/dispatcher');
 var { format } = require('../formatters/number-formatter');
 var { DATA_HOVER, MOUSE_OUT, getNamespaced } = require('../events/events');
+var PlotPoint = require('./plot-point.jsx');
+var Label = require('./label.jsx');
+var TimeseriesLegendIcon = require('./timeseries-legend-icon.jsx');
+var TimeseriesLegendLabel = require('./timeseries-legend-label.jsx');
+var TimeseriesLegendReadout = require('./timeseries-legend-readout.jsx');
+var Dispatcher = require('../events/dispatcher');
 
 module.exports = React.createClass({
 
@@ -13,7 +16,16 @@ module.exports = React.createClass({
     height: number.isRequired,
     id: number.isRequired,
     label: string.isRequired,
-    type: string.isRequired,
+    style: object,
+    type: oneOf([
+      'area',
+      'bar',
+      'clusteredBar',
+      'differenceBar',
+      'line',
+      'plot',
+      'stackedBar'
+    ]).isRequired,
     x: number.isRequired
   },
 
@@ -77,41 +89,21 @@ module.exports = React.createClass({
         transform={getTranslateFromCoords(this.props.x, 0)}
         ref={'node'}>
 
-        { this.props.type === 'bar' ||
-          this.props.type === 'clusteredBar' ||
-          this.props.type === 'differenceBar' ||
-          this.props.type === 'stackedBar' ? (
-          <rect
-            height={iconHeight}
-            style={this.props.style}
-            width={iconWidth} />
-        ) : null}
+        <TimeseriesLegendIcon
+          height={iconHeight}
+          style={this.props.style}
+          type={this.props.type}
+          width={iconWidth} />
 
-        {this.props.type === 'area' || this.props.type === 'line' ? (
-          <line
-            style={this.props.style}
-            x1={0}
-            y1={centerY}
-            x2={iconWidth}
-            y2={centerY} />
-        ) : null}
-
-        {this.props.type === 'plot' ? (
-          <PlotPoint
-            height={iconHeight}
-            style={this.props.style}
-            width={iconHeight}
-            x={centerY}
+        {this.props.label ? (
+          <TimeseriesLegendLabel
+            text={this.props.label}
+            x={iconWidth + spacing}
             y={centerY} />
         ) : null}
 
-        {this.props.label ? (
-          <Label className={'timeseries-legend-item-label'}
-            text={this.props.label}
-            x={iconWidth + centerY} />
-        ) : null}
-
-        <Label className={'timeseries-legend-item-readout'}
+        <TimeseriesLegendReadout
+          style={this.props.style}
           text={this.state.readout}
           y={iconHeight + spacing} />
 

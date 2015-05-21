@@ -29,8 +29,11 @@
 @import 'components/tick-label';
 @import 'components/time-axis';
 @import 'components/timeseries-group';
-@import 'components/timeseries-legend-item';
 @import 'components/timeseries-legend';
+@import 'components/timeseries-legend-icon';
+@import 'components/timeseries-legend-item';
+@import 'components/timeseries-legend-label';
+@import 'components/timeseries-legend-readout';
 @import 'components/vertical-bar';
 
 .chart {
