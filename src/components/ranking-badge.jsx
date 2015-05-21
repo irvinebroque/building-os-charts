@@ -38,7 +38,7 @@ module.exports = React.createClass({
           cx={radius}
           cy={radius}
           r={radius} />
-        <text className={'ranking-badge-text'}
+        <text
           x={radius}
           y={radius + 1}>
           { this.props.index + 1 }
