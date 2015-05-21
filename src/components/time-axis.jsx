@@ -3,6 +3,8 @@ var { array, func, number, oneOf } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var classNames = require('classnames');
 var moment = require('moment');
+var Divider = require('./divider.jsx');
+var TickLabel = require('./tick-label.jsx');
 
 var _durations = [{
   duration: moment.duration(365, 'days').asMilliseconds(),
@@ -76,19 +78,20 @@ module.exports = React.createClass({
       <g className={classNames('time-axis', this.props.orient)}
         transform={getTranslateFromCoords(this.props.x, this.props.y)}>
 
-        <line className={'time-axis-divider'}
-          x1={0} y1={0}
-          x2={this.props.width} y2={0} />
+        <Divider
+          x1={0}
+          y1={0}
+          x2={this.props.width}
+          y2={0} />
 
         {ticks.map((datum, index) => {
           if (index % 2) {
             return (
-              <text className={'time-axis-label'}
+              <TickLabel
                 key={index}
+                text={moment(datum).format(tickFormat)}
                 x={Math.floor((this.props.tickWidth * index) + this.props.offset)}
-                y={Math.ceil(this.props.tickPadding)}>
-                {moment(datum).format(tickFormat)}
-              </text>
+                y={Math.ceil(this.props.tickPadding)} />
             )
           }
           return null;
