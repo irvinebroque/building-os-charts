@@ -223,6 +223,7 @@ module.exports = React.createClass({
 
         <path className={'line'}
           d={line(data)}
+          style={this.props.style} />
           ref={'path'} />
 
         {this.props.data[this.state.activeIndex] ? (
