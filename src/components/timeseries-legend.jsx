@@ -93,7 +93,7 @@ module.exports = React.createClass({
 
   render: function() {
     var data = this.getData(this.props.groups);
-    
+
     return (
       <g className={'timeseries-legend'}
         transform={getTranslateFromCoords(this.props.x, this.props.y)}

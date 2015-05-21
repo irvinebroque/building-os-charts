@@ -32,10 +32,13 @@ module.exports = React.createClass({
   getGroups: function() {
     var counter = 0;
     var groups = clone(this.props.groups);
-    groups.forEach(function(group) {
-      group.series.forEach(function(timeseries) {
+    groups.forEach((group) =>{
+      group.series.forEach((timeseries) => {
         counter++;
         timeseries.id = counter;
+        if (!timeseries.type) {
+          timeseries.type = group.type;
+        }
       });
     });
     return groups;
