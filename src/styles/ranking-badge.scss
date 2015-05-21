@@ -12,16 +12,15 @@
   }
 }
 
-/* move to colors.scss */
 .gold {
-  fill: #e4ac43;
-  stroke: #f8c350;
+  fill: $gold;
+  stroke: $satsuma;
 }
 .silver {
-  fill: #d1d1d1;
+  fill: $silver;
   stroke: $white;
 }
 .bronze {
-  fill: #e09765;
-  stroke: #f2b793;
+  fill: $bronze;
+  stroke: $peach;
 }
