@@ -36,13 +36,3 @@
   'components/timeseries-legend-label',
   'components/timeseries-legend-readout',
   'components/vertical-bar';
-
-.chart {
-  text {
-    dominant-baseline: text-before-edge;
-    fill: $black;
-    font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light',
-      'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-    font-size: 12px;
-  }
-}

@@ -1,3 +1,10 @@
 .timeseries-chart {
   pointer-events: none;
+
+  text {
+    dominant-baseline: text-before-edge;
+    fill: $black;
+    font-family: $font-family;
+    font-size: 12px;
+  }
 }

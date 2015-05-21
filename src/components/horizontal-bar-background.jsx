@@ -17,7 +17,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <g className={'horizontal-bar-background'}>
-        <rect className={'horizontal-bar-background-hit-area'}
+        <rect className={'horizontal-bar-background-interaction-surface'}
           height={this.props.height}
           width={this.props.width} />
         <RoundedRect className={'horizontal-bar-background-fill'}

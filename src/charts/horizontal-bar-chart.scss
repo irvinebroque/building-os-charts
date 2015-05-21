@@ -1,0 +1,10 @@
+@import '../styles/_variables';
+
+.horizontal-bar-chart {
+  text {
+    dominant-baseline: text-before-edge;
+    fill: $black;
+    font-family: $font-family;
+    font-size: 24px;
+  }
+}

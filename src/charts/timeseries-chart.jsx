@@ -4,7 +4,6 @@ var { getTranslateFromCoords } = require('../utils/svg-util');
 var BoxUtil = require('../utils/box-util');
 var TimeseriesGroup = require('../components/timeseries-group.jsx');
 var TimeseriesLegend = require('../components/timeseries-legend.jsx');
-var classNames = require('classnames');
 var InteractionSurface = require('../components/interaction-surface.jsx');
 var clone = require('clone');
 
@@ -70,7 +69,7 @@ module.exports = React.createClass({
     var tickWidth = Math.floor(contentWidth / numTicksX);
 
     return (
-      <svg className={classNames('chart', 'timeseries-chart', this.props.className)}
+      <svg className={'timeseries-chart', this.props.className}
         height={Math.ceil(this.props.height) + 1}
         width={Math.ceil(this.props.width) + 1}>
 

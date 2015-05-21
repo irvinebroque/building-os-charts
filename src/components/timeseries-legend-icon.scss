@@ -1,7 +1,7 @@
-@import '../colors/colors';
+@import '../styles/_variables';
 
 .timeseries-legend-icon {
   fill: $green;
   stroke: $green;
-  stroke-width: 3px;
+  stroke-width: $stroke-width;
 }
