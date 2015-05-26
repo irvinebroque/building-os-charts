@@ -18,19 +18,17 @@ module.exports = {
   }, {}),
   module: {
     loaders: [
-      {test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader']},
-      {test: /\.jsx$/, exclude: /node_modules/, loaders: ['jsx-loader?harmony']},
-      {test: /\.scss$/, exclude: /node_modules/, loader: ExtractTextPlugin.extract('style-loader', [
+      {test: /\.(js|jsx)$/, exclude: /node_modules/, loaders: ['babel-loader']},
+      {test: /\.(css|scss)$/, exclude: /node_modules/, loader: ExtractTextPlugin.extract('style-loader', [
         'css-loader',
-        'autoprefixer-loader?browsers=last 2 version',
+        'autoprefixer-loader?{browsers:["Safari >= 6", "Chrome >= 26", "Firefox >= 10", "Explorer >= 9", "iOS >= 6", "ChromeAndroid >= 26"]}',
         'sass-loader?outputStyle=compressed',
       ].join('!'))}
     ]
   },
   output: {
-    path: 'examples/__build__',
     filename: '[name].js',
-    chunkFilename: '[id].chunk.js',
+    path: 'examples/__build__',
     publicPath: '/__build__/'
   },
   plugins: [
