@@ -3,6 +3,7 @@ var { isFloat } = require('../utils/number-util');
 var { isValid } = require('../validators/number-validator');
 
 module.exports = {
+
   format(value, abbreviate) {
     if (!isValid(value)) {
       return '';
@@ -27,4 +28,5 @@ module.exports = {
     var format = d3.format(specifier);
     return format(valueToFormat);
   }
+  
 };
