@@ -1,17 +1,18 @@
 var React = require('react');
+var { func, number, object, string } = React.PropTypes;
 var RoundedRect = require('./rounded-rect');
 
 module.exports = React.createClass({
 
   propTypes: {
-    corners: React.PropTypes.object,
-    fill: React.PropTypes.string,
-    height: React.PropTypes.number.isRequired,
-    scale: React.PropTypes.func.isRequired,
-    stroke: React.PropTypes.string,
-    value: React.PropTypes.number.isRequired,
-    width: React.PropTypes.number.isRequired,
-    x: React.PropTypes.number
+    corners: object,
+    fill: string,
+    height: number.isRequired,
+    scale: func.isRequired,
+    stroke: string,
+    value: number.isRequired,
+    width: number.isRequired,
+    x: number
   },
 
   render() {

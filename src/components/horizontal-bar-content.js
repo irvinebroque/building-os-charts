@@ -1,4 +1,5 @@
 var React = require('react');
+var { number, string } = React.PropTypes;
 var HorizontalBarIcon = require('./horizontal-bar-icon');
 var Label = require('./label');
 var { getLayout } = require('../layouts/flexbox');
@@ -8,13 +9,13 @@ var _componentShouldSetLayoutAfterUpdate = false;
 module.exports = React.createClass({
 
   propTypes: {
-    height: React.PropTypes.number.isRequired,
-    icon: React.PropTypes.string,
-    iconClipPathId: React.PropTypes.string,
-    iconHeight: React.PropTypes.number,
-    index: React.PropTypes.number.isRequired,
-    label: React.PropTypes.string,
-    width: React.PropTypes.number.isRequired
+    height: number.isRequired,
+    icon: string,
+    iconClipPathId: string,
+    iconHeight: number,
+    index: number.isRequired,
+    label: string,
+    width: number.isRequired
   },
 
   getInitialState() {

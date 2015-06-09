@@ -1,4 +1,5 @@
 var React = require('react');
+var { func, number, object, string } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var HorizontalBarBackground = require('./horizontal-bar-background');
 var HorizontalBarContent = require('./horizontal-bar-content');
@@ -7,23 +8,23 @@ var HorizontalBarDetail = require('./horizontal-bar-detail');
 module.exports = React.createClass({
 
   propTypes: {
-    corners: React.PropTypes.object,
-    detailIcon: React.PropTypes.string,
-    detailIconHeight: React.PropTypes.number,
-    detailLabel: React.PropTypes.string,
-    fill: React.PropTypes.string,
-    height: React.PropTypes.number.isRequired,
-    icon: React.PropTypes.string,
-    iconClipPathId: React.PropTypes.string,
-    iconHeight: React.PropTypes.number,
-    index: React.PropTypes.number.isRequired,
-    label: React.PropTypes.string,
-    scale: React.PropTypes.func.isRequired,
-    stroke: React.PropTypes.string,
-    value: React.PropTypes.number.isRequired,
-    verticalSpacing: React.PropTypes.number,
-    width: React.PropTypes.number.isRequired,
-    x: React.PropTypes.number
+    corners: object,
+    detailIcon: string,
+    detailIconHeight: number,
+    detailLabel: string,
+    fill: string,
+    height: number.isRequired,
+    icon: string,
+    iconClipPathId: string,
+    iconHeight: number,
+    index: number.isRequired,
+    label: string,
+    scale: func.isRequired,
+    stroke: string,
+    value: number.isRequired,
+    verticalSpacing: number,
+    width: number.isRequired,
+    x: number
   },
 
   getDefaultProps() {

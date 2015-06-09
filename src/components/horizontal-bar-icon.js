@@ -1,16 +1,17 @@
 var React = require('react');
+var { number, string } = React.PropTypes;
 var SvgImage = require('./svg-image');
 var RankingBadge = require('./ranking-badge');
 
 module.exports = React.createClass({
 
   propTypes: {
-    height: React.PropTypes.number.isRequired,
-    icon: React.PropTypes.string,
-    iconClipPathId: React.PropTypes.string,
-    iconHeight: React.PropTypes.number,
-    index: React.PropTypes.number.isRequired,
-    width: React.PropTypes.number.isRequired
+    height: number.isRequired,
+    icon: string,
+    iconClipPathId: string,
+    iconHeight: number,
+    index: number.isRequired,
+    width: number.isRequired
   },
 
   render() {

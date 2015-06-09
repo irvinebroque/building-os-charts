@@ -1,12 +1,13 @@
 var React = require('react');
+var { number, string } = React.PropTypes;
 var classNames = require('classnames');
 
 module.exports = React.createClass({
 
   propTypes: {
-    className: React.PropTypes.string.isRequired,
-    height: React.PropTypes.number.isRequired,
-    index: React.PropTypes.number.isRequired
+    className: string.isRequired,
+    height: number.isRequired,
+    index: number.isRequired
   },
 
   getDefaultProps() {

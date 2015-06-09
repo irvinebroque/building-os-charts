@@ -1,16 +1,17 @@
 var React = require('react');
+var { number, string } = React.PropTypes;
 var { getAttribute, getTranslateFromCoords } = require('../utils/svg-util');
 
 module.exports = React.createClass({
 
   propTypes: {
-    className: React.PropTypes.string.isRequired,
-    clipPathID: React.PropTypes.string.isRequired,
-    height: React.PropTypes.number.isRequired,
-    url: React.PropTypes.string.isRequired,
-    width: React.PropTypes.number.isRequired,
-    x: React.PropTypes.number.isRequired,
-    y: React.PropTypes.number.isRequired
+    className: string.isRequired,
+    clipPathID: string.isRequired,
+    height: number.isRequired,
+    url: string.isRequired,
+    width: number.isRequired,
+    x: number.isRequired,
+    y: number.isRequired
   },
 
   getDefaultProps() {

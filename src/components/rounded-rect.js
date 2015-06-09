@@ -1,17 +1,18 @@
 var React = require('react');
+var { number, object, string } = React.PropTypes;
 var { getRoundedRectPath } = require('../utils/svg-util');
 
 module.exports = React.createClass({
 
   propTypes: {
-    className: React.PropTypes.string.isRequired,
-    corners: React.PropTypes.object,
-    fill: React.PropTypes.string,
-    height: React.PropTypes.number.isRequired,
-    stroke: React.PropTypes.string,
-    width: React.PropTypes.number.isRequired,
-    x: React.PropTypes.number,
-    y: React.PropTypes.number
+    className: string.isRequired,
+    corners: object,
+    fill: string,
+    height: number.isRequired,
+    stroke: string,
+    width: number.isRequired,
+    x: number,
+    y: number
   },
 
   getDefaultProps() {

@@ -1,12 +1,13 @@
 var React = require('react');
+var { number, string } = React.PropTypes;
 
 module.exports = React.createClass({
 
   propTypes: {
-    height: React.PropTypes.number,
-    id: React.PropTypes.string,
-    shape: React.PropTypes.string,
-    width: React.PropTypes.number
+    height: number,
+    id: string,
+    shape: string,
+    width: number
   },
 
   render() {

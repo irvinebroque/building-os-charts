@@ -1,4 +1,5 @@
 var React = require('react');
+var { number, string } = React.PropTypes;
 var SvgImage = require('./svg-image');
 var Label = require('./label');
 var { getLayout } = require('../layouts/flexbox');
@@ -8,11 +9,11 @@ var _componentShouldSetLayoutAfterUpdate = false;
 module.exports = React.createClass({
 
   propTypes: {
-    height: React.PropTypes.number.isRequired,
-    icon: React.PropTypes.string,
-    iconHeight: React.PropTypes.number,
-    label: React.PropTypes.string,
-    width: React.PropTypes.number.isRequired
+    height: number.isRequired,
+    icon: string,
+    iconHeight: number,
+    label: string,
+    width: number.isRequired
   },
 
   getInitialState() {
