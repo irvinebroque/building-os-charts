@@ -3,8 +3,8 @@ var Range = require('../ranges/range');
 var LinearDomain = require('../domains/linear-domain');
 var LinearScale = require('../scales/linear-scale');
 var { numericDescending } = require('../utils/sort-util');
-var HorizontalBar = require('../components/horizontal-bar.jsx');
-var HorizontalBarDefs = require('../components/horizontal-bar-defs.jsx');
+var HorizontalBar = require('../components/horizontal-bar');
+var HorizontalBarDefs = require('../components/horizontal-bar-defs');
 
 module.exports = React.createClass({
 

@@ -1,14 +1,12 @@
 var React = require('react');
-var { number, string } = React.PropTypes;
-var Label = require('./label.jsx');
-var classNames = require('classnames');
+var { number, object, string } = React.PropTypes;
+var Label = require('./label');
 
 module.exports = React.createClass({
 
   propTypes: {
-    className: string,
+    style: object,
     text: string.isRequired,
-    transform: string,
     x: number.isRequired,
     y: number.isRequired
   },
@@ -22,10 +20,16 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var style = {};
+    if (this.props.style) {
+      style.fill = this.props.style.stroke;
+    }
+    console.log(this.props)
+
     return (
-      <Label className={classNames('axis-label', this.props.className)}
+      <Label className={'timeseries-legend-readout'}
+        style={style}
         text={this.props.text}
-        transform={this.props.transform}
         x={this.props.x}
         y={this.props.y} />
     );

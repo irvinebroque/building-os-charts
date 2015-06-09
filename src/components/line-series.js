@@ -6,7 +6,7 @@ var { isValid } = require('../validators/number-validator');
 var { stretch } = require('../utils/data-util');
 var classNames = require('classnames');
 var Dispatcher = require('../events/dispatcher');
-var LineMarker = require('./line-marker.jsx');
+var LineMarker = require('./line-marker');
 
 var _componentShouldResetPoints = false;
 

@@ -1,6 +1,6 @@
 var React = require('react');
-var SvgImage = require('./svg-image.jsx');
-var RankingBadge = require('./ranking-badge.jsx');
+var SvgImage = require('./svg-image');
+var RankingBadge = require('./ranking-badge');
 
 module.exports = React.createClass({
 

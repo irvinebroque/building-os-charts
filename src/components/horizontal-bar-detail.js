@@ -1,6 +1,6 @@
 var React = require('react');
-var SvgImage = require('./svg-image.jsx');
-var Label = require('./label.jsx');
+var SvgImage = require('./svg-image');
+var Label = require('./label');
 var { getLayout } = require('../layouts/flexbox');
 
 var _componentShouldSetLayoutAfterUpdate = false;

@@ -3,8 +3,8 @@ var { array, func, number, oneOf } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var classNames = require('classnames');
 var moment = require('moment');
-var Divider = require('./divider.jsx');
-var TickLabel = require('./tick-label.jsx');
+var Divider = require('./divider');
+var TickLabel = require('./tick-label');
 
 var _durations = [{
   duration: moment.duration(365, 'days').asMilliseconds(),

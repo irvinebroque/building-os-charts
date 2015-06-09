@@ -1,6 +1,6 @@
 var React = require('react');
-var HorizontalBarIcon = require('./horizontal-bar-icon.jsx');
-var Label = require('./label.jsx');
+var HorizontalBarIcon = require('./horizontal-bar-icon');
+var Label = require('./label');
 var { getLayout } = require('../layouts/flexbox');
 
 var _componentShouldSetLayoutAfterUpdate = false;

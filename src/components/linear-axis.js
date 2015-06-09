@@ -3,9 +3,9 @@ var { array, bool, func, number, oneOf, string } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var { format } = require('../formatters/number-formatter');
 var { getRotate } = require('../utils/svg-util');
-var Divider = require('./divider.jsx');
-var TickLabel = require('./tick-label.jsx');
-var AxisLabel = require('./axis-label.jsx');
+var Divider = require('./divider');
+var TickLabel = require('./tick-label');
+var AxisLabel = require('./axis-label');
 
 module.exports = React.createClass({
 

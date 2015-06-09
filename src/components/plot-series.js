@@ -2,29 +2,22 @@ var React = require('react');
 var { array, func, number, object, oneOf, string } = React.PropTypes;
 var { DATA_HOVER, MOUSE_MOVE, MOUSE_OUT, getNamespaced } = require('../events/events');
 var classNames = require('classnames');
-var VerticalBar = require('./vertical-bar.jsx');
-var { isValid } = require('../validators/number-validator');
+var PlotPoint = require('./plot-point');
 var Dispatcher = require('../events/dispatcher');
 
 module.exports = React.createClass({
 
   propTypes: {
-    barSpacing: number,
     className: string,
     data: array.isRequired,
     height: number.isRequired,
     id: number.isRequired,
-    index: number.isRequired,
     interaction: oneOf(['none', 'mouseover']),
-    numSeries: number.isRequired,
     offset: number.isRequired,
-    scaleX: func.isRequired,
     scaleY: func.isRequired,
     style: object,
     tickWidth: number.isRequired,
-    type: string.isRequired,
-    width: number.isRequired,
-    zeroY: number.isRequired
+    width: number.isRequired
   },
 
   getDefaultProps: function() {
@@ -32,17 +25,13 @@ module.exports = React.createClass({
       data: [],
       height: 0,
       id: 0,
-      index: 0,
       interaction: 'mouseover',
       legendLabel: '',
-      numSeries: 0,
       offset: 0,
       scaleX: Function,
       scaleY: Function,
       tickWidth: 0,
-      type: '',
-      width: 0,
-      zeroY: 0
+      width: 0
     };
   },
 
@@ -96,43 +85,29 @@ module.exports = React.createClass({
   },
 
   render: function() {
-
-    var barSpacing = isValid(this.props.barSpacing) ?
-      this.props.barSpacing : Math.floor(this.props.tickWidth / 3);
-
-    var barWidth = Math.floor(
-      (this.props.tickWidth - barSpacing) / this.props.numSeries);
-
     return (
-      <g className={classNames('clustered-bar-series', this.props.className)}
+      <g className={classNames('plot-series', this.props.className)}
         style={this.props.style}>
 
         {this.props.data.map((datum, index) => {
 
-          var barHeight = Math.round(
-            this.props.zeroY - this.props.scaleY(Math.abs(datum.value)));
-
-          var x = Math.floor(
-            (this.props.tickWidth * index) +
-            (barWidth * this.props.index) +
-            this.props.offset
-          );
-
-          var y = datum.value > 0 ?
-            this.props.zeroY - barHeight :
-            this.props.zeroY;
+          var x = Math.floor((this.props.tickWidth * index) + this.props.offset);
+          if (x % 2 == 0) {
+            // 1-pixel tweak for even numbers:
+            x--;
+          }
+          var y = Math.round(this.props.scaleY(datum.value));
 
           return (
-            <VerticalBar className={datum.className}
+            <PlotPoint className={datum.className}
               active={this.state.activeIndex === index ? true : false}
-              height={barHeight}
               index={index}
               key={index}
               style={datum.style}
               timestamp={datum.timestamp}
               value={datum.value}
               valueFormatted={datum.valueFormatted}
-              width={barWidth}
+              width={Math.round(this.props.tickWidth / 2)}
               x={x}
               y={y} />
           );

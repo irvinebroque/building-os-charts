@@ -4,7 +4,7 @@ var { getTranslateFromCoords } = require('../utils/svg-util');
 var { isValid } = require('../validators/number-validator');
 var { numericAscending } = require('../utils/sort-util')
 var clone = require('clone');
-var TimeseriesLegendItem = require('./timeseries-legend-item.jsx');
+var TimeseriesLegendItem = require('./timeseries-legend-item');
 var { getLayout } = require('../layouts/flexbox');
 
 var _componentShouldSetLayoutAfterUpdate = false;

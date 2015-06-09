@@ -2,7 +2,7 @@ var React = require('react');
 var { array, func, number, object, oneOf, string } = React.PropTypes;
 var { DATA_HOVER, MOUSE_MOVE, MOUSE_OUT, getNamespaced } = require('../events/events');
 var classNames = require('classnames');
-var DifferenceBar = require('./difference-bar.jsx');
+var VerticalBar = require('./vertical-bar');
 var Dispatcher = require('../events/dispatcher');
 
 module.exports = React.createClass({
@@ -10,7 +10,6 @@ module.exports = React.createClass({
   propTypes: {
     barSpacing: number.isRequired,
     className: string,
-    comparisonData: array.isRequired,
     data: array.isRequired,
     height: number.isRequired,
     id: number.isRequired,
@@ -26,11 +25,11 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       barSpacing: 2,
-      comparisonData: [],
       data: [],
       height: 0,
       id: 0,
       interaction: 'mouseover',
+      legendLabel: '',
       scaleX: Function,
       scaleY: Function,
       tickWidth: 0,
@@ -90,7 +89,7 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <g className={classNames('difference-bar-series', this.props.className)}
+      <g className={classNames('bar-series', this.props.className)}
         style={this.props.style}>
 
         {this.props.data.map((datum, index) => {
@@ -104,19 +103,13 @@ module.exports = React.createClass({
             this.props.zeroY - barHeight :
             this.props.zeroY;
 
-          var comparisonDatum = this.props.comparisonData[index];
-          var className = datum.value > comparisonDatum.value ? 'higher' : 'lower';
-          var fillHeight = Math.round(
-            this.props.scaleY(comparisonDatum.value) - y);
-
           return (
-            <DifferenceBar className={className}
+            <VerticalBar className={datum.className}
               active={this.state.activeIndex === index ? true : false}
-              fillHeight={fillHeight}
               height={barHeight}
               index={index}
               key={index}
-              style={this.props.style}
+              style={datum.style}
               timestamp={datum.timestamp}
               value={datum.value}
               valueFormatted={datum.valueFormatted}

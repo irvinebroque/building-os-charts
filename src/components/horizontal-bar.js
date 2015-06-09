@@ -1,8 +1,8 @@
 var React = require('react');
 var { getTranslateFromCoords } = require('../utils/svg-util');
-var HorizontalBarBackground = require('./horizontal-bar-background.jsx');
-var HorizontalBarContent = require('./horizontal-bar-content.jsx');
-var HorizontalBarDetail = require('./horizontal-bar-detail.jsx');
+var HorizontalBarBackground = require('./horizontal-bar-background');
+var HorizontalBarContent = require('./horizontal-bar-content');
+var HorizontalBarDetail = require('./horizontal-bar-detail');
 
 module.exports = React.createClass({
 

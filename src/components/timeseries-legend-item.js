@@ -3,9 +3,9 @@ var { number, object, oneOf, string } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var { format } = require('../formatters/number-formatter');
 var { DATA_HOVER, MOUSE_OUT, getNamespaced } = require('../events/events');
-var TimeseriesLegendIcon = require('./timeseries-legend-icon.jsx');
-var TimeseriesLegendLabel = require('./timeseries-legend-label.jsx');
-var TimeseriesLegendReadout = require('./timeseries-legend-readout.jsx');
+var TimeseriesLegendIcon = require('./timeseries-legend-icon');
+var TimeseriesLegendLabel = require('./timeseries-legend-label');
+var TimeseriesLegendReadout = require('./timeseries-legend-readout');
 var Dispatcher = require('../events/dispatcher');
 
 module.exports = React.createClass({

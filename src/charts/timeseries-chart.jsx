@@ -2,9 +2,9 @@ var React = require('react');
 var { array, number, objectOf, oneOfType } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var BoxUtil = require('../utils/box-util');
-var TimeseriesGroup = require('../components/timeseries-group.jsx');
-var TimeseriesLegend = require('../components/timeseries-legend.jsx');
-var InteractionSurface = require('../components/interaction-surface.jsx');
+var TimeseriesGroup = require('../components/timeseries-group');
+var TimeseriesLegend = require('../components/timeseries-legend');
+var InteractionSurface = require('../components/interaction-surface');
 var clone = require('clone');
 
 module.exports = React.createClass({

@@ -1,5 +1,5 @@
 var React = require('react');
-var RoundedRect = require('./rounded-rect.jsx');
+var RoundedRect = require('./rounded-rect');
 
 module.exports = React.createClass({
 

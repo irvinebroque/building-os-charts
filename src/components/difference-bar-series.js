@@ -2,36 +2,40 @@ var React = require('react');
 var { array, func, number, object, oneOf, string } = React.PropTypes;
 var { DATA_HOVER, MOUSE_MOVE, MOUSE_OUT, getNamespaced } = require('../events/events');
 var classNames = require('classnames');
-var PlotPoint = require('./plot-point.jsx');
+var DifferenceBar = require('./difference-bar');
 var Dispatcher = require('../events/dispatcher');
 
 module.exports = React.createClass({
 
   propTypes: {
+    barSpacing: number.isRequired,
     className: string,
+    comparisonData: array.isRequired,
     data: array.isRequired,
     height: number.isRequired,
     id: number.isRequired,
     interaction: oneOf(['none', 'mouseover']),
-    offset: number.isRequired,
+    scaleX: func.isRequired,
     scaleY: func.isRequired,
     style: object,
     tickWidth: number.isRequired,
-    width: number.isRequired
+    width: number.isRequired,
+    zeroY: number.isRequired
   },
 
   getDefaultProps: function() {
     return {
+      barSpacing: 2,
+      comparisonData: [],
       data: [],
       height: 0,
       id: 0,
       interaction: 'mouseover',
-      legendLabel: '',
-      offset: 0,
       scaleX: Function,
       scaleY: Function,
       tickWidth: 0,
-      width: 0
+      width: 0,
+      zeroY: 0
     };
   },
 
@@ -86,28 +90,37 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <g className={classNames('plot-series', this.props.className)}
+      <g className={classNames('difference-bar-series', this.props.className)}
         style={this.props.style}>
 
         {this.props.data.map((datum, index) => {
 
-          var x = Math.floor((this.props.tickWidth * index) + this.props.offset);
-          if (x % 2 == 0) {
-            // 1-pixel tweak for even numbers:
-            x--;
-          }
-          var y = Math.round(this.props.scaleY(datum.value));
+          var barHeight = Math.round(
+            this.props.zeroY - this.props.scaleY(Math.abs(datum.value)));
+
+          var x = Math.floor((this.props.tickWidth * index));
+
+          var y = datum.value > 0 ?
+            this.props.zeroY - barHeight :
+            this.props.zeroY;
+
+          var comparisonDatum = this.props.comparisonData[index];
+          var className = datum.value > comparisonDatum.value ? 'higher' : 'lower';
+          var fillHeight = Math.round(
+            this.props.scaleY(comparisonDatum.value) - y);
 
           return (
-            <PlotPoint className={datum.className}
+            <DifferenceBar className={className}
               active={this.state.activeIndex === index ? true : false}
+              fillHeight={fillHeight}
+              height={barHeight}
               index={index}
               key={index}
-              style={datum.style}
+              style={this.props.style}
               timestamp={datum.timestamp}
               value={datum.value}
               valueFormatted={datum.valueFormatted}
-              width={Math.round(this.props.tickWidth / 2)}
+              width={this.props.tickWidth - this.props.barSpacing}
               x={x}
               y={y} />
           );
