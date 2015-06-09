@@ -21,11 +21,11 @@ module.exports = {
     vendor: ['./src/vendor']
   },
   module: {
-    preLoaders: [ 
-      {test: /\.(js|jsx)$/, loader: 'eslint-loader', exclude: /node_modules/}
+    preLoaders: [
+      {test: /\.js$/, loader: 'eslint-loader', exclude: /node_modules/}
     ],
     loaders: [
-      {test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/},
+      {test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/},
       {test: /\.scss$/, loader: ExtractTextPlugin.extract('style-loader', [
         'css-loader',
         'autoprefixer-loader' + _getAutoPrefixerParams(),
