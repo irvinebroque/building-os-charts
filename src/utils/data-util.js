@@ -2,7 +2,7 @@ var clone = require('clone');
 
 module.exports = {
 
-  stretch: function(data) {
+  stretch(data) {
     /*
     Lucid timeseries data is inclusive.
     If you request one day of data, from

@@ -24,7 +24,7 @@ module.exports = React.createClass({
     zeroY: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       contentWidth: 0,
       height: 0,
@@ -41,7 +41,7 @@ module.exports = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
     var ticks = this.props.scale.ticks(this.props.numTicks);
 
     var labelX, labelY, rotate, x;

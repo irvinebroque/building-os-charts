@@ -20,7 +20,7 @@ module.exports = React.createClass({
     y: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       active: false,
       fillHeight: 0,
@@ -34,7 +34,7 @@ module.exports = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
     var active = this.props.active ? 'active' : null;
     return (
       <g className={classNames('difference-bar', this.props.className, active)}

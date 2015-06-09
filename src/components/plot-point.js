@@ -15,7 +15,7 @@ module.exports = React.createClass({
     y: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       active: false,
       height: 0,
@@ -28,7 +28,7 @@ module.exports = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
     var active = this.props.active ? 'active' : null;
     return (
       <circle className={classNames('plot-point', this.props.className, active)}

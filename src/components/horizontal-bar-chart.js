@@ -24,7 +24,7 @@ module.exports = React.createClass({
     width: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       barHeight: 80,
       data: [],
@@ -41,18 +41,18 @@ module.exports = React.createClass({
     };
   },
 
-  getData: function(data, sortFunction, sortKey) {
+  getData(data, sortFunction, sortKey) {
     return sortFunction(data.slice(), sortKey);
   },
 
-  getScale: function(data, startAtZero, width) {
+  getScale(data, startAtZero, width) {
     return new LinearScale(
       new LinearDomain([{data: data}], startAtZero),
       new Range(width)
     );
   },
 
-  render: function() {
+  render() {
     var data = this.getData(
       this.props.data,
       this.props.sortFunction,

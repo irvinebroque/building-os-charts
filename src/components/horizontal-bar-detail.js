@@ -15,21 +15,21 @@ module.exports = React.createClass({
     width: React.PropTypes.number.isRequired
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       layout: {}
     };
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.setLayout();
   },
 
-  componentWillReceiveProps: function() {
+  componentWillReceiveProps() {
     _componentShouldSetLayoutAfterUpdate = true;
   },
 
-  componentDidUpdate: function() {
+  componentDidUpdate() {
     // Prevents an infinite loop:
     if (_componentShouldSetLayoutAfterUpdate) {
       _componentShouldSetLayoutAfterUpdate = false;
@@ -37,7 +37,7 @@ module.exports = React.createClass({
     }
   },
 
-  setLayout: function() {
+  setLayout() {
     this.setState({
       layout: getLayout(React.findDOMNode(this.refs.node), {
         alignItems: 'center',
@@ -53,7 +53,7 @@ module.exports = React.createClass({
     });
   },
 
-  render: function() {
+  render() {
     return (
       <g className={'horizontal-bar-detail'} ref="node">
 

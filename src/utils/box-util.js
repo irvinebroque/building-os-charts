@@ -12,7 +12,7 @@ var _getBox = function(value) {
 
 module.exports = {
 
-  box: function(input) {
+  box(input) {
     if (typeof input === 'number' && isValid(input)) {
       return _getBox(input);
     }

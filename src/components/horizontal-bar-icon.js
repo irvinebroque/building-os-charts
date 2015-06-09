@@ -13,7 +13,7 @@ module.exports = React.createClass({
     width: React.PropTypes.number.isRequired
   },
 
-  render: function() {
+  render() {
     if (!this.props.icon) {
       return null;
     }

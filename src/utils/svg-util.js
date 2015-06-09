@@ -3,14 +3,14 @@ var assign = require('object-assign');
 
 module.exports = {
 
-  getAttribute: function(name, value) {
+  getAttribute(name, value) {
     if (!name) {
       return '';
     }
     return [name, '="', value, '"'].join('');
   },
 
-  getCoordsFromTranslate: function(translate) {
+  getCoordsFromTranslate(translate) {
     if (translate) {
       var regExp = /\(([^)]+)\)/;
       var matches = regExp.exec(translate);
@@ -25,7 +25,7 @@ module.exports = {
     return [];
   },
 
-  getRotate: function(angle, x, y) {
+  getRotate(angle, x, y) {
     if (!isValid(angle)) {
       return '';
     }
@@ -41,7 +41,7 @@ module.exports = {
     return 'rotate(' + angle + ')';
   },
 
-  getRoundedRectPath: function(props) {
+  getRoundedRectPath(props) {
     // Width and height are required:
     if (!props || !isValid(props.width) || !isValid(props.height)) {
       return '';
@@ -83,7 +83,7 @@ module.exports = {
     ].join(' ');
   },
 
-  getTranslateFromCoords: function(x, y) {
+  getTranslateFromCoords(x, y) {
     if (!isValid(x) || !isValid(y)) {
       return '';
     }

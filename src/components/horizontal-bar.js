@@ -26,19 +26,19 @@ module.exports = React.createClass({
     x: React.PropTypes.number
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       value: 0,
       verticalSpacing: 0
     };
   },
 
-  getTranslate: function(barHeight, verticalSpacing, index) {
+  getTranslate(barHeight, verticalSpacing, index) {
     var y = (barHeight + verticalSpacing) * index;
     return getTranslateFromCoords(0, Math.ceil(y));
   },
 
-  render: function() {
+  render() {
     return (
       <g className={'horizontal-bar'}
         transform={this.getTranslate(

@@ -27,7 +27,7 @@ module.exports = React.createClass({
     x: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       height: 0,
       id: 0,
@@ -37,19 +37,19 @@ module.exports = React.createClass({
     };
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {readout: ''};
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.addEventListeners();
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     this.removeEventListeners();
   },
 
-  addEventListeners: function() {
+  addEventListeners() {
     Dispatcher.on(getNamespaced(
       DATA_HOVER, 'legend' + this.props.id), (event) => {
         if (event.datum && event.id === this.props.id) {
@@ -66,14 +66,14 @@ module.exports = React.createClass({
     );
   },
 
-  removeEventListeners: function() {
+  removeEventListeners() {
     Dispatcher.on(getNamespaced(
       DATA_HOVER, 'legend' + this.props.id), null);
     Dispatcher.on(getNamespaced(
       MOUSE_OUT, 'legend' + this.props.id), null);
   },
 
-  render: function() {
+  render() {
     var iconHeight = Math.round(this.props.height / 2);
     var centerY = Math.round(iconHeight / 2);
     var iconWidth = this.props.type === 'plot' ?

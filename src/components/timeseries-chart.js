@@ -16,7 +16,7 @@ module.exports = React.createClass({
     width: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       groups: [{
         series: [{
@@ -29,7 +29,7 @@ module.exports = React.createClass({
     };
   },
 
-  getGroups: function() {
+  getGroups() {
     var counter = 0;
     var groups = clone(this.props.groups);
     groups.forEach((group) => {
@@ -44,7 +44,7 @@ module.exports = React.createClass({
     return groups;
   },
 
-  getMargins: function(groups, margins) {
+  getMargins(groups, margins) {
     if (groups.length < 2) {
       /*
       The right margin is only used when
@@ -56,7 +56,7 @@ module.exports = React.createClass({
     return margins;
   },
 
-  render: function() {
+  render() {
     var groups = this.getGroups();
 
     var margins = this.getMargins(

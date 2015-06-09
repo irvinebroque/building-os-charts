@@ -13,7 +13,7 @@ module.exports = React.createClass({
     y: React.PropTypes.number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       clipPathID: '',
       height: 0,
@@ -24,7 +24,7 @@ module.exports = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
     // React does not support namespaced attributes. So this:
     var attributes = [
       getAttribute('height', this.props.height),

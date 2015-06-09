@@ -20,7 +20,7 @@ module.exports = React.createClass({
     width: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       data: [],
       height: 0,
@@ -35,23 +35,23 @@ module.exports = React.createClass({
     };
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {activeIndex: -1};
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.addEventListeners();
   },
 
-  componentDidUpdate: function() {
+  componentDidUpdate() {
     this.dispatchEvents();
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     this.removeEventListeners();
   },
 
-  addEventListeners: function() {
+  addEventListeners() {
     if (this.props.interaction === 'none') {
       return;
     }
@@ -71,7 +71,7 @@ module.exports = React.createClass({
     });
   },
 
-  dispatchEvents: function() {
+  dispatchEvents() {
     Dispatcher[DATA_HOVER]({
       type: DATA_HOVER,
       datum: this.state.activeDatum,
@@ -79,12 +79,12 @@ module.exports = React.createClass({
     });
   },
 
-  removeEventListeners: function() {
+  removeEventListeners() {
     Dispatcher.on(getNamespaced(MOUSE_MOVE, this.props.id), null);
     Dispatcher.on(getNamespaced(MOUSE_OUT, this.props.id), null);
   },
 
-  render: function() {
+  render() {
     return (
       <g className={classNames('plot-series', this.props.className)}
         style={this.props.style}>

@@ -10,7 +10,7 @@ module.exports = React.createClass({
     y: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       width: 14,
       x: 0,
@@ -18,7 +18,7 @@ module.exports = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
     return (
       <circle className={'line-marker'}
         cx={Math.floor(this.props.x)}

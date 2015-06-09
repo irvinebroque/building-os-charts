@@ -11,7 +11,7 @@ module.exports = React.createClass({
     y: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       text: '',
       x: 0,
@@ -19,7 +19,7 @@ module.exports = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
     var style = {};
     if (this.props.style) {
       style.fill = this.props.style.stroke;

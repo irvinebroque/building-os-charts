@@ -15,7 +15,7 @@ module.exports = React.createClass({
     y: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       height: 0,
       tickWidth: 0,
@@ -25,15 +25,15 @@ module.exports = React.createClass({
     };
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.addEventListeners();
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     this.removeEventListeners();
   },
 
-  addEventListeners: function() {
+  addEventListeners() {
     var node = React.findDOMNode(this.refs.node);
     var mouse = [];
 
@@ -58,14 +58,14 @@ module.exports = React.createClass({
       });
   },
 
-  removeEventListeners: function() {
+  removeEventListeners() {
     var node = React.findDOMNode(this.refs.node);
     d3.select(node)
       .on(Events.MOUSE_MOVE, null)
       .on(Events.MOUSE_OUT, null);
   },
 
-  render: function() {
+  render() {
     return (
       <g className={'interaction-surface'}
         ref={'node'}

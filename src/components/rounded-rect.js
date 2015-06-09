@@ -14,14 +14,14 @@ module.exports = React.createClass({
     y: React.PropTypes.number
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       height: 10,
       width: 10
     };
   },
 
-  render: function() {
+  render() {
     var data = getRoundedRectPath({
       x: this.props.x,
       y: this.props.y,

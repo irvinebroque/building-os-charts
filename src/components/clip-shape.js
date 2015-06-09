@@ -9,7 +9,7 @@ module.exports = React.createClass({
     width: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       height: 0,
       id: '',
@@ -17,7 +17,7 @@ module.exports = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
     return (
       <clipPath className={'clip-shape'}
         id={this.props.id}>

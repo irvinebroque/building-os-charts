@@ -3,7 +3,7 @@ var { isFloat } = require('../utils/number-util');
 var { isValid } = require('../validators/number-validator');
 
 module.exports = {
-  format: function(value, abbreviate) {
+  format(value, abbreviate) {
     if (!isValid(value)) {
       return '';
     }

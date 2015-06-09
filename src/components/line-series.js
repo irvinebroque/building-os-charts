@@ -45,7 +45,7 @@ module.exports = React.createClass({
     width: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       bisector: d3.bisector((datum) => {
         if (datum.hasOwnProperty('value')) {
@@ -69,7 +69,7 @@ module.exports = React.createClass({
     };
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       activeIndex: -1,
       markerX: 0,
@@ -79,20 +79,20 @@ module.exports = React.createClass({
     };
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.addEventListeners();
     this.setPoints();
   },
 
-  componentWillReceiveProps: function() {
+  componentWillReceiveProps() {
     _componentShouldResetPoints = true;
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     this.removeEventListeners();
   },
 
-  componentDidUpdate: function() {
+  componentDidUpdate() {
     if (_componentShouldResetPoints) {
       _componentShouldResetPoints = false;
       this.setPoints();
@@ -100,7 +100,7 @@ module.exports = React.createClass({
     this.dispatchEvents();
   },
 
-  dispatchEvents: function() {
+  dispatchEvents() {
     Dispatcher[DATA_HOVER]({
       type: DATA_HOVER,
       datum: this.state.activeDatum,
@@ -108,7 +108,7 @@ module.exports = React.createClass({
     });
   },
 
-  getMarkerPosition: function(activeIndex, mouseX) {
+  getMarkerPosition(activeIndex, mouseX) {
     if (!this.props.data[activeIndex]) {
       return {
         x: 0,
@@ -137,13 +137,13 @@ module.exports = React.createClass({
     }
   },
 
-  getSegmentWidth: function() {
+  getSegmentWidth() {
     return this.props.offset ?
       this.props.tickWidth :
       Math.round(this.props.width / this.props.data.length);
   },
 
-  setPoints: function() {
+  setPoints() {
     if (this.props.marker === 'smooth') {
       var path = React.findDOMNode(this.refs.path);
       var pathLength = path.getTotalLength();
@@ -155,7 +155,7 @@ module.exports = React.createClass({
     }
   },
 
-  addEventListeners: function() {
+  addEventListeners() {
     if (this.props.interaction === 'none') {
       return;
     }
@@ -182,12 +182,12 @@ module.exports = React.createClass({
     });
   },
 
-  removeEventListeners: function() {
+  removeEventListeners() {
     Dispatcher.on(getNamespaced(MOUSE_MOVE, this.props.id), null);
     Dispatcher.on(getNamespaced(MOUSE_OUT, this.props.id), null);
   },
 
-  render: function() {
+  render() {
     var area = Function;
     if (this.props.type === 'area') {
       area = d3.svg.area()

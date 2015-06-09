@@ -19,7 +19,7 @@ module.exports = React.createClass({
     y: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       groups: [],
       height: 0,
@@ -29,21 +29,21 @@ module.exports = React.createClass({
     };
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       layout: {}
     };
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.setLayout();
   },
 
-  componentWillReceiveProps: function() {
+  componentWillReceiveProps() {
     _componentShouldSetLayoutAfterUpdate = true;
   },
 
-  componentDidUpdate: function() {
+  componentDidUpdate() {
     // Prevents an infinite loop:
     if (_componentShouldSetLayoutAfterUpdate) {
       _componentShouldSetLayoutAfterUpdate = false;
@@ -51,7 +51,7 @@ module.exports = React.createClass({
     }
   },
 
-  getData: function(groups) {
+  getData(groups) {
     if (groups.length < 2) {
       return numericAscending(groups[0].series, 'legendIndex');
     }
@@ -68,7 +68,7 @@ module.exports = React.createClass({
     return numericAscending(series, 'legendIndex');
   },
 
-  setLayout: function() {
+  setLayout() {
     var node = React.findDOMNode(this.refs.node);
     var childNodes = [].slice.call(node.childNodes);
     var childStyles = [];
@@ -91,7 +91,7 @@ module.exports = React.createClass({
     });
   },
 
-  render: function() {
+  render() {
     var data = this.getData(this.props.groups);
 
     return (

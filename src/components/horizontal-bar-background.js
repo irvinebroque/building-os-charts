@@ -14,7 +14,7 @@ module.exports = React.createClass({
     x: React.PropTypes.number
   },
 
-  render: function() {
+  render() {
     return (
       <g className={'horizontal-bar-background'}>
         <rect className={'horizontal-bar-background-interaction-rect'}

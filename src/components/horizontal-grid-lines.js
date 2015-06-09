@@ -9,7 +9,7 @@ module.exports = React.createClass({
     width: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       numTicks: 0,
       scale: Function,
@@ -17,7 +17,7 @@ module.exports = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
     var ticks = this.props.scale.ticks(this.props.numTicks);
 
     return (

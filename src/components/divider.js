@@ -12,7 +12,7 @@ module.exports = React.createClass({
     y2: number.isRequired
   },
 
-  render: function() {
+  render() {
     return (
       <line className={classNames('divider', this.props.className)}
         x1={this.props.x1}

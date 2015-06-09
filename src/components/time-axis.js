@@ -44,7 +44,7 @@ module.exports = React.createClass({
     y: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       domain: [],
       numTicks: 12,
@@ -59,7 +59,7 @@ module.exports = React.createClass({
     };
   },
 
-  getTickFormat: function(domain) {
+  getTickFormat(domain) {
     var duration = domain[1] - domain[0];
     var tickFormat = '';
     _durations.forEach((datum) => {
@@ -70,7 +70,7 @@ module.exports = React.createClass({
     return tickFormat;
   },
 
-  render: function() {
+  render() {
     var ticks = this.props.scale.ticks(this.props.numTicks);
     var tickFormat = this.getTickFormat(this.props.domain);
 

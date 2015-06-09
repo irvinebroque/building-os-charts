@@ -19,7 +19,7 @@ module.exports = React.createClass({
     width: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       height: 0,
       type: 'bar',
@@ -27,7 +27,7 @@ module.exports = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
     var style = {};
     if (this.props.style) {
       style.rect = {

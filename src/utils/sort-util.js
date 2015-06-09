@@ -3,7 +3,7 @@ var objectPropertyNaturalSort = require('object-property-natural-sort');
 
 module.exports = {
 
-  alphabetical: function(data, key) {
+  alphabetical(data, key) {
     if (key) {
       data.sort(function(datum1, datum2) {
         var item1 = datum1[key].toLowerCase();
@@ -18,14 +18,14 @@ module.exports = {
     return data;
   },
 
-  natural: function(data, key) {
+  natural(data, key) {
     if (key) {
       return data.sort(objectPropertyNaturalSort(key));
     }
     return data.sort(naturalSort);
   },
 
-  numericAscending: function(data, key) {
+  numericAscending(data, key) {
     data.sort(function(datum1, datum2) {
       if (key) {
         return datum1[key] - datum2[key];
@@ -35,7 +35,7 @@ module.exports = {
     return data;
   },
 
-  numericDescending: function(data, key) {
+  numericDescending(data, key) {
     data.sort(function(datum1, datum2) {
       if (key) {
         return datum2[key] - datum1[key];

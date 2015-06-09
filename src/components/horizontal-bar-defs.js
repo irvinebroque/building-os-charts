@@ -9,7 +9,7 @@ module.exports = React.createClass({
     width: React.PropTypes.number
   },
 
-  render: function() {
+  render() {
     if (this.props.shape === 'circle') {
       var radius = Math.ceil(this.props.height / 2);
       return (

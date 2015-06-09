@@ -43,7 +43,7 @@ module.exports = React.createClass({
     width: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       clampToZero: true,
       clipShapeId: 'timeseriesClipShape',
@@ -64,15 +64,15 @@ module.exports = React.createClass({
     };
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.setClipShape();
   },
 
-  componentDidUpdate: function() {
+  componentDidUpdate() {
     this.setClipShape();
   },
 
-  getOffset: function(groupType, series, tickWidth) {
+  getOffset(groupType, series, tickWidth) {
     var offset = Math.floor(tickWidth / 2);
 
     if (this.isBarBased(groupType)) {
@@ -88,7 +88,7 @@ module.exports = React.createClass({
     return 0;
   },
 
-  getTimeSeries: function(groupType, seriesType) {
+  getTimeSeries(groupType, seriesType) {
     var type = seriesType ? seriesType : groupType;
     switch (type) {
       case 'area':
@@ -110,7 +110,7 @@ module.exports = React.createClass({
     }
   },
 
-  isBarBased: function(type) {
+  isBarBased(type) {
     switch (type) {
       case 'bar':
       case 'clusteredBar':
@@ -123,7 +123,7 @@ module.exports = React.createClass({
     }
   },
 
-  setClipShape: function() {
+  setClipShape() {
     /*
     React does not currently whitelist the clip-path
     attribute for SVG elements, so we set it manually
@@ -133,7 +133,7 @@ module.exports = React.createClass({
       .setAttribute('clip-path', 'url(#' + this.props.clipShapeId + ')');
   },
 
-  render: function() {
+  render() {
     var domainX = new TimeDomain(this.props.series);
     var domainY = new LinearDomain(
       this.props.series,

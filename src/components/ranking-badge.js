@@ -9,14 +9,14 @@ module.exports = React.createClass({
     index: React.PropTypes.number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       height: 0,
       index: 0
     };
   },
 
-  getColorClass: function(index) {
+  getColorClass(index) {
     switch (index) {
       case 0:
         return 'gold';
@@ -29,7 +29,7 @@ module.exports = React.createClass({
     }
   },
 
-  render: function() {
+  render() {
     var radius = Math.ceil(this.props.height / 2);
     var color = this.getColorClass(this.props.index);
 

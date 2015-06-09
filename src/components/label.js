@@ -13,7 +13,7 @@ module.exports = React.createClass({
     y: number.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       text: '',
       x: 0,
@@ -21,7 +21,7 @@ module.exports = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
     return (
       <text className={classNames('label', this.props.className)}
         style={this.props.style}
