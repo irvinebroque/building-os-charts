@@ -18,10 +18,12 @@ module.exports = React.createClass({
   render() {
     return (
       <g className={'horizontal-bar-background'}>
-        <rect className={'horizontal-bar-background-interaction-rect'}
+        <rect
+          className={'horizontal-bar-background-interaction-rect'}
           height={this.props.height}
           width={this.props.width} />
-        <RoundedRect className={'horizontal-bar-background-fill'}
+        <RoundedRect
+          className={'horizontal-bar-background-fill'}
           corners={this.props.corners}
           fill={this.props.fill}
           height={this.props.height}

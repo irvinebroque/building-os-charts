@@ -19,7 +19,8 @@ module.exports = React.createClass({
 
   render() {
     return (
-      <clipPath className={'clip-shape'}
+      <clipPath
+        className={'clip-shape'}
         id={this.props.id}>
         <rect
           height={this.props.height}

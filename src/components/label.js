@@ -23,7 +23,8 @@ module.exports = React.createClass({
 
   render() {
     return (
-      <text className={classNames('label', this.props.className)}
+      <text
+        className={classNames('label', this.props.className)}
         style={this.props.style}
         transform={this.props.transform}
         x={this.props.x}

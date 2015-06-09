@@ -20,7 +20,8 @@ module.exports = React.createClass({
 
   render() {
     return (
-      <Label className={'timeseries-legend-label'}
+      <Label
+        className={'timeseries-legend-label'}
         text={this.props.text}
         x={this.props.x}
         y={this.props.y} />

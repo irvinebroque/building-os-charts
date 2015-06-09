@@ -103,7 +103,8 @@ module.exports = React.createClass({
       (this.props.tickWidth - barSpacing) / this.props.numSeries);
 
     return (
-      <g className={classNames('clustered-bar-series', this.props.className)}
+      <g
+        className={classNames('clustered-bar-series', this.props.className)}
         style={this.props.style}>
 
         {this.props.data.map((datum, index) => {
@@ -113,9 +114,7 @@ module.exports = React.createClass({
           var x = Math.floor(
             (this.props.tickWidth * index) +
             (barWidth * this.props.index) +
-            this.props.offset
-          );
-
+            this.props.offset);
           var y = datum.value > 0 ?
             this.props.zeroY - barHeight :
             this.props.zeroY;

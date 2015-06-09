@@ -95,7 +95,8 @@ module.exports = React.createClass({
     var data = this.getData(this.props.groups);
 
     return (
-      <g className={'timeseries-legend'}
+      <g
+        className={'timeseries-legend'}
         ref={'node'}
         transform={getTranslateFromCoords(this.props.x, this.props.y)}>
 

@@ -22,15 +22,17 @@ module.exports = React.createClass({
     switch (this.props.icon) {
       case 'rank':
         return (
-          <RankingBadge className={this.props.className}
+          <RankingBadge
+            className={this.props.className}
             height={this.props.height}
             index={this.props.index} />
         );
       default:
         return (
-          <SvgImage className={this.props.className}
-            height={this.props.iconHeight}
+          <SvgImage
+            className={this.props.className}
             clipPathID={this.props.iconClipPathId}
+            height={this.props.iconHeight}
             url={this.props.icon}
             width={this.props.iconHeight} />
         );

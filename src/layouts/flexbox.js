@@ -32,5 +32,4 @@ module.exports = {
       children: _getChildNodes(node.childNodes, childStyles ? childStyles : [])
     });
   }
-  
 };

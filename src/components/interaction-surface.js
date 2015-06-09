@@ -67,9 +67,11 @@ module.exports = React.createClass({
 
   render() {
     return (
-      <g className={'interaction-surface'}
+      <g
+        className={'interaction-surface'}
         ref={'node'}
         transform={getTranslateFromCoords(this.props.x, this.props.y)}>
+
         <rect
           height={this.props.height}
           style={{visibility: 'hidden'}}

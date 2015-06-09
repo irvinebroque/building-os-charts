@@ -31,7 +31,8 @@ module.exports = React.createClass({
   render() {
     var active = this.props.active ? 'active' : null;
     return (
-      <circle className={classNames('plot-point', this.props.className, active)}
+      <circle
+        className={classNames('plot-point', this.props.className, active)}
         cx={this.props.x}
         cy={this.props.y}
         r={Math.round(this.props.width / 2)}

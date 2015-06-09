@@ -59,14 +59,16 @@ module.exports = React.createClass({
       <g className={'horizontal-bar-detail'} ref="node">
 
         {this.props.label ? (
-          <Label className={'horizontal-bar-detail-label'}
+          <Label
+            className={'horizontal-bar-detail-label'}
             text={this.props.label}
             x={this.state.layout.children ? this.state.layout.children[0].left : 0}
             y={this.state.layout.children ? this.state.layout.children[0].top : 0} />
         ) : null}
 
         {this.props.icon ? (
-          <SvgImage className={'horizontal-bar-detail-icon'}
+          <SvgImage
+            className={'horizontal-bar-detail-icon'}
             height={this.props.iconHeight}
             url={this.props.icon}
             width={this.props.iconHeight}

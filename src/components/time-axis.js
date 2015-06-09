@@ -75,7 +75,8 @@ module.exports = React.createClass({
     var tickFormat = this.getTickFormat(this.props.domain);
 
     return (
-      <g className={classNames('time-axis', this.props.orient)}
+      <g
+        className={classNames('time-axis', this.props.orient)}
         transform={getTranslateFromCoords(this.props.x, this.props.y)}>
 
         <Divider

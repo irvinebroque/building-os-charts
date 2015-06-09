@@ -90,7 +90,8 @@ module.exports = React.createClass({
 
   render() {
     return (
-      <g className={classNames('difference-bar-series', this.props.className)}
+      <g
+        className={classNames('difference-bar-series', this.props.className)}
         style={this.props.style}>
 
         {this.props.data.map((datum, index) => {

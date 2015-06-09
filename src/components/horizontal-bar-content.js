@@ -60,14 +60,16 @@ module.exports = React.createClass({
       <g className={'horizontal-bar-content'} ref="node">
 
         {this.props.icon ? (
-          <HorizontalBarIcon className={'horizontal-bar-content-icon'}
+          <HorizontalBarIcon
             {...this.props}
+            className={'horizontal-bar-content-icon'}
             x={this.state.layout.children ? this.state.layout.children[0].left : 0}
             y={this.state.layout.children ? this.state.layout.children[0].top : 0} />
         ) : null}
 
         {this.props.label ? (
-          <Label className={'horizontal-bar-content-label'}
+          <Label
+            className={'horizontal-bar-content-label'}
             text={this.props.label}
             x={this.state.layout.children ? this.state.layout.children[1].left : 0}
             y={this.state.layout.children ? this.state.layout.children[1].top : 0} />

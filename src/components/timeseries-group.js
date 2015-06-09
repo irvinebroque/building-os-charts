@@ -175,13 +175,15 @@ module.exports = React.createClass({
           id={this.props.clipShapeId}
           width={this.props.width} />
 
-        <g className={'timeseries-container'}
+        <g
+          className={'timeseries-container'}
           ref={'timeseriesContainer'}>
 
           {this.props.series.map((datum, index) => {
             var TimeSeries = this.getTimeSeries(this.props.type, datum.type);
             return (
-              <TimeSeries className={datum.className}
+              <TimeSeries
+                className={datum.className}
                 clipShapeId={this.props.clipShapeId}
                 comparisonData={datum.comparisonData}
                 data={datum.data}

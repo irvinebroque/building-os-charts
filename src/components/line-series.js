@@ -88,16 +88,16 @@ module.exports = React.createClass({
     _componentShouldResetPoints = true;
   },
 
-  componentWillUnmount() {
-    this.removeEventListeners();
-  },
-
   componentDidUpdate() {
     if (_componentShouldResetPoints) {
       _componentShouldResetPoints = false;
       this.setPoints();
     }
     this.dispatchEvents();
+  },
+
+  componentWillUnmount() {
+    this.removeEventListeners();
   },
 
   dispatchEvents() {

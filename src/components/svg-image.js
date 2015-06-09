@@ -38,7 +38,8 @@ module.exports = React.createClass({
       attributes.push(getAttribute('xlink:href', this.props.url));
     }
     return (
-      <g className={this.props.className}
+      <g
+        className={this.props.className}
         dangerouslySetInnerHTML={{
           __html: '<image ' + attributes.join(' ') + '/>'
         }}

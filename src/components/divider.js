@@ -14,7 +14,8 @@ module.exports = React.createClass({
 
   render() {
     return (
-      <line className={classNames('divider', this.props.className)}
+      <line
+        className={classNames('divider', this.props.className)}
         x1={this.props.x1}
         x2={this.props.x2}
         y1={this.props.y1}

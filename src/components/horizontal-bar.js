@@ -41,7 +41,8 @@ module.exports = React.createClass({
 
   render() {
     return (
-      <g className={'horizontal-bar'}
+      <g
+        className={'horizontal-bar'}
         transform={this.getTranslate(
           this.props.height,
           this.props.verticalSpacing,

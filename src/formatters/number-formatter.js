@@ -28,5 +28,4 @@ module.exports = {
     var format = d3.format(specifier);
     return format(valueToFormat);
   }
-  
 };

@@ -34,7 +34,8 @@ module.exports = React.createClass({
   render() {
     var active = this.props.active ? 'active' : null;
     return (
-      <rect className={classNames('vertical-bar', this.props.className, active)}
+      <rect
+        className={classNames('vertical-bar', this.props.className, active)}
         height={this.props.height}
         style={this.props.style}
         width={this.props.width}

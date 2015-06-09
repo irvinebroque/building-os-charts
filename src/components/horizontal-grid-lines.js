@@ -25,10 +25,13 @@ module.exports = React.createClass({
         {ticks.map((datum, index) => {
           var y = Math.ceil(this.props.scale(datum));
           return (
-            <line className={'horizontal-grid-line'}
+            <line
+              className={'horizontal-grid-line'}
               key={index}
-              x1={0} y1={y}
-              x2={this.props.width} y2={y} />
+              x1={0}
+              x2={this.props.width}
+              y1={y}
+              y2={y} />
           );
         })}
       </g>

@@ -26,7 +26,8 @@ module.exports = React.createClass({
     }
 
     return (
-      <Label className={'timeseries-legend-readout'}
+      <Label
+        className={'timeseries-legend-readout'}
         style={style}
         text={this.props.text}
         x={this.props.x}

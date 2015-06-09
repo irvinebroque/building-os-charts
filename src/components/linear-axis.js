@@ -58,7 +58,8 @@ module.exports = React.createClass({
     }
 
     return (
-      <g className={'linear-axis'}
+      <g
+        className={'linear-axis'}
         transform={getTranslateFromCoords(this.props.x, 0)}>
 
         <Divider

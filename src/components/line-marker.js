@@ -20,7 +20,8 @@ module.exports = React.createClass({
 
   render() {
     return (
-      <circle className={'line-marker'}
+      <circle
+        className={'line-marker'}
         cx={Math.floor(this.props.x)}
         cy={Math.round(this.props.y)}
         r={Math.floor(this.props.width / 2)}

@@ -42,7 +42,8 @@ module.exports = React.createClass({
     };
 
     return (
-      <path className={this.props.className}
+      <path
+        className={this.props.className}
         d={data}
         style={style} />
     );

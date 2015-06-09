@@ -82,7 +82,8 @@ module.exports = React.createClass({
     var spacing = Math.round(iconHeight / 2);
 
     return (
-      <g className={'timeseries-legend-item'}
+      <g
+        className={'timeseries-legend-item'}
         ref={'node'}
         transform={getTranslateFromCoords(this.props.x, 0)}>
 

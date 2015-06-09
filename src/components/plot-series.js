@@ -86,7 +86,8 @@ module.exports = React.createClass({
 
   render() {
     return (
-      <g className={classNames('plot-series', this.props.className)}
+      <g
+        className={classNames('plot-series', this.props.className)}
         style={this.props.style}>
 
         {this.props.data.map((datum, index) => {
@@ -108,7 +109,6 @@ module.exports = React.createClass({
               y={y} />
           );
         })}
-
       </g>
     );
   }

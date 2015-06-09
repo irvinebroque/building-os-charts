@@ -65,8 +65,8 @@ module.exports = React.createClass({
             <line
               style={style.line}
               x1={0}
-              y1={centerY}
               x2={this.props.width}
+              y1={centerY}
               y2={centerY} />
             <circle
               cx={centerX}

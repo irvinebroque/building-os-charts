@@ -63,7 +63,8 @@ module.exports = React.createClass({
       this.props.width);
 
     return (
-      <svg className={'horizontal-bar-chart'}
+      <svg
+        className={'horizontal-bar-chart'}
         height={this.props.height + 1}
         width={this.props.width + 1}>
 

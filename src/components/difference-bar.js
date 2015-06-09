@@ -38,8 +38,8 @@ module.exports = React.createClass({
     var active = this.props.active ? 'active' : null;
     return (
       <g className={classNames('difference-bar', this.props.className, active)}
-        transform={getTranslateFromCoords(this.props.x, this.props.y)}
-        style={this.props.style}>
+        style={this.props.style}
+        transform={getTranslateFromCoords(this.props.x, this.props.y)}>
         <rect
           height={Math.abs(this.props.fillHeight)}
           width={this.props.width}

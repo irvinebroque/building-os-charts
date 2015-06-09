@@ -72,11 +72,13 @@ module.exports = React.createClass({
     var tickWidth = Math.floor(contentWidth / numTicksX);
 
     return (
-      <svg className={'timeseries-chart'}
+      <svg
+        className={'timeseries-chart'}
         height={Math.ceil(this.props.height) + 1}
         width={Math.ceil(this.props.width) + 1}>
 
-        <g className={'timeseries-groups'}
+        <g
+          className={'timeseries-groups'}
           transform={getTranslateFromCoords(margins.left, margins.top)}>
           {groups.map((datum, index) => (
             <TimeseriesGroup
