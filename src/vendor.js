@@ -2,7 +2,6 @@ require('classnames');
 require('clone');
 require('css-layout');
 require('d3');
-require('flux');
 require('javascript-natural-sort');
 require('moment');
 require('object-assign');

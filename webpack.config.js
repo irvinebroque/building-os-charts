@@ -2,19 +2,35 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
 
+var _supportedBrowsers = [
+  'Safari >= 6',
+  'Chrome >= 26',
+  'Firefox >= 10',
+  'Explorer >= 9',
+  'iOS >= 6',
+  'ChromeAndroid >= 26'
+];
+
+function _getAutoPrefixerParams() {
+  return '?{browsers:["' + _supportedBrowsers.join('", "') + '"]}';
+};
+
 module.exports = {
   entry: {
     ld3: ['./src/index'],
     vendor: ['./src/vendor']
   },
   module: {
+    preLoaders: [ 
+      {test: /\.(js|jsx)$/, loader: 'eslint-loader', exclude: /node_modules/}
+    ],
     loaders: [
-      {test: /\.(js|jsx)$/, exclude: /node_modules/, loaders: ['babel-loader']},
-      {test: /\.(css|scss)$/, exclude: /node_modules/, loader: ExtractTextPlugin.extract('style-loader', [
+      {test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/},
+      {test: /\.scss$/, loader: ExtractTextPlugin.extract('style-loader', [
         'css-loader',
-        'autoprefixer-loader?{browsers:["Safari >= 6", "Chrome >= 26", "Firefox >= 10", "Explorer >= 9", "iOS >= 6", "ChromeAndroid >= 26"]}',
-        'sass-loader?outputStyle=compressed',
-      ].join('!'))}
+        'autoprefixer-loader' + _getAutoPrefixerParams(),
+        'sass-loader?outputStyle=compressed'
+      ].join('!')), exclude: /node_modules/}
     ]
   },
   output: {
