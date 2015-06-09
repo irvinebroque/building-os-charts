@@ -25,16 +25,16 @@ module.exports = React.createClass({
     this.setLayout();
   },
 
+  componentWillReceiveProps: function() {
+    _componentShouldSetLayoutAfterUpdate = true;
+  },
+
   componentDidUpdate: function() {
     // Prevents an infinite loop:
     if (_componentShouldSetLayoutAfterUpdate) {
       _componentShouldSetLayoutAfterUpdate = false;
       this.setLayout();
     }
-  },
-
-  componentWillReceiveProps: function() {
-    _componentShouldSetLayoutAfterUpdate = true;
   },
 
   setLayout: function() {
@@ -46,7 +46,7 @@ module.exports = React.createClass({
         height: this.props.height,
         justifyContent: 'flex-end',
         width: this.props.width
-      },[
+      }, [
         {style: {marginRight: 10}},
         {style: {marginRight: 10}}
       ])

@@ -4,6 +4,7 @@ var { getRoundedRectPath } = require('../utils/svg-util');
 module.exports = React.createClass({
 
   propTypes: {
+    className: React.PropTypes.string.isRequired,
     corners: React.PropTypes.object,
     fill: React.PropTypes.string,
     height: React.PropTypes.number.isRequired,
@@ -17,7 +18,7 @@ module.exports = React.createClass({
     return {
       height: 10,
       width: 10
-    }
+    };
   },
 
   render: function() {

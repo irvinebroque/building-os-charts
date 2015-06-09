@@ -74,7 +74,7 @@ module.exports = React.createClass({
       });
     });
 
-    Dispatcher.on(getNamespaced(MOUSE_OUT, this.props.id), (event) => {
+    Dispatcher.on(getNamespaced(MOUSE_OUT, this.props.id), () => {
       this.setState({
         activeDatum: undefined,
         activeIndex: -1
@@ -96,7 +96,6 @@ module.exports = React.createClass({
   },
 
   render: function() {
-
     var barSpacing = isValid(this.props.barSpacing) ?
       this.props.barSpacing : Math.floor(this.props.tickWidth / 3);
 
@@ -108,7 +107,6 @@ module.exports = React.createClass({
         style={this.props.style}>
 
         {this.props.data.map((datum, index) => {
-
           var barHeight = Math.round(
             this.props.zeroY - this.props.scaleY(Math.abs(datum.value)));
 
@@ -123,8 +121,9 @@ module.exports = React.createClass({
             this.props.zeroY;
 
           return (
-            <VerticalBar className={datum.className}
+            <VerticalBar
               active={this.state.activeIndex === index ? true : false}
+              className={datum.className}
               height={barHeight}
               index={index}
               key={index}

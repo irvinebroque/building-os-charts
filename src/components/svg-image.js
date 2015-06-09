@@ -4,6 +4,7 @@ var { getAttribute, getTranslateFromCoords } = require('../utils/svg-util');
 module.exports = React.createClass({
 
   propTypes: {
+    className: React.PropTypes.string.isRequired,
     clipPathID: React.PropTypes.string.isRequired,
     height: React.PropTypes.number.isRequired,
     url: React.PropTypes.string.isRequired,
@@ -20,7 +21,7 @@ module.exports = React.createClass({
       width: 0,
       x: 0,
       y: 0
-    }
+    };
   },
 
   render: function() {
@@ -37,10 +38,10 @@ module.exports = React.createClass({
     }
     return (
       <g className={this.props.className}
-        transform={getTranslateFromCoords(this.props.x, this.props.y)}
         dangerouslySetInnerHTML={{
-        __html: '<image ' + attributes.join(' ') + '/>'
-      }} />
+          __html: '<image ' + attributes.join(' ') + '/>'
+        }}
+        transform={getTranslateFromCoords(this.props.x, this.props.y)} />
     );
   }
 

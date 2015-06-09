@@ -21,6 +21,7 @@ module.exports = React.createClass({
 
   propTypes: {
     clampToZero: bool.isRequired,
+    className: string,
     clipShapeId: string.isRequired,
     height: number.isRequired,
     index: number.isRequired,
@@ -133,16 +134,16 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var domainX = TimeDomain(this.props.series);
-    var domainY = LinearDomain(
+    var domainX = new TimeDomain(this.props.series);
+    var domainY = new LinearDomain(
       this.props.series,
       this.props.clampToZero);
 
-    var rangeX = Range(this.props.width);
-    var rangeY = Range(this.props.height, true);
+    var rangeX = new Range(this.props.width);
+    var rangeY = new Range(this.props.height, true);
 
-    var scaleX = TimeScale(domainX, rangeX);
-    var scaleY = LinearScale(domainY, rangeY);
+    var scaleX = new TimeScale(domainX, rangeX);
+    var scaleY = new LinearScale(domainY, rangeY);
 
     var zeroY = Math.round(scaleY(0));
 

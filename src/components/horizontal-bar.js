@@ -30,7 +30,7 @@ module.exports = React.createClass({
     return {
       value: 0,
       verticalSpacing: 0
-    }
+    };
   },
 
   getTranslate: function(barHeight, verticalSpacing, index) {

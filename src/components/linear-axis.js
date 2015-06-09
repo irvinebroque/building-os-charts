@@ -42,7 +42,6 @@ module.exports = React.createClass({
   },
 
   render: function() {
-
     var ticks = this.props.scale.ticks(this.props.numTicks);
 
     var labelX, labelY, rotate, x;
@@ -64,8 +63,8 @@ module.exports = React.createClass({
 
         <Divider
           x1={0}
-          y1={this.props.y}
           x2={0}
+          y1={this.props.y}
           y2={this.props.height} />
 
         {ticks.map((datum, index) => {
@@ -81,8 +80,8 @@ module.exports = React.createClass({
         {this.props.showDividerAtZero ? (
           <Divider
             x1={0}
-            y1={this.props.zeroY}
             x2={this.props.contentWidth}
+            y1={this.props.zeroY}
             y2={this.props.zeroY} />
         ) : null}
 

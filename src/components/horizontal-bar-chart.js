@@ -1,4 +1,5 @@
 var React = require('react');
+var { array, bool, func, number, string } = React.PropTypes;
 var Range = require('../ranges/range');
 var LinearDomain = require('../domains/linear-domain');
 var LinearScale = require('../scales/linear-scale');
@@ -9,17 +10,18 @@ var HorizontalBarDefs = require('../components/horizontal-bar-defs');
 module.exports = React.createClass({
 
   propTypes: {
-    barHeight: React.PropTypes.number.isRequired,
-    data: React.PropTypes.array.isRequired,
-    detailIconHeight: React.PropTypes.number.isRequired,
-    height: React.PropTypes.number.isRequired,
-    iconClipPathId: React.PropTypes.string.isRequired,
-    iconHeight: React.PropTypes.number.isRequired,
-    sortFunction: React.PropTypes.func.isRequired,
-    sortKey: React.PropTypes.string.isRequired,
-    startAtZero: React.PropTypes.bool.isRequired,
-    verticalSpacing: React.PropTypes.number.isRequired,
-    width: React.PropTypes.number.isRequired
+    barHeight: number.isRequired,
+    data: array.isRequired,
+    detailIconHeight: number.isRequired,
+    height: number.isRequired,
+    iconClipPathId: string.isRequired,
+    iconHeight: number.isRequired,
+    iconShape: string.isRequired,
+    sortFunction: func.isRequired,
+    sortKey: string.isRequired,
+    startAtZero: bool.isRequired,
+    verticalSpacing: number.isRequired,
+    width: number.isRequired
   },
 
   getDefaultProps: function() {
@@ -36,7 +38,7 @@ module.exports = React.createClass({
       startAtZero: false,
       verticalSpacing: 6,
       width: 800
-    }
+    };
   },
 
   getData: function(data, sortFunction, sortKey) {
@@ -44,9 +46,9 @@ module.exports = React.createClass({
   },
 
   getScale: function(data, startAtZero, width) {
-    return LinearScale(
-      LinearDomain([{data: data}], startAtZero),
-      Range(width)
+    return new LinearScale(
+      new LinearDomain([{data: data}], startAtZero),
+      new Range(width)
     );
   },
 
@@ -72,29 +74,27 @@ module.exports = React.createClass({
           width={this.props.iconHeight} />
 
         <g className={'horizontal-bar-container'}>
-          {data.map(function(datum, index) {
-            return (
-              <HorizontalBar
-                corners={datum.corners}
-                detailIcon={datum.detailIcon}
-                detailIconHeight={this.props.detailIconHeight}
-                detailLabel={datum.detailLabel}
-                fill={datum.fill}
-                height={this.props.barHeight}
-                icon={datum.icon}
-                iconClipPathId={this.props.iconClipPathId}
-                iconHeight={this.props.iconHeight}
-                index={index}
-                key={index}
-                label={datum.label}
-                scale={scale}
-                stroke={datum.stroke}
-                value={datum.value}
-                verticalSpacing={this.props.verticalSpacing}
-                width={this.props.width}
-                x={datum.x} />
-            );
-          }, this)}
+          {data.map((datum, index) => (
+            <HorizontalBar
+              corners={datum.corners}
+              detailIcon={datum.detailIcon}
+              detailIconHeight={this.props.detailIconHeight}
+              detailLabel={datum.detailLabel}
+              fill={datum.fill}
+              height={this.props.barHeight}
+              icon={datum.icon}
+              iconClipPathId={this.props.iconClipPathId}
+              iconHeight={this.props.iconHeight}
+              index={index}
+              key={index}
+              label={datum.label}
+              scale={scale}
+              stroke={datum.stroke}
+              value={datum.value}
+              verticalSpacing={this.props.verticalSpacing}
+              width={this.props.width}
+              x={datum.x} />
+          ))}
         </g>
 
       </svg>

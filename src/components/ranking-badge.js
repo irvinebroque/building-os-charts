@@ -4,6 +4,7 @@ var classNames = require('classnames');
 module.exports = React.createClass({
 
   propTypes: {
+    className: React.PropTypes.string.isRequired,
     height: React.PropTypes.number.isRequired,
     index: React.PropTypes.number.isRequired
   },
@@ -12,7 +13,7 @@ module.exports = React.createClass({
     return {
       height: 0,
       index: 0
-    }
+    };
   },
 
   getColorClass: function(index) {
@@ -24,7 +25,7 @@ module.exports = React.createClass({
       case 2:
         return 'bronze';
       default:
-        return;
+        return '';
     }
   },
 

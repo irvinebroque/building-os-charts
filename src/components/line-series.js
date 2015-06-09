@@ -84,20 +84,20 @@ module.exports = React.createClass({
     this.setPoints();
   },
 
-  componentDidUpdate: function() {
-    if (_componentShouldResetPoints) {
-      _componentShouldResetPoints = false;
-      this.setPoints();
-    }
-    this.dispatchEvents();
-  },
-
   componentWillReceiveProps: function() {
     _componentShouldResetPoints = true;
   },
 
   componentWillUnmount: function() {
     this.removeEventListeners();
+  },
+
+  componentDidUpdate: function() {
+    if (_componentShouldResetPoints) {
+      _componentShouldResetPoints = false;
+      this.setPoints();
+    }
+    this.dispatchEvents();
   },
 
   dispatchEvents: function() {
@@ -172,7 +172,7 @@ module.exports = React.createClass({
       });
     });
 
-    Dispatcher.on(getNamespaced(MOUSE_OUT, this.props.id), (event) => {
+    Dispatcher.on(getNamespaced(MOUSE_OUT, this.props.id), () => {
       this.setState({
         activeDatum: null,
         activeIndex: -1,
@@ -188,8 +188,9 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var area = Function;
     if (this.props.type === 'area') {
-      var area = d3.svg.area()
+      area = d3.svg.area()
         .defined((datum) => isValid(datum.value) ? datum.value : null)
         .interpolate(this.props.interpolate)
         .x((datum, index) =>
@@ -231,15 +232,17 @@ module.exports = React.createClass({
       <g className={classNames(className, this.props.className)}>
 
         {this.props.type === 'area' ? (
-          <path className={'area'}
+          <path
+            className={'area'}
             d={area(data)}
             style={style.area} />
         ) : null}
 
-        <path className={'line'}
+        <path
+          className={'line'}
           d={line(data)}
-          style={style.line}
-          ref={'path'} />
+          ref={'path'}
+          style={style.line} />
 
         {this.props.data[this.state.activeIndex] ? (
           <LineMarker

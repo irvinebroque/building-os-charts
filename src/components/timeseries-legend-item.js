@@ -52,19 +52,18 @@ module.exports = React.createClass({
   addEventListeners: function() {
     Dispatcher.on(getNamespaced(
       DATA_HOVER, 'legend' + this.props.id), (event) => {
-
-      if (event.datum && event.id === this.props.id) {
-        var readout = event.datum.valueFormatted ?
-          event.datum.valueFormatted :
-          format(event.datum.value);
-        this.setState({readout: readout});
-      }
-    });
+        if (event.datum && event.id === this.props.id) {
+          var readout = event.datum.valueFormatted ?
+            event.datum.valueFormatted :
+            format(event.datum.value);
+          this.setState({readout: readout});
+        }
+      });
 
     Dispatcher.on(getNamespaced(
-      MOUSE_OUT, 'legend' + this.props.id), (event) => {
-      this.setState({readout: ''});
-    });
+      MOUSE_OUT, 'legend' + this.props.id), () =>
+        this.setState({readout: ''})
+    );
   },
 
   removeEventListeners: function() {
@@ -84,8 +83,8 @@ module.exports = React.createClass({
 
     return (
       <g className={'timeseries-legend-item'}
-        transform={getTranslateFromCoords(this.props.x, 0)}
-        ref={'node'}>
+        ref={'node'}
+        transform={getTranslateFromCoords(this.props.x, 0)}>
 
         <TimeseriesLegendIcon
           height={iconHeight}

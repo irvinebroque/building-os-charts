@@ -38,7 +38,7 @@ module.exports = React.createClass({
     var mouse = [];
 
     d3.select(node)
-      .on(Events.MOUSE_MOVE, (event) => {
+      .on(Events.MOUSE_MOVE, () => {
         mouse = d3.mouse(node);
         Dispatcher[Events.MOUSE_MOVE]({
           type: Events.MOUSE_MOVE,
@@ -47,7 +47,7 @@ module.exports = React.createClass({
           y: mouse[1]
         });
       })
-      .on(Events.MOUSE_OUT, (event) => {
+      .on(Events.MOUSE_OUT, () => {
         mouse = d3.mouse(node);
         Dispatcher[Events.MOUSE_OUT]({
           type: Events.MOUSE_OUT,
@@ -68,8 +68,8 @@ module.exports = React.createClass({
   render: function() {
     return (
       <g className={'interaction-surface'}
-        transform={getTranslateFromCoords(this.props.x, this.props.y)}
-        ref={'node'}>
+        ref={'node'}
+        transform={getTranslateFromCoords(this.props.x, this.props.y)}>
         <rect
           height={this.props.height}
           style={{visibility: 'hidden'}}

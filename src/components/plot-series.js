@@ -63,7 +63,7 @@ module.exports = React.createClass({
       });
     });
 
-    Dispatcher.on(getNamespaced(MOUSE_OUT, this.props.id), (event) => {
+    Dispatcher.on(getNamespaced(MOUSE_OUT, this.props.id), () => {
       this.setState({
         activeDatum: undefined,
         activeIndex: -1
@@ -90,17 +90,13 @@ module.exports = React.createClass({
         style={this.props.style}>
 
         {this.props.data.map((datum, index) => {
-
           var x = Math.floor((this.props.tickWidth * index) + this.props.offset);
-          if (x % 2 == 0) {
-            // 1-pixel tweak for even numbers:
-            x--;
-          }
           var y = Math.round(this.props.scaleY(datum.value));
 
           return (
-            <PlotPoint className={datum.className}
+            <PlotPoint
               active={this.state.activeIndex === index ? true : false}
+              className={datum.className}
               index={index}
               key={index}
               style={datum.style}

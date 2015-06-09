@@ -67,7 +67,7 @@ module.exports = React.createClass({
       });
     });
 
-    Dispatcher.on(getNamespaced(MOUSE_OUT, this.props.id), (event) => {
+    Dispatcher.on(getNamespaced(MOUSE_OUT, this.props.id), () => {
       this.setState({
         activeDatum: undefined,
         activeIndex: -1
@@ -94,12 +94,10 @@ module.exports = React.createClass({
         style={this.props.style}>
 
         {this.props.data.map((datum, index) => {
-
           var barHeight = Math.round(
             this.props.zeroY - this.props.scaleY(Math.abs(datum.value)));
 
           var x = Math.floor((this.props.tickWidth * index));
-
           var y = datum.value > 0 ?
             this.props.zeroY - barHeight :
             this.props.zeroY;
@@ -110,8 +108,9 @@ module.exports = React.createClass({
             this.props.scaleY(comparisonDatum.value) - y);
 
           return (
-            <DifferenceBar className={className}
+            <DifferenceBar
               active={this.state.activeIndex === index ? true : false}
+              className={className}
               fillHeight={fillHeight}
               height={barHeight}
               index={index}

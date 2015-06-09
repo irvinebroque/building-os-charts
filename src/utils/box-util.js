@@ -10,14 +10,16 @@ var _getBox = function(value) {
   };
 };
 
-module.exports = function(input) {
-  if (typeof input === 'number' && isValid(input)) {
-    return _getBox(input);
+module.exports = {
+
+  box: function(input) {
+    if (typeof input === 'number' && isValid(input)) {
+      return _getBox(input);
+    }
+    if (typeof input === 'object') {
+      return assign(_getBox(0), input);
+    }
+    return _getBox(0);
   }
 
-  if (typeof input === 'object') {
-    return assign(_getBox(0), input);
-  }
-
-  return _getBox(0);
 };

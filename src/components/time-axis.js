@@ -9,22 +9,22 @@ var TickLabel = require('./tick-label');
 var _durations = [{
   duration: moment.duration(365, 'days').asMilliseconds(),
   tickFormat: 'MMM'
-},{
+}, {
   duration: moment.duration(180, 'days').asMilliseconds(),
   tickFormat: 'D'
-},{
+}, {
   duration: moment.duration(90, 'days').asMilliseconds(),
   tickFormat: 'D'
-},{
+}, {
   duration: moment.duration(31, 'days').asMilliseconds(),
   tickFormat: 'D'
-},{
+}, {
   duration: moment.duration(7, 'days').asMilliseconds(),
   tickFormat: 'ddd'
-},{
+}, {
   duration: moment.duration(2, 'days').asMilliseconds(),
   tickFormat: 'ha'
-},{
+}, {
   duration: moment.duration(1, 'day').asMilliseconds(),
   tickFormat: 'ha'
 }];
@@ -80,8 +80,8 @@ module.exports = React.createClass({
 
         <Divider
           x1={0}
-          y1={0}
           x2={this.props.width}
+          y1={0}
           y2={0} />
 
         {ticks.map((datum, index) => {
@@ -92,7 +92,7 @@ module.exports = React.createClass({
                 text={moment(datum).format(tickFormat)}
                 x={Math.floor((this.props.tickWidth * index) + this.props.offset)}
                 y={Math.ceil(this.props.tickPadding)} />
-            )
+            );
           }
           return null;
         })}

@@ -32,7 +32,7 @@ module.exports = React.createClass({
   getGroups: function() {
     var counter = 0;
     var groups = clone(this.props.groups);
-    groups.forEach((group) =>{
+    groups.forEach((group) => {
       group.series.forEach((timeseries) => {
         counter++;
         timeseries.id = counter;
@@ -60,7 +60,7 @@ module.exports = React.createClass({
     var groups = this.getGroups();
 
     var margins = this.getMargins(
-      groups, BoxUtil(this.props.margins));
+      groups, BoxUtil.box(this.props.margins));
 
     var contentHeight = Math.ceil(
       this.props.height - margins.top - margins.bottom);
@@ -83,8 +83,8 @@ module.exports = React.createClass({
               clampToZero={datum.clampToZero}
               height={contentHeight}
               index={index}
-              label={datum.label}
               key={index}
+              label={datum.label}
               margins={margins}
               numTicksX={numTicksX}
               numTicksY={datum.numTicksY}

@@ -24,7 +24,6 @@ module.exports = React.createClass({
     if (this.props.style) {
       style.fill = this.props.style.stroke;
     }
-    console.log(this.props)
 
     return (
       <Label className={'timeseries-legend-readout'}

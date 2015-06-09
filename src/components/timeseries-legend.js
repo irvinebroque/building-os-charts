@@ -2,7 +2,7 @@ var React = require('react');
 var { array, number } = React.PropTypes;
 var { getTranslateFromCoords } = require('../utils/svg-util');
 var { isValid } = require('../validators/number-validator');
-var { numericAscending } = require('../utils/sort-util')
+var { numericAscending } = require('../utils/sort-util');
 var clone = require('clone');
 var TimeseriesLegendItem = require('./timeseries-legend-item');
 var { getLayout } = require('../layouts/flexbox');
@@ -25,7 +25,7 @@ module.exports = React.createClass({
       height: 0,
       x: 0,
       y: 0,
-      width: 0,
+      width: 0
     };
   },
 
@@ -39,16 +39,16 @@ module.exports = React.createClass({
     this.setLayout();
   },
 
+  componentWillReceiveProps: function() {
+    _componentShouldSetLayoutAfterUpdate = true;
+  },
+
   componentDidUpdate: function() {
     // Prevents an infinite loop:
     if (_componentShouldSetLayoutAfterUpdate) {
       _componentShouldSetLayoutAfterUpdate = false;
       this.setLayout();
     }
-  },
-
-  componentWillReceiveProps: function() {
-    _componentShouldSetLayoutAfterUpdate = true;
   },
 
   getData: function(groups) {
@@ -72,7 +72,7 @@ module.exports = React.createClass({
     var node = React.findDOMNode(this.refs.node);
     var childNodes = [].slice.call(node.childNodes);
     var childStyles = [];
-    childNodes.forEach((datum) =>
+    childNodes.forEach(() =>
       childStyles.push({style: {
         marginRight: Math.round(this.props.x / 2)
       }})
@@ -96,8 +96,8 @@ module.exports = React.createClass({
 
     return (
       <g className={'timeseries-legend'}
-        transform={getTranslateFromCoords(this.props.x, this.props.y)}
-        ref={'node'}>
+        ref={'node'}
+        transform={getTranslateFromCoords(this.props.x, this.props.y)}>
 
         {data.map((datum, index) => (
           <TimeseriesLegendItem
