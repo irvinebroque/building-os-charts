@@ -23,7 +23,7 @@ module.exports = React.createClass({
   render() {
     return (
       <Label
-        className={classNames('tick-label', this.props.className)}
+        className={classNames('time-axis-tick-label', this.props.className)}
         text={this.props.text}
         x={this.props.x}
         y={this.props.y} />

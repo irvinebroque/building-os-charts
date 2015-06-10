@@ -38,7 +38,7 @@ module.exports = React.createClass({
         className={classNames('vertical-bar', this.props.className, active)}
         height={this.props.height}
         style={this.props.style}
-        width={this.props.width}
+        width={this.props.width ? this.props.width : 1}
         x={this.props.x}
         y={this.props.y} />
     );

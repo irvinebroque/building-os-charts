@@ -4,8 +4,8 @@ var { getTranslateFromCoords } = require('../utils/svg-util');
 var { format } = require('../formatters/number-formatter');
 var { getRotate } = require('../utils/svg-util');
 var Divider = require('./divider');
-var TickLabel = require('./tick-label');
 var AxisLabel = require('./axis-label');
+var LinearAxisTickLabel = require('./linear-axis-tick-label');
 
 module.exports = React.createClass({
 
@@ -70,7 +70,8 @@ module.exports = React.createClass({
 
         {ticks.map((datum, index) => {
           return (
-            <TickLabel className={this.props.orient}
+            <LinearAxisTickLabel
+              className={this.props.orient}
               key={index}
               text={format(datum)}
               x={x}

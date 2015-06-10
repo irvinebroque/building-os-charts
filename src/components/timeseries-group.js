@@ -225,6 +225,7 @@ module.exports = React.createClass({
 
         {this.props.index === 0 ? (
           <TimeAxis
+            data={this.props.series[0].data}
             domain={domainX}
             numTicks={this.props.numTicksX}
             scale={scaleX}

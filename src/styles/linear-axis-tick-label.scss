@@ -1,0 +1,11 @@
+.linear-axis-tick-label {
+  dominant-baseline: middle;
+}
+
+.linear-axis-tick-label.left {
+  text-anchor: end;
+}
+
+.linear-axis-tick-label.right {
+  text-anchor: start;
+}
