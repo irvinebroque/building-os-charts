@@ -56,7 +56,7 @@ module.exports = React.createClass({
         right: 0,
         top: 0
       },
-      numTicks: 0,
+      numTicksX: 0,
       numTicksY: 5,
       series: [],
       tickWidth: 0,
