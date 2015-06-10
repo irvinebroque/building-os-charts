@@ -4,34 +4,13 @@ var { getTranslateFromCoords } = require('../utils/svg-util');
 var classNames = require('classnames');
 var moment = require('moment');
 var Divider = require('./divider');
-var TickLabel = require('./tick-label');
-
-var _durations = [{
-  duration: moment.duration(365, 'days').asMilliseconds(),
-  tickFormat: 'MMM'
-}, {
-  duration: moment.duration(180, 'days').asMilliseconds(),
-  tickFormat: 'D'
-}, {
-  duration: moment.duration(90, 'days').asMilliseconds(),
-  tickFormat: 'D'
-}, {
-  duration: moment.duration(31, 'days').asMilliseconds(),
-  tickFormat: 'D'
-}, {
-  duration: moment.duration(7, 'days').asMilliseconds(),
-  tickFormat: 'ddd'
-}, {
-  duration: moment.duration(2, 'days').asMilliseconds(),
-  tickFormat: 'ha'
-}, {
-  duration: moment.duration(1, 'day').asMilliseconds(),
-  tickFormat: 'ha'
-}];
+var TimeAxisTickLabel = require('./time-axis-tick-label');
+var Duration = require('../constants/duration');
 
 module.exports = React.createClass({
 
   propTypes: {
+    data: array.isRequired,
     domain: array.isRequired,
     numTicks: number.isRequired,
     offset: number.isRequired,
@@ -46,8 +25,9 @@ module.exports = React.createClass({
 
   getDefaultProps() {
     return {
+      data: [],
       domain: [],
-      numTicks: 12,
+      numTicks: 0,
       offset: 0,
       orient: 'bottom',
       scale: Function,
@@ -59,20 +39,73 @@ module.exports = React.createClass({
     };
   },
 
-  getTickFormat(domain) {
-    var duration = domain[1] - domain[0];
-    var tickFormat = '';
-    _durations.forEach((datum) => {
-      if (duration < datum.duration) {
-        tickFormat = datum.tickFormat;
+  getRules(domain) {
+    var domainDuration = domain[1] - domain[0];
+    var rules = {format: 'MMM', frequency: 1};
+    if (domainDuration <= Duration.YEAR) {
+      rules = {format: 'MMM', frequency: 1};
+    }
+    if (domainDuration <= Duration.HALF_YEAR) {
+      rules = {format: 'MMM', frequency: 1};
+    }
+    if (domainDuration <= Duration.NINETY_DAYS) {
+      rules = {format: 'MMM', frequency: 1};
+    }
+    if (domainDuration <= Duration.THIRTY_ONE_DAYS) {
+      rules = {format: 'D', frequency: 1};
+    }
+    if (domainDuration <= Duration.WEEK) {
+      rules = {format: 'ddd', frequency: 24};
+    }
+    if (domainDuration <= Duration.FORTY_EIGHT_HOURS) {
+      rules = {format: 'ha', frequency: 24};
+    }
+    if (domainDuration <= Duration.DAY) {
+      rules = {format: 'ha', frequency: 12};
+    }
+    return rules;
+  },
+
+  getTickClass(data, index) {
+    if (index === 0) {
+      return 'first';
+    }
+    if (index === (data.length - 1)) {
+      return 'last';
+    }
+  },
+
+  getTicks(data, rules) {
+    return data.map((datum, index) => {
+      if (index % rules.frequency === 0) {
+        var tickText = moment(datum.timestamp).format(rules.format);
+        switch (tickText) {
+          case '12pm':
+            return 'Noon';
+          case 'Jan':
+            if (index) {
+              return moment(datum.timestamp).format('MMM YYYY');
+            }
+            return tickText;
+          default:
+            return tickText;
+        }
       }
+      return '';
     });
-    return tickFormat;
+  },
+
+  getTickX(tickWidth, offset, index) {
+    return Math.floor(
+      (tickWidth * index) +
+      (tickWidth / 2) +
+      offset
+    );
   },
 
   render() {
-    var ticks = this.props.scale.ticks(this.props.numTicks);
-    var tickFormat = this.getTickFormat(this.props.domain);
+    var rules = this.getRules(this.props.domain);
+    var ticks = this.getTicks(this.props.data, rules);
 
     return (
       <g
@@ -85,18 +118,15 @@ module.exports = React.createClass({
           y1={0}
           y2={0} />
 
-        {ticks.map((datum, index) => {
-          if (index % 2) {
-            return (
-              <TickLabel
-                key={index}
-                text={moment(datum).format(tickFormat)}
-                x={Math.floor((this.props.tickWidth * index) + this.props.offset)}
-                y={Math.ceil(this.props.tickPadding)} />
-            );
-          }
-          return null;
-        })}
+        {ticks.map((datum, index) => datum ? (
+            <TimeAxisTickLabel
+              className={this.getTickClass(this.props.data, index)}
+              key={index}
+              text={datum}
+              x={this.getTickX(this.props.tickWidth, this.props.offset, index)}
+              y={Math.ceil(this.props.tickPadding)} />
+          ) : null
+        )}
 
       </g>
     );

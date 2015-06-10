@@ -11,7 +11,7 @@
     "build": "webpack -p --progress --colors",
     "examples": "webpack-dev-server --config examples/webpack.config.js --content-base examples",
     "lint": "webpack -p --progress --colors",
-    "tests": "karma start"
+    "test": "karma start"
   },
   "repository": {
     "type": "git",
