@@ -66,15 +66,6 @@ module.exports = React.createClass({
     return rules;
   },
 
-  getTickClass(data, index) {
-    if (index === 0) {
-      return 'first';
-    }
-    if (index === (data.length - 1)) {
-      return 'last';
-    }
-  },
-
   getTicks(data, rules) {
     return data.map((datum, index) => {
       if (index % rules.frequency === 0) {
@@ -120,7 +111,6 @@ module.exports = React.createClass({
 
         {ticks.map((datum, index) => datum ? (
             <TimeAxisTickLabel
-              className={this.getTickClass(this.props.data, index)}
               key={index}
               text={datum}
               x={this.getTickX(this.props.tickWidth, this.props.offset, index)}
