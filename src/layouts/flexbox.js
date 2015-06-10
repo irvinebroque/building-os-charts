@@ -25,7 +25,8 @@ var _getChildNodes = function(childNodes, childStyles) {
 };
 
 module.exports = {
-  getLayout: function(node, parentStyle, childStyles) {
+
+  getLayout(node, parentStyle, childStyles) {
     return cssLayout({
       style: parentStyle,
       children: _getChildNodes(node.childNodes, childStyles ? childStyles : [])

@@ -3,27 +3,44 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
 var fs = require('fs');
 
-function isDirectory(dir) {
-  return fs.lstatSync(dir).isDirectory();
-}
+var _supportedBrowsers = [
+  'Safari >= 6',
+  'Chrome >= 26',
+  'Firefox >= 10',
+  'Explorer >= 9',
+  'iOS >= 6',
+  'ChromeAndroid >= 26'
+];
 
-module.exports = {
-  devtool: 'inline-source-map',
-  entry: fs.readdirSync(__dirname).reduce(function(entries, dir) {
+function _getAutoPrefixerParams() {
+  return '?{browsers:["' + _supportedBrowsers.join('", "') + '"]}';
+};
+
+function _getEntry() {
+  return fs.readdirSync(__dirname).reduce(function(entries, dir) {
     var isDraft = dir.charAt(0) === '_';
-    if (!isDraft && isDirectory(path.join(__dirname, dir))) {
+    if (!isDraft && _isDirectory(path.join(__dirname, dir))) {
       entries[dir] = path.join(__dirname, dir, 'index.js');
     }
     return entries;
-  }, {}),
+  }, {});
+};
+
+function _isDirectory(dir) {
+  return fs.lstatSync(dir).isDirectory();
+};
+
+module.exports = {
+  devtool: 'eval',
+  entry: _getEntry(),
   module: {
     loaders: [
-      {test: /\.(js|jsx)$/, exclude: /node_modules/, loaders: ['babel-loader']},
-      {test: /\.(css|scss)$/, exclude: /node_modules/, loader: ExtractTextPlugin.extract('style-loader', [
+      {test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/},
+      {test: /\.scss$/, loader: ExtractTextPlugin.extract('style-loader', [
         'css-loader',
-        'autoprefixer-loader?{browsers:["Safari >= 6", "Chrome >= 26", "Firefox >= 10", "Explorer >= 9", "iOS >= 6", "ChromeAndroid >= 26"]}',
+        'autoprefixer-loader' + _getAutoPrefixerParams(),
         'sass-loader?outputStyle=compressed',
-      ].join('!'))}
+      ].join('!')), exclude: /node_modules/}
     ]
   },
   output: {

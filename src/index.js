@@ -1,3 +1,3 @@
-exports.HorizontalBarChart = require('./charts/horizontal-bar-chart.jsx');
-exports.TimeseriesChart = require('./charts/timeseries-chart.jsx');
+exports.HorizontalBarChart = require('./components/horizontal-bar-chart');
+exports.TimeseriesChart = require('./components/timeseries-chart');
 require('./theme.scss');

@@ -1,5 +1,6 @@
 module.exports = {
-  isValid: function(value) {
+
+  isValid(value) {
     if (typeof value !== 'number') {
       return false;
     }
@@ -16,4 +17,5 @@ module.exports = {
       }
     }
   }
+
 };
