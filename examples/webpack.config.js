@@ -53,7 +53,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      'ld3': '../../src/index'
+      'building-os-charts': '../../src/index'
     }
-  },
+  }
 };

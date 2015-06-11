@@ -17,7 +17,7 @@ function _getAutoPrefixerParams() {
 
 module.exports = {
   entry: {
-    ld3: ['./src/index'],
+    index: ['./src/index'],
     vendor: ['./src/vendor']
   },
   module: {
@@ -39,6 +39,11 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('[name].css'),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
-  ]
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
+  ],
+  resolve: {
+    alias: {
+      'building-os-charts': '../../src/index'
+    }
+  }
 };

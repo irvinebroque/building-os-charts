@@ -1,7 +1,7 @@
 var React = require('react');
-var { TimeseriesChart } = require('ld3');
+var { TimeseriesChart } = require('building-os-charts');
 var moment = require('moment');
-require('../../src/theme.scss');
+require('../../src/index.scss');
 
 function getData() {
   var start = moment().startOf('day');

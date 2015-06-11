@@ -1,6 +1,6 @@
 var React = require('react');
-var { HorizontalBarChart } = require('ld3');
-require('../../src/theme.scss');
+var { HorizontalBarChart } = require('building-os-charts');
+require('../../src/index.scss');
 
 var data = [];
 for (var ii = 0, nn = 20; ii < nn; ii++) {
