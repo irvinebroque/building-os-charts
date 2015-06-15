@@ -17,29 +17,17 @@
     "type": "git",
     "url": "git@repos.office.luciddg.com:peter/lucid-d3.git"
   },
-  "dependencies": {
-    "classnames": "^2.1.2",
-    "clone": "^1.0.2",
-    "css-layout": "0.0.2",
-    "d3": "^3.5.5",
-    "javascript-natural-sort": "^0.7.1",
-    "moment": "^2.10.3",
-    "object-assign": "^3.0.0",
-    "object-property-natural-sort": "0.0.4",
-    "react": "^0.13.3"
-  },
   "devDependencies": {
     "autoprefixer-loader": "^2.0.0",
     "babel-core": "^5.5.6",
-    "babel-eslint": "^3.1.14",
+    "babel-eslint": "^3.1.15",
     "babel-loader": "^5.1.4",
-    "css-loader": "^0.14.1",
+    "css-loader": "^0.14.5",
     "eslint": "^0.22.1",
     "eslint-loader": "^0.12.0",
-    "eslint-plugin-react": "^2.5.0",
     "extract-text-webpack-plugin": "^0.8.1",
     "jasmine-core": "^2.3.4",
-    "karma": "^0.12.31",
+    "karma": "^0.12.36",
     "karma-babel-preprocessor": "^5.2.1",
     "karma-chrome-launcher": "^0.1.12",
     "karma-cli": "^0.0.4",
@@ -56,6 +44,19 @@
     "style-loader": "^0.12.3",
     "webpack": "^1.9.10",
     "webpack-dev-server": "^1.9.0"
+  },
+  "dependencies": {
+    "classnames": "^2.1.2",
+    "clone": "^1.0.2",
+    "css-layout": "0.0.2",
+    "d3": "^3.5.5",
+    "javascript-natural-sort": "^0.7.1",
+    "moment": "^2.10.3",
+    "object-assign": "^3.0.0",
+    "object-property-natural-sort": "0.0.4"
+  },
+  "peerDependencies": {
+    "react": "^0.13.3"
   },
   "engines": {
     "node": ">=0.12.0"
