@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@repos.office.luciddg.com:peter/lucid-d3.git"
+    "url": "git@github.com:luciddg/building-os-charts.git"
   },
   "devDependencies": {
     "autoprefixer-loader": "^2.0.0",
