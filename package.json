@@ -6,7 +6,6 @@
   ],
   "description": "Plug-and-play chart components based on d3 and React",
   "main": "index.js",
-  "private": true,
   "scripts": {
     "build": "webpack -p --progress --colors",
     "examples": "webpack-dev-server --config examples/webpack.config.js --content-base examples",
