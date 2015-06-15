@@ -2,6 +2,8 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
 
+var _prepublishMode = process.env.NODE_ENV === 'prepublish' ? true : false;
+
 var _supportedBrowsers = [
   'Safari >= 6',
   'Chrome >= 26',
@@ -15,10 +17,9 @@ function _getAutoPrefixerParams() {
   return '?{browsers:["' + _supportedBrowsers.join('", "') + '"]}';
 };
 
-module.exports = {
+var config = {
   entry: {
-    index: ['./src/index'],
-    vendor: ['./src/vendor']
+    index: ['./src/index']
   },
   module: {
     preLoaders: [
@@ -38,8 +39,7 @@ module.exports = {
     path: path.join(__dirname, './build')
   },
   plugins: [
-    new ExtractTextPlugin('[name].css'),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
+    new ExtractTextPlugin('[name].css')
   ],
   resolve: {
     alias: {
@@ -47,3 +47,27 @@ module.exports = {
     }
   }
 };
+
+if (_prepublishMode) {
+  config.externals = {
+    'classnames': 'classnames',
+    'clone': 'clone',
+    'css-layout': 'css-layout',
+    'd3': 'd3',
+    'javascript-natural-sort': 'javascript-natural-sort',
+    'moment': 'moment',
+    'object-assign': 'object-assign',
+    'object-property-natural-sort': 'object-property-natural-sort',
+    'react': 'react'
+  };
+
+  config.output = {
+    filename: '[name].js',
+    path: path.join(__dirname, './lib'),
+    libraryTarget: 'umd',
+    library: 'building-os-charts',
+  };
+}
+
+
+module.exports = config;

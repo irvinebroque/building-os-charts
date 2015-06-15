@@ -5,10 +5,12 @@
     "Peter Barker <zoopoetics@gmail.com>"
   ],
   "description": "Plug-and-play chart components based on d3 and React",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "webpack -p --progress --colors",
+    "prepublish": "NODE_ENV=prepublish webpack --progress --colors",
     "examples": "webpack-dev-server --config examples/webpack.config.js --content-base examples",
+    "tet": "webpack-dev-server --config tet/webpack.config.js --content-base tet",
     "lint": "webpack -p --progress --colors",
     "test": "karma start"
   },
@@ -44,7 +46,7 @@
     "webpack": "^1.9.10",
     "webpack-dev-server": "^1.9.0"
   },
-  "dependencies": {
+  "peerDependencies": {
     "classnames": "^2.1.2",
     "clone": "^1.0.2",
     "css-layout": "0.0.2",
@@ -52,7 +54,8 @@
     "javascript-natural-sort": "^0.7.1",
     "moment": "^2.10.3",
     "object-assign": "^3.0.0",
-    "object-property-natural-sort": "0.0.4"
+    "object-property-natural-sort": "0.0.4",
+    "react": "^0.13.3"
   },
   "peerDependencies": {
     "react": "^0.13.3"
